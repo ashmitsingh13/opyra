@@ -1,0 +1,40 @@
+{
+  "name": "Opyra - AI-Powered Digital Marketing",
+  "short_name": "Opyra",
+  "description": "AI-powered digital marketing platform delivering 450% ROI increase through intelligent automation and data-driven strategies.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#00FF00",
+  "orientation": "portrait-primary",
+  "categories": ["business", "productivity", "technology"],
+  "lang": "en",
+  "dir": "ltr",
+  "scope": "/",
+  "id": "opyra-ai-marketing",
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Contact Support",
+      "short_name": "Support", 
+      "description": "Get help from our AI support team",
+      "url": "/contact"
+    }
+  ]
+}
