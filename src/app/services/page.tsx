@@ -367,7 +367,7 @@ export default function ServicesPage() {
                     asChild
                     className="bg-[#00FF00] text-[#000000] hover:bg-[#00FF00]/90 transition-all duration-300"
                   >
-                    <Link href={`/${service.link}`}>
+                    <Link href={`/services/${service.link}`}>
                       Learn More <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>

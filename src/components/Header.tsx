@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion'
-import Navbar from './Nabar'
+import Navbar from './Navbar'
 import { useEffect, useState } from 'react';
 
 const Header = () => {

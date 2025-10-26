@@ -4,8 +4,6 @@ import './home.css'
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay, EffectCards, EffectCoverflow } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -170,7 +168,7 @@ export default function HomePage() {
       features: ["Predictive Modeling", "Real-time Tracking", "Customer Insights", "Performance Forecasting"],
       color: "from-blue-500/20 to-[#00FF00]/20",
       stats: { value: "340%", label: "Data Accuracy" },
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.1.0&auto=format&fit=crop&w=1000&q=80"
+      image: "/images/AI-PoweredAnalytics.png"
     },
     {
       icon: Target,
