@@ -28,6 +28,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Image } from '@/components/ui/image';
+import { link } from 'fs';
 
 export default function ServicesPage() {
   const services = [
@@ -41,6 +42,7 @@ export default function ServicesPage() {
         "Customer behavior analysis",
         "ROI optimization recommendations"
       ],
+      link: "ai-powered-analytics",
       image: "https://static.wixstatic.com/media/d1fa15_5e07e16180624cbbbb8855744f843caf~mv2.png?originWidth=576&originHeight=384"
     },
     {
@@ -53,6 +55,7 @@ export default function ServicesPage() {
         "Cross-platform targeting",
         "Dynamic audience optimization"
       ],
+      link: "precision-targeting",
       image: "https://static.wixstatic.com/media/d1fa15_1fb442b14a054b588a7eccca03ea8f39~mv2.png?originWidth=576&originHeight=384"
     },
     {
@@ -65,6 +68,7 @@ export default function ServicesPage() {
         "Conversion rate improvement",
         "Scalable growth strategies"
       ],
+      link: "growth-optimization",
       image: "https://static.wixstatic.com/media/d1fa15_e1fc03636cf04fc5b1435dba2eb2359b~mv2.png?originWidth=576&originHeight=384"
     },
     {
@@ -77,6 +81,7 @@ export default function ServicesPage() {
         "Automated reporting",
         "Performance benchmarking"
       ],
+      link: "data-intelligence",
       image: "https://static.wixstatic.com/media/d1fa15_b93263ca6bc24b42965ebc2833a98fd1~mv2.png?originWidth=576&originHeight=384"
     },
     {
@@ -101,6 +106,7 @@ export default function ServicesPage() {
         "Influencer identification",
         "Social listening and monitoring"
       ],
+      link: "social-media-ai",
       image: "https://static.wixstatic.com/media/d1fa15_903782f58a94493f832a659c716cba52~mv2.png?originWidth=576&originHeight=384"
     }
   ];
@@ -361,7 +367,7 @@ export default function ServicesPage() {
                     asChild
                     className="bg-[#00FF00] text-[#000000] hover:bg-[#00FF00]/90 transition-all duration-300"
                   >
-                    <Link href="/contact">
+                    <Link href={`/${service.link}`}>
                       Learn More <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
