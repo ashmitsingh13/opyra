@@ -1,0 +1,480 @@
+/* SEO Content AI Page Styles */
+
+.content-bubble {
+  animation: floatContent 8s ease-in-out infinite;
+}
+
+@keyframes floatContent {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-15px) scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* Floating Animation for Content Icons */
+.animate-float {
+  animation: floatSEO 6s ease-in-out infinite;
+}
+
+@keyframes floatSEO {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(3deg);
+  }
+}
+
+/* Content Generation Animation */
+.content-generation {
+  animation: generateContent 3s ease-out;
+}
+
+@keyframes generateContent {
+  from {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  to {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+}
+
+/* SEO Score Animation */
+.seo-score {
+  animation: scoreIncrease 2s ease-out;
+}
+
+@keyframes scoreIncrease {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Feature Card Content Effect */
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 255, 0, 0.2);
+}
+
+.feature-card:hover .w-16 {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 15px 30px rgba(0, 255, 0, 0.4);
+}
+
+/* Content Flow Animation */
+.content-flow {
+  position: relative;
+  overflow: hidden;
+}
+
+.content-flow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.2), transparent);
+  animation: contentFlow 3s infinite;
+}
+
+@keyframes contentFlow {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Pulsing Content Indicator */
+.content-pulse {
+  animation: contentPulse 2s ease-in-out infinite;
+}
+
+@keyframes contentPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 15px rgba(0, 255, 0, 0);
+  }
+}
+
+/* Keyword Research Animation */
+.keyword-research {
+  animation: keywordDiscover 1.8s ease-out;
+}
+
+@keyframes keywordDiscover {
+  from {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Content Service Cards */
+.service-card {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+  animation: rotateService 10s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+@keyframes rotateService {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Quality Score Progress */
+.quality-progress {
+  position: relative;
+  background: rgba(68, 68, 68, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  height: 6px;
+}
+
+.quality-progress::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #00FF00, #00CC00);
+  border-radius: 10px;
+  transition: width 2s ease-out;
+}
+
+.quality-progress[data-score="9.2/10"]::after {
+  width: 92%;
+}
+
+.quality-progress[data-score="9.5/10"]::after {
+  width: 95%;
+}
+
+.quality-progress[data-score="9.1/10"]::after {
+  width: 91%;
+}
+
+.quality-progress[data-score="9.3/10"]::after {
+  width: 93%;
+}
+
+.quality-progress[data-score="9.4/10"]::after {
+  width: 94%;
+}
+
+.quality-progress[data-score="9.0/10"]::after {
+  width: 90%;
+}
+
+/* Floating Content Elements */
+.content-element {
+  animation: floatElement 5s ease-in-out infinite;
+}
+
+.content-element:nth-child(2) {
+  animation-delay: -1.5s;
+}
+
+.content-element:nth-child(3) {
+  animation-delay: -3s;
+}
+
+@keyframes floatElement {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+/* SEO Optimization Animation */
+.seo-optimization {
+  animation: seoOptimize 2.5s ease-in-out infinite;
+}
+
+@keyframes seoOptimize {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+/* Industry Results Cards */
+.result-card {
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.result-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 255, 0, 0.15);
+}
+
+.result-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #00FF00, #00CC00);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.result-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* Content Volume Display */
+.volume-display {
+  animation: volumeCounter 2s ease-out;
+}
+
+@keyframes volumeCounter {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Content Icon Animations */
+.content-icon {
+  transition: all 0.3s ease;
+}
+
+.content-icon:hover {
+  transform: scale(1.2) rotate(8deg);
+  filter: drop-shadow(0 0 12px rgba(0, 255, 0, 0.8));
+}
+
+/* Plan Content Display */
+.plan-content {
+  position: relative;
+  overflow: hidden;
+}
+
+.plan-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+  animation: planContentShimmer 4s infinite;
+}
+
+@keyframes planContentShimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* CTA Content Animation */
+.cta-content {
+  animation: ctaContentPulse 3s ease-in-out infinite;
+}
+
+@keyframes ctaContentPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.01);
+  }
+}
+
+/* Traffic Growth Indicators */
+.traffic-indicator {
+  animation: trafficGrowth 3s ease-out;
+}
+
+@keyframes trafficGrowth {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Content Progress Bars */
+.content-progress {
+  position: relative;
+  background: rgba(68, 68, 68, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  height: 4px;
+}
+
+.content-progress::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #00FF00, #00CC00);
+  border-radius: 8px;
+  transition: width 1.5s ease-out;
+}
+
+.content-progress[data-volume="50"]::after {
+  width: 25%;
+}
+
+.content-progress[data-volume="200"]::after {
+  width: 60%;
+}
+
+.content-progress[data-volume="unlimited"]::after {
+  width: 100%;
+}
+
+/* SEO Features Animation */
+.seo-feature {
+  animation: seoFeatureGlow 2s ease-in-out infinite;
+}
+
+@keyframes seoFeatureGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .content-bubble {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 10px;
+  }
+  
+  .feature-card {
+    margin-bottom: 1rem;
+  }
+  
+  .seo-score {
+    font-size: 2rem !important;
+  }
+  
+  .content-flow {
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-content {
+    text-align: center;
+  }
+  
+  .content-pulse {
+    font-size: 1.5rem !important;
+  }
+  
+  .service-card {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Dark Theme Specific */
+@media (prefers-color-scheme: dark) {
+  .quality-progress {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .service-card {
+    backdrop-filter: blur(10px);
+  }
+  
+  .content-bubble {
+    border-color: rgba(0, 255, 0, 0.4);
+  }
+}
+
+/* High Performance Mode */
+@media (prefers-reduced-motion: reduce) {
+  .content-bubble,
+  .content-element,
+  .seo-optimization,
+  .traffic-indicator {
+    animation: none;
+  }
+  
+  .feature-card,
+  .service-card {
+    transition: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .content-bubble,
+  .content-element,
+  .traffic-indicator {
+    display: none;
+  }
+  
+  .feature-card,
+  .result-card {
+    break-inside: avoid;
+  }
+}

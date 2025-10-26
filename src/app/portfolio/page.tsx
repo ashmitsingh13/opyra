@@ -380,30 +380,6 @@ export default function PortfolioPage() {
   return (
     <div className="min-h-screen bg-[#000000] text-[#FFFFFF] overflow-hidden">
       {/* Enhanced Hero Section with 3D Effects */}
-      <section ref={heroRef} className="relative py-32 px-4 max-w-480 mx-auto">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-[#00FF00]/20 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -30, 0],
-                opacity: [0.2, 0.8, 0.2],
-                scale: [1, 1.5, 1],
-              }}
-              transition={{
-                duration: 3 + Math.random() * 2,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
-        </div>
 
         <div className="relative z-10 text-center mb-20">
           <motion.div
@@ -460,7 +436,6 @@ export default function PortfolioPage() {
             ))}
           </div>
         </div>
-      </section>
 
       {/* Interactive Filter Section */}
       <section className="py-16 px-4 bg-[#111111]">

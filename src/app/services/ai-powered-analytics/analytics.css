@@ -1,0 +1,246 @@
+/* AI-Powered Analytics Page Styles */
+
+.floating-chart {
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-chart:nth-child(2) {
+  animation-delay: -2s;
+}
+
+.floating-chart:nth-child(3) {
+  animation-delay: -4s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Particle Animation */
+.absolute.w-1.h-1 {
+  animation: particle-float 8s ease-in-out infinite;
+}
+
+@keyframes particle-float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.4;
+  }
+  25% {
+    transform: translateY(-30px) scale(1.2);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-60px) scale(0.8);
+    opacity: 0.6;
+  }
+  75% {
+    transform: translateY(-30px) scale(1.1);
+    opacity: 0.7;
+  }
+}
+
+/* Chart Bar Animation */
+.chart-bar {
+  animation: chart-grow 2s ease-out;
+}
+
+@keyframes chart-grow {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--final-width);
+  }
+}
+
+/* Feature Card Hover Effects */
+.feature-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+}
+
+.feature-card:hover .card-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Stats Counter Animation */
+.stat-number {
+  animation: count-up 2s ease-out;
+}
+
+@keyframes count-up {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Glow Effects */
+.glow-green {
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.glow-green:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+}
+
+/* Progress Bar Animation */
+.progress-bar {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: progress-shine 2s ease-in-out infinite;
+}
+
+@keyframes progress-shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Chart Pulse Animation */
+.chart-pulse {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(0, 255, 0, 0.4);
+  }
+}
+
+/* Testimonial Card Effects */
+.testimonial-card {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(18, 18, 18, 0.9) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  border-color: rgba(0, 255, 0, 0.5);
+  transform: translateY(-5px);
+}
+
+/* Pricing Card Highlight */
+.pricing-highlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-highlight::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #00FF00, #00CC00, #00FF00);
+  border-radius: inherit;
+  z-index: -1;
+  animation: border-glow 3s ease-in-out infinite;
+}
+
+@keyframes border-glow {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Interactive Elements */
+.interactive-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 255, 0, 0.15);
+}
+
+/* Text Gradient Animation */
+.text-gradient-animate {
+  background: linear-gradient(45deg, #00FF00, #ffffff, #00FF00);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 3s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .floating-chart {
+    animation-duration: 4s;
+  }
+  
+  .feature-card:hover {
+    transform: none;
+  }
+  
+  .chart-pulse {
+    animation-duration: 2s;
+  }
+}
+
+/* Loading States */
+.skeleton {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Focus States for Accessibility */
+.focus\:ring-green:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 255, 0, 0.5);
+}

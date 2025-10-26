@@ -1,0 +1,436 @@
+/* Growth Optimization Page Styles */
+
+.growth-line {
+  filter: drop-shadow(0 0 10px rgba(0, 255, 0, 0.5));
+}
+
+/* Floating Animation for Growth Icons */
+.animate-float {
+  animation: floatUpDown 6s ease-in-out infinite;
+}
+
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Growth Chart Animation */
+.growth-chart {
+  animation: chartGrow 2s ease-out;
+}
+
+@keyframes chartGrow {
+  from {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+  to {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+}
+
+/* Metric Counter Animation */
+.metric-counter {
+  animation: countUpMetric 2s ease-out;
+}
+
+@keyframes countUpMetric {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Feature Card Growth Effect */
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 255, 0, 0.2);
+}
+
+.feature-card:hover .w-16 {
+  transform: scale(1.1);
+  box-shadow: 0 15px 30px rgba(0, 255, 0, 0.4);
+}
+
+/* Growth Indicator Animation */
+.growth-indicator {
+  position: relative;
+  overflow: hidden;
+}
+
+.growth-indicator::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.2), transparent);
+  animation: growthShimmer 3s infinite;
+}
+
+@keyframes growthShimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Pulsing Growth Button */
+.growth-pulse {
+  animation: growthPulse 2s ease-in-out infinite;
+}
+
+@keyframes growthPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(0, 255, 0, 0);
+  }
+}
+
+/* Revenue Growth Animation */
+.revenue-growth {
+  animation: revenueUp 2s ease-out;
+}
+
+@keyframes revenueUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Growth Strategy Cards */
+.strategy-card {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.strategy-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+  animation: rotateStrategy 6s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.strategy-card:hover::before {
+  opacity: 1;
+}
+
+@keyframes rotateStrategy {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Impact Progress Bars */
+.impact-progress {
+  position: relative;
+  background: rgba(68, 68, 68, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  height: 6px;
+}
+
+.impact-progress::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #00FF00, #00CC00);
+  border-radius: 10px;
+  transition: width 2s ease-out;
+}
+
+.impact-progress[data-impact="340%"]::after {
+  width: 85%;
+}
+
+.impact-progress[data-impact="267%"]::after {
+  width: 70%;
+}
+
+.impact-progress[data-impact="195%"]::after {
+  width: 55%;
+}
+
+.impact-progress[data-impact="225%"]::after {
+  width: 65%;
+}
+
+.impact-progress[data-impact="156%"]::after {
+  width: 45%;
+}
+
+.impact-progress[data-impact="289%"]::after {
+  width: 75%;
+}
+
+/* Floating Revenue Indicators */
+.revenue-float {
+  animation: floatRevenue 4s ease-in-out infinite;
+}
+
+.revenue-float:nth-child(2) {
+  animation-delay: -1s;
+}
+
+.revenue-float:nth-child(3) {
+  animation-delay: -2s;
+}
+
+@keyframes floatRevenue {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+/* Growth Velocity Animation */
+.velocity-indicator {
+  animation: velocityPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes velocityPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Success Story Cards */
+.success-story {
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.success-story:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 255, 0, 0.15);
+}
+
+.success-story::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #00FF00, #00CC00);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.success-story:hover::after {
+  transform: scaleX(1);
+}
+
+/* Results Counter */
+.result-counter {
+  animation: slideInResult 1.5s ease-out;
+}
+
+@keyframes slideInResult {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Growth Icon Animations */
+.growth-icon {
+  transition: all 0.3s ease;
+}
+
+.growth-icon:hover {
+  transform: scale(1.2) rotate(10deg);
+  filter: drop-shadow(0 0 15px rgba(0, 255, 0, 0.8));
+}
+
+/* Plan Glow Effect */
+.plan-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.plan-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+  animation: planGlow 4s infinite;
+}
+
+@keyframes planGlow {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* CTA Growth Animation */
+.cta-growth {
+  animation: ctaGrowth 3s ease-in-out infinite;
+}
+
+@keyframes ctaGrowth {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+/* Growth Rings */
+.growth-ring {
+  position: absolute;
+  border: 2px solid rgba(0, 255, 0, 0.3);
+  border-radius: 50%;
+  animation: expandGrowthRing 4s ease-in-out infinite;
+}
+
+.growth-ring:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.growth-ring:nth-child(2) {
+  animation-delay: 1.5s;
+}
+
+.growth-ring:nth-child(3) {
+  animation-delay: 3s;
+}
+
+@keyframes expandGrowthRing {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .growth-chart {
+    height: 200px !important;
+  }
+  
+  .revenue-float {
+    display: none;
+  }
+  
+  .feature-card {
+    margin-bottom: 1rem;
+  }
+  
+  .metric-counter {
+    font-size: 2rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-content {
+    text-align: center;
+  }
+  
+  .growth-indicator {
+    font-size: 1.5rem !important;
+  }
+  
+  .strategy-card {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Dark Theme Specific */
+@media (prefers-color-scheme: dark) {
+  .impact-progress {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .strategy-card {
+    backdrop-filter: blur(10px);
+  }
+  
+  .growth-line {
+    filter: drop-shadow(0 0 15px rgba(0, 255, 0, 0.6));
+  }
+}
+
+/* High Performance Mode */
+@media (prefers-reduced-motion: reduce) {
+  .growth-line,
+  .revenue-float,
+  .velocity-indicator,
+  .growth-ring {
+    animation: none;
+  }
+  
+  .feature-card,
+  .strategy-card {
+    transition: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .growth-line,
+  .revenue-float,
+  .velocity-indicator {
+    display: none;
+  }
+  
+  .feature-card,
+  .success-story {
+    break-inside: avoid;
+  }
+}

@@ -1,0 +1,466 @@
+/* Data Intelligence Page Styles */
+
+.data-flow-line {
+  filter: drop-shadow(0 0 8px rgba(0, 255, 0, 0.6));
+}
+
+.data-flow-particle {
+  animation: flowData 4s ease-in-out infinite;
+}
+
+@keyframes flowData {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Floating Animation for Data Icons */
+.animate-float {
+  animation: floatData 5s ease-in-out infinite;
+}
+
+@keyframes floatData {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* Data Processing Animation */
+.data-processing {
+  animation: processData 3s ease-out;
+}
+
+@keyframes processData {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* Intelligence Metric Animation */
+.intelligence-metric {
+  animation: intelligenceGlow 2s ease-out;
+}
+
+@keyframes intelligenceGlow {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+    box-shadow: 0 0 0 rgba(0, 255, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+  }
+}
+
+/* Feature Card Intelligence Effect */
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 255, 0, 0.2);
+}
+
+.feature-card:hover .w-16 {
+  transform: scale(1.1);
+  box-shadow: 0 15px 30px rgba(0, 255, 0, 0.4);
+}
+
+/* Data Stream Animation */
+.data-stream {
+  position: relative;
+  overflow: hidden;
+}
+
+.data-stream::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.3), transparent);
+  animation: dataFlow 2s infinite;
+}
+
+@keyframes dataFlow {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Pulsing Data Indicator */
+.data-pulse {
+  animation: dataPulse 2s ease-in-out infinite;
+}
+
+@keyframes dataPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 15px rgba(0, 255, 0, 0);
+  }
+}
+
+/* Processing Speed Animation */
+.processing-speed {
+  animation: speedUp 1.5s ease-out;
+}
+
+@keyframes speedUp {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Intelligence Capability Cards */
+.capability-card {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.capability-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+  animation: rotateCapability 8s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.capability-card:hover::before {
+  opacity: 1;
+}
+
+@keyframes rotateCapability {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Efficiency Progress Bars */
+.efficiency-progress {
+  position: relative;
+  background: rgba(68, 68, 68, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  height: 6px;
+}
+
+.efficiency-progress::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #00FF00, #00CC00);
+  border-radius: 10px;
+  transition: width 2s ease-out;
+}
+
+.efficiency-progress[data-efficiency="99%"]::after {
+  width: 99%;
+}
+
+.efficiency-progress[data-efficiency="97%"]::after {
+  width: 97%;
+}
+
+.efficiency-progress[data-efficiency="95%"]::after {
+  width: 95%;
+}
+
+.efficiency-progress[data-efficiency="98%"]::after {
+  width: 98%;
+}
+
+.efficiency-progress[data-efficiency="94%"]::after {
+  width: 94%;
+}
+
+.efficiency-progress[data-efficiency="100%"]::after {
+  width: 100%;
+}
+
+/* Floating Data Particles */
+.data-particle {
+  animation: floatParticle 6s ease-in-out infinite;
+}
+
+.data-particle:nth-child(2) {
+  animation-delay: -2s;
+}
+
+.data-particle:nth-child(3) {
+  animation-delay: -4s;
+}
+
+@keyframes floatParticle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(5deg);
+  }
+}
+
+/* Intelligence Accuracy Animation */
+.accuracy-indicator {
+  animation: accuracyPulse 3s ease-in-out infinite;
+}
+
+@keyframes accuracyPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.9;
+  }
+}
+
+/* Application Cards */
+.application-card {
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.application-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 255, 0, 0.15);
+}
+
+.application-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #00FF00, #00CC00);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.application-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* Data Volume Indicator */
+.volume-indicator {
+  animation: volumePulse 2s ease-in-out infinite;
+}
+
+@keyframes volumePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Intelligence Icon Animations */
+.intelligence-icon {
+  transition: all 0.3s ease;
+}
+
+.intelligence-icon:hover {
+  transform: scale(1.15) rotate(8deg);
+  filter: drop-shadow(0 0 12px rgba(0, 255, 0, 0.8));
+}
+
+/* Plan Capacity Display */
+.capacity-display {
+  position: relative;
+  overflow: hidden;
+}
+
+.capacity-display::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+  animation: capacityShimmer 3s infinite;
+}
+
+@keyframes capacityShimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* CTA Intelligence Animation */
+.cta-intelligence {
+  animation: ctaIntelligence 4s ease-in-out infinite;
+}
+
+@keyframes ctaIntelligence {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.01);
+  }
+}
+
+/* Data Security Indicators */
+.security-indicator {
+  animation: securityBlink 2s ease-in-out infinite;
+}
+
+@keyframes securityBlink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Processing Capacity Bars */
+.capacity-bar {
+  position: relative;
+  background: rgba(68, 68, 68, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  height: 4px;
+}
+
+.capacity-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #00FF00, #00CC00);
+  border-radius: 8px;
+  transition: width 1.5s ease-out;
+}
+
+.capacity-bar[data-capacity="1TB"]::after {
+  width: 30%;
+}
+
+.capacity-bar[data-capacity="10TB"]::after {
+  width: 70%;
+}
+
+.capacity-bar[data-capacity="Unlimited"]::after {
+  width: 100%;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .data-flow-particle {
+    display: none;
+  }
+  
+  .feature-card {
+    margin-bottom: 1rem;
+  }
+  
+  .intelligence-metric {
+    font-size: 2rem !important;
+  }
+  
+  .data-stream {
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-content {
+    text-align: center;
+  }
+  
+  .data-pulse {
+    font-size: 1.5rem !important;
+  }
+  
+  .capability-card {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Dark Theme Specific */
+@media (prefers-color-scheme: dark) {
+  .efficiency-progress {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .capability-card {
+    backdrop-filter: blur(10px);
+  }
+  
+  .data-flow-line {
+    filter: drop-shadow(0 0 10px rgba(0, 255, 0, 0.7));
+  }
+}
+
+/* High Performance Mode */
+@media (prefers-reduced-motion: reduce) {
+  .data-flow-particle,
+  .data-particle,
+  .volume-indicator,
+  .security-indicator {
+    animation: none;
+  }
+  
+  .feature-card,
+  .capability-card {
+    transition: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .data-flow-particle,
+  .data-particle,
+  .volume-indicator {
+    display: none;
+  }
+  
+  .feature-card,
+  .application-card {
+    break-inside: avoid;
+  }
+}
