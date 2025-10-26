@@ -30,13 +30,23 @@ export default function AboutPage() {
   const timelineRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState('mission');
+  const [mounted, setMounted] = useState(false);
 
   const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: true,
   });
 
+  // Generate stable particle positions
+  const particlePositions = Array.from({ length: 20 }, (_, i) => ({
+    left: ((i * 37) % 100), // Deterministic pseudo-random based on index
+    top: ((i * 73) % 100),
+    delay: (i * 0.1) % 2
+  }));
+
   useEffect(() => {
+    setMounted(true);
+    
     if (typeof window !== 'undefined') {
       // Hero section animations
       gsap.fromTo(
@@ -358,19 +368,21 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[#000000] text-[#FFFFFF] overflow-hidden">
       {/* Floating Particles Background */}
-      <div className="fixed inset-0 pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="particle absolute w-2 h-2 bg-[#00FF00] rounded-full opacity-20"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 2}s`
-            }}
-          />
-        ))}
-      </div>
+      {mounted && (
+        <div className="fixed inset-0 pointer-events-none">
+          {particlePositions.map((particle, i) => (
+            <div
+              key={i}
+              className="particle absolute w-2 h-2 bg-[#00FF00] rounded-full opacity-20"
+              style={{
+                left: `${particle.left}%`,
+                top: `${particle.top}%`,
+                animationDelay: `${particle.delay}s`
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Hero Section */}
       <section ref={heroRef} className="relative py-32 px-4 max-w-480 mx-auto">

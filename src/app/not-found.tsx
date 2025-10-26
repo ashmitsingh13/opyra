@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Home, Search, Bot, Zap, TrendingUp, Sparkles } from 'lucide-react';
 import gsap from 'gsap';
@@ -10,8 +10,21 @@ export default function NotFound() {
   const errorCodeRef = useRef<HTMLDivElement>(null);
   const orbRefs = useRef<(HTMLDivElement | null)[]>([]);
   const particleRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [mounted, setMounted] = useState(false);
+
+  // Generate stable positions for orbs and particles
+  const orbPositions = Array.from({ length: 6 }, (_, i) => ({
+    left: ((i * 19 + 13) % 100),
+    top: ((i * 31 + 17) % 100)
+  }));
+
+  const particlePositions = Array.from({ length: 20 }, (_, i) => ({
+    left: ((i * 37 + 7) % 100),
+    top: ((i * 43 + 11) % 100)
+  }));
 
   useEffect(() => {
+    setMounted(true);
     const ctx = gsap.context(() => {
       // Animate error code with glitch effect
       if (errorCodeRef.current) {
@@ -96,7 +109,7 @@ export default function NotFound() {
         </div>
 
         {/* Floating Orbs */}
-        {Array.from({ length: 6 }).map((_, i) => (
+        {mounted && orbPositions.map((orb, i) => (
           <div
             key={`orb-${i}`}
             ref={(el) => { orbRefs.current[i] = el; }}
@@ -105,21 +118,21 @@ export default function NotFound() {
               background: i % 2 === 0 ? 
                 'radial-gradient(circle, #00FF00 0%, transparent 70%)' : 
                 'radial-gradient(circle, #FF0080 0%, transparent 70%)',
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${orb.left}%`,
+              top: `${orb.top}%`,
             }}
           />
         ))}
 
         {/* Particles */}
-        {Array.from({ length: 20 }).map((_, i) => (
+        {mounted && particlePositions.map((particle, i) => (
           <div
             key={`particle-${i}`}
             ref={(el) => { particleRefs.current[i] = el; }}
             className="absolute w-1 h-1 bg-[#00FF00] rounded-full opacity-60"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
             }}
           />
         ))}
