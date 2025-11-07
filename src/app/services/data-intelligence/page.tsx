@@ -1,11 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   Database, Brain, BarChart3, PieChart, LineChart, Activity,
   Cpu, Zap, Target, Eye, Search, Filter, Layers, Settings,
@@ -17,76 +15,9 @@ import {
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import './intelligence.css';
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 export default function DataIntelligencePage() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
   const [activeDataFlow, setActiveDataFlow] = useState(0);
-
-  // Generate stable data flow points
-  const dataFlowPoints = Array.from({ length: 6 }, (_, i) => ({
-    id: i,
-    x: (i * 20) + 10,
-    y: 30 + Math.sin(i) * 15,
-    size: 4 + (i % 3) * 2,
-    delay: i * 0.5
-  }));
-
-  const [ref, inView] = useInView({
-    threshold: 0.1,
-    triggerOnce: true,
-  });
-
-  useEffect(() => {
-    setMounted(true);
-    
-    if (typeof window !== 'undefined') {
-      // Hero animations
-      gsap.fromTo(
-        '.hero-content',
-        { y: 100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out', stagger: 0.2 }
-      );
-
-      // Data flow animation
-      gsap.to('.data-flow-particle', {
-        x: '+=100',
-        opacity: 0.8,
-        duration: 3,
-        ease: 'power2.inOut',
-        stagger: 0.3,
-        repeat: -1,
-        yoyo: true
-      });
-
-      // Data stream animation
-      const dataStreamInterval = setInterval(() => {
-        setActiveDataFlow(prev => (prev + 1) % 4);
-      }, 2000);
-
-      // Feature cards animation
-      ScrollTrigger.create({
-        trigger: '.features-section',
-        start: 'top 80%',
-        onEnter: () => {
-          gsap.fromTo('.feature-card', 
-            { y: 50, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, stagger: 0.15 }
-          );
-        }
-      });
-
-      return () => {
-        clearInterval(dataStreamInterval);
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-      };
-    }
-  }, []);
 
   const intelligenceFeatures = [
     {
@@ -94,328 +25,250 @@ export default function DataIntelligencePage() {
       title: "Advanced Data Processing",
       description: "Process and analyze massive datasets in real-time with AI-powered data intelligence systems.",
       benefits: ["Real-time Data Processing", "Automated Data Cleaning", "Data Quality Assurance", "Scalable Architecture"],
-      color: "from-blue-500 to-purple-600",
+      color: "from-blue-500 to-blue-600",
       accuracy: "99.2%"
     },
     {
       icon: Brain,
-      title: "Predictive Analytics",
-      description: "Leverage machine learning to predict trends, behaviors, and outcomes with exceptional accuracy.",
-      benefits: ["Trend Forecasting", "Behavior Prediction", "Risk Assessment", "Outcome Modeling"],
-      color: "from-green-500 to-teal-600",
-      accuracy: "94.7%"
+      title: "Machine Learning Insights",
+      description: "Extract deep insights from your data using advanced machine learning algorithms and AI models.",
+      benefits: ["Predictive Analytics", "Pattern Recognition", "Anomaly Detection", "Automated Insights"],
+      color: "from-blue-500 to-blue-600",
+      accuracy: "94.8%"
     },
     {
       icon: Eye,
-      title: "Business Intelligence",
-      description: "Transform raw data into actionable business insights with comprehensive analytics dashboards.",
-      benefits: ["Executive Dashboards", "KPI Monitoring", "Performance Metrics", "Custom Reports"],
-      color: "from-orange-500 to-red-600",
-      accuracy: "96.8%"
+      title: "Visual Analytics",
+      description: "Transform complex data into intuitive visualizations and interactive dashboards for better decision-making.",
+      benefits: ["Interactive Dashboards", "Custom Visualizations", "Real-time Charts", "Data Storytelling"],
+      color: "from-blue-500 to-blue-600",
+      accuracy: "97.5%"
     },
     {
       icon: Target,
-      title: "Customer Intelligence",
-      description: "Deep customer insights and segmentation for personalized experiences and targeted strategies.",
-      benefits: ["Customer Segmentation", "Behavior Analysis", "Lifetime Value Prediction", "Churn Prevention"],
-      color: "from-purple-500 to-pink-600",
-      accuracy: "92.4%"
+      title: "Predictive Modeling",
+      description: "Build sophisticated predictive models to forecast trends, behaviors, and business outcomes.",
+      benefits: ["Forecasting Models", "Risk Assessment", "Trend Analysis", "Scenario Planning"],
+      color: "from-blue-500 to-blue-600",
+      accuracy: "91.7%"
     },
     {
-      icon: Zap,
-      title: "Real-time Insights",
-      description: "Get instant insights and alerts as your data changes, enabling rapid decision-making.",
-      benefits: ["Live Data Monitoring", "Instant Alerts", "Anomaly Detection", "Real-time Reporting"],
-      color: "from-indigo-500 to-blue-600",
+      icon: Network,
+      title: "Data Integration",
+      description: "Seamlessly integrate data from multiple sources into a unified, intelligent data ecosystem.",
+      benefits: ["Multi-source Integration", "API Connectivity", "Data Harmonization", "Cloud Integration"],
+      color: "from-blue-500 to-blue-600",
       accuracy: "98.1%"
     },
     {
-      icon: Settings,
-      title: "Data Automation",
-      description: "Automate data collection, processing, and analysis workflows for maximum efficiency.",
-      benefits: ["Automated Workflows", "Data Pipeline Management", "ETL Automation", "Process Optimization"],
-      color: "from-teal-500 to-green-600",
-      accuracy: "97.3%"
+      icon: Shield,
+      title: "Data Security & Governance",
+      description: "Ensure data security, compliance, and governance with enterprise-grade protection systems.",
+      benefits: ["Data Encryption", "Access Controls", "Compliance Monitoring", "Audit Trails"],
+      color: "from-blue-500 to-blue-600",
+      accuracy: "99.9%"
     }
   ];
 
   const intelligenceMetrics = [
     {
       icon: Database,
-      metric: "Data Processing",
-      value: "10TB+",
-      description: "Daily data processing capacity",
-      trend: "up",
-      change: "+25%",
-      color: "text-blue-400"
+      metric: "Data Processing Speed",
+      value: "10TB/hr",
+      description: "Massive data processing capability for real-time insights",
+      trend: "up"
     },
     {
       icon: Brain,
-      metric: "Prediction Accuracy",
-      value: "94.7%",
-      description: "ML model prediction accuracy",
-      trend: "up",
-      change: "+3.2%",
-      color: "text-green-400"
+      metric: "Model Accuracy",
+      value: "94.8%",
+      description: "Average accuracy across all machine learning models",
+      trend: "up"
     },
     {
-      icon: Zap,
-      metric: "Processing Speed",
-      value: "2.3s",
-      description: "Average query response time",
-      trend: "down",
-      change: "-45%",
-      color: "text-purple-400"
+      icon: Clock,
+      metric: "Time to Insights", 
+      value: "2min",
+      description: "From raw data to actionable business insights",
+      trend: "down"
     },
     {
-      icon: Target,
-      metric: "Insight Quality",
-      value: "9.1/10",
-      description: "Business insight relevance score",
-      trend: "up",
-      change: "+0.8",
-      color: "text-orange-400"
-    }
-  ];
-
-  const dataCapabilities = [
-    {
-      name: "Data Collection & Integration",
-      description: "Seamlessly collect and integrate data from multiple sources and platforms",
-      icon: Upload,
-      capabilities: ["API Integrations", "Database Connectors", "Real-time Streaming", "Batch Processing", "Data Validation"],
-      efficiency: "99%",
-      sources: "100+"
-    },
-    {
-      name: "Data Processing & Cleaning",
-      description: "Advanced data processing and cleaning with AI-powered quality assurance",
-      icon: RefreshCw,
-      capabilities: ["Data Normalization", "Duplicate Detection", "Missing Value Handling", "Outlier Detection", "Schema Validation"],
-      efficiency: "97%",
-      sources: "All Types"
-    },
-    {
-      name: "Advanced Analytics",
-      description: "Comprehensive analytics with machine learning and statistical modeling",
-      icon: BarChart3,
-      capabilities: ["Statistical Analysis", "Machine Learning", "Time Series Analysis", "Cohort Analysis", "A/B Testing"],
-      efficiency: "95%",
-      sources: "Multi-Source"
-    },
-    {
-      name: "Visualization & Reporting",
-      description: "Create stunning visualizations and automated reports for stakeholders",
-      icon: PieChart,
-      capabilities: ["Interactive Dashboards", "Custom Charts", "Automated Reports", "Data Storytelling", "Export Options"],
-      efficiency: "98%",
-      sources: "Any Format"
-    },
-    {
-      name: "Predictive Modeling",
-      description: "Build and deploy predictive models for forecasting and optimization",
       icon: TrendingUp,
-      capabilities: ["Forecasting Models", "Classification", "Regression Analysis", "Clustering", "Recommendation Systems"],
-      efficiency: "94%",
-      sources: "Historical Data"
-    },
-    {
-      name: "Data Security & Governance",
-      description: "Enterprise-grade security and governance for your data assets",
-      icon: Shield,
-      capabilities: ["Data Encryption", "Access Controls", "Audit Trails", "Compliance Monitoring", "Privacy Protection"],
-      efficiency: "100%",
-      sources: "All Data"
+      metric: "Decision Speed",
+      value: "320%",
+      description: "Faster data-driven decision making process",
+      trend: "up"
     }
   ];
 
-  const industryApplications = [
+  const dataTypes = [
     {
-      title: "Financial Services",
-      challenge: "Risk assessment and fraud detection with large transaction volumes",
-      solution: "Real-time analytics with ML-powered fraud detection and risk modeling",
-      results: {
-        fraud_detection: "+280%",
-        risk_accuracy: "+195%",
-        processing_speed: "+340%"
-      },
-      industry: "Finance",
-      data_volume: "50TB/day",
-      accuracy: "99.7%"
+      id: 'structured',
+      name: 'Structured Data',
+      icon: Database,
+      description: 'Traditional databases and organized datasets',
+      features: ['SQL Databases', 'Spreadsheets', 'CRM Systems', 'ERP Data', 'Transactional Records', 'Financial Data']
     },
     {
-      title: "E-commerce Platform",
-      challenge: "Customer behavior analysis and personalization at scale",
-      solution: "Advanced customer intelligence with predictive analytics and segmentation",
-      results: {
-        personalization: "+320%",
-        conversion_rate: "+185%",
-        customer_satisfaction: "+67%"
-      },
-      industry: "Retail",
-      data_volume: "25TB/day",
-      accuracy: "94.2%"
+      id: 'unstructured',
+      name: 'Unstructured Data',
+      icon: Globe,
+      description: 'Text, images, videos, and complex data formats',
+      features: ['Social Media Posts', 'Images & Videos', 'Documents & PDFs', 'Email Content', 'Web Data', 'Sensor Data']
     },
     {
-      title: "Healthcare Network",
-      challenge: "Patient outcome prediction and operational efficiency optimization",
-      solution: "Predictive modeling for patient care and resource optimization analytics",
-      results: {
-        outcome_prediction: "+245%",
-        efficiency: "+156%",
-        cost_reduction: "-38%"
-      },
-      industry: "Healthcare",
-      data_volume: "15TB/day",
-      accuracy: "96.8%"
+      id: 'streaming',
+      name: 'Streaming Data',
+      icon: Activity,
+      description: 'Real-time data flows and live data streams',
+      features: ['IoT Sensors', 'Web Analytics', 'Social Streams', 'Market Data', 'User Behavior', 'System Logs']
+    },
+    {
+      id: 'external',
+      name: 'External Data',
+      icon: Network,
+      description: 'Third-party and public data sources',
+      features: ['Market Research', 'Weather Data', 'Economic Indicators', 'Industry Reports', 'Public APIs', 'Competitor Data']
+    }
+  ];
+
+  const useCases = [
+    {
+      title: "Business Intelligence",
+      description: "Transform your business data into comprehensive intelligence for strategic decision making and operational efficiency.",
+      icon: BarChart3,
+      metrics: ["Decision Speed +320%", "Data Accuracy +94%", "Insight Generation +267%"],
+      image: "/api/placeholder/400/300"
+    },
+    {
+      title: "Customer Analytics",
+      description: "Deep customer insights through advanced analytics to improve customer experience and drive growth.",
+      icon: Users,
+      metrics: ["Customer Satisfaction +89%", "Retention Rate +156%", "Personalization +234%"],
+      image: "/api/placeholder/400/300"
+    },
+    {
+      title: "Operational Intelligence",
+      description: "Optimize operations with real-time monitoring, predictive maintenance, and performance analytics.",
+      icon: Settings,
+      metrics: ["Efficiency +67%", "Cost Reduction -45%", "Uptime +98%"],
+      image: "/api/placeholder/400/300"
     }
   ];
 
   const pricingPlans = [
     {
       name: "Intelligence Starter",
-      price: "$1,299",
+      price: "$799",
       period: "/month",
       description: "Essential data intelligence for growing businesses",
       features: [
         "Up to 1TB data processing",
-        "Basic analytics dashboard",
-        "Standard integrations",
+        "Basic ML models",
+        "Standard dashboards",
         "Email support",
-        "Monthly reports",
-        "Data quality monitoring"
+        "API access",
+        "Monthly reporting"
       ],
-      highlight: false,
-      processing_capacity: "1TB",
-      accuracy: "92%"
+      highlight: false
     },
     {
-      name: "Advanced Intelligence",
-      price: "$3,999",
+      name: "Intelligence Professional", 
+      price: "$2,499",
       period: "/month",
-      description: "Comprehensive data intelligence with AI-powered insights",
+      description: "Advanced intelligence for data-driven organizations",
       features: [
         "Up to 10TB data processing",
-        "Advanced ML models",
+        "Advanced ML & AI models",
+        "Custom dashboards",
         "Real-time analytics",
-        "Custom integrations",
         "Priority support",
-        "Unlimited reports",
-        "Predictive modeling",
-        "API access"
+        "Custom integrations",
+        "Team collaboration",
+        "Advanced security"
       ],
-      highlight: true,
-      processing_capacity: "10TB",
-      accuracy: "96%"
+      highlight: true
     },
     {
-      name: "Enterprise Intelligence",
+      name: "Intelligence Enterprise",
       price: "Custom",
       period: "pricing",
-      description: "Enterprise-grade data intelligence with full customization",
+      description: "Enterprise-grade intelligence solutions",
       features: [
         "Unlimited data processing",
         "Custom AI model development",
         "Dedicated infrastructure",
-        "24/7 premium support",
+        "24/7 expert support",
         "White-label solutions",
-        "Advanced security",
-        "Custom integrations",
+        "Advanced governance",
+        "Custom training",
         "SLA guarantees"
       ],
-      highlight: false,
-      processing_capacity: "Unlimited",
-      accuracy: "99%"
+      highlight: false
+    }
+  ];
+
+  const testimonials = [
+    {
+      quote: "Opyra's data intelligence platform transformed how we understand our business. The insights are incredible and actionable.",
+      author: "Rachel Thompson",
+      position: "Chief Data Officer",
+      company: "DataCorp",
+      image: "/api/placeholder/64/64",
+      results: ["320% Decision Speed", "94% Model Accuracy", "267% Insight Generation"]
+    },
+    {
+      quote: "From scattered data to unified intelligence - this platform has revolutionized our analytics capabilities and business understanding.",
+      author: "Kevin Park",
+      position: "VP of Analytics",
+      company: "InsightTech",
+      image: "/api/placeholder/64/64",
+      results: ["10TB/hr Processing", "99% Data Accuracy", "156% Faster Insights"]
+    },
+    {
+      quote: "The predictive capabilities and real-time analytics have given us a competitive advantage we never thought possible.",
+      author: "Sophie Martinez",
+      position: "Head of Strategy",
+      company: "FutureCorp",
+      image: "/api/placeholder/64/64",
+      results: ["91% Prediction Accuracy", "89% Better Decisions", "234% ROI Increase"]
     }
   ];
 
   return (
-    <div className="min-h-screen bg-[#000000] text-[#FFFFFF] overflow-hidden">
-      {/* Animated Data Flow Background */}
-      {mounted && (
-        <div className="fixed inset-0 pointer-events-none z-0">
-          {/* Data Flow Lines */}
-          <svg className="absolute inset-0 w-full h-full opacity-10">
-            <defs>
-              <linearGradient id="dataGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#00FF00" stopOpacity="0" />
-                <stop offset="50%" stopColor="#00FF00" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#00FF00" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-            {dataFlowPoints.map((point, i) => (
-              <g key={i}>
-                <line
-                  x1={`${point.x}%`}
-                  y1={`${point.y}%`}
-                  x2={`${point.x + 15}%`}
-                  y2={`${point.y + 10}%`}
-                  stroke="url(#dataGradient)"
-                  strokeWidth="1"
-                  className="data-flow-line"
-                />
-                <circle
-                  className="data-flow-particle"
-                  cx={`${point.x}%`}
-                  cy={`${point.y}%`}
-                  r={point.size}
-                  fill="#00FF00"
-                  opacity="0.6"
-                  style={{ animationDelay: `${point.delay}s` }}
-                />
-              </g>
-            ))}
-          </svg>
-          
-          {/* Floating Data Icons */}
-          <div className="absolute top-20 left-10 animate-bounce">
-            <Database className="w-8 h-8 text-[#00FF00] opacity-20" />
-          </div>
-          <div className="absolute top-40 right-20 animate-pulse">
-            <Brain className="w-6 h-6 text-[#00FF00] opacity-30" />
-          </div>
-          <div className="absolute bottom-40 left-20 animate-float">
-            <BarChart3 className="w-7 h-7 text-[#00FF00] opacity-25" />
-          </div>
-          <div className="absolute bottom-20 right-10 animate-bounce" style={{ animationDelay: '1s' }}>
-            <Server className="w-8 h-8 text-[#00FF00] opacity-20" />
-          </div>
-        </div>
-      )}
-
+    <div className="min-h-screen bg-white text-gray-900 overflow-hidden">
       {/* Hero Section */}
-      <section ref={heroRef} className="relative py-32 px-4 max-w-7xl mx-auto">
+      <section className="relative py-32 px-4 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="hero-content">
+          <div>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="mb-6"
             >
-              <span className="px-4 py-2 bg-[#00FF00]/10 text-[#00FF00] rounded-full text-sm font-medium border border-[#00FF00]/20">
+              <span className="px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-sm font-medium border border-blue-200">
                 Data Intelligence
               </span>
             </motion.div>
             
             <motion.h1 
-              className="hero-content text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-[#FFFFFF] mb-8 leading-tight"
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-8 leading-tight"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Transform Data
-              <span className="text-[#00FF00] block">Into Intelligence</span>
-              with AI
+              Transform Data Into
+              <span className="text-blue-600 block">Strategic Intelligence</span>
             </motion.h1>
             
             <motion.p 
-              className="hero-content text-xl md:text-2xl font-paragraph text-[#FFFFFF]/80 mb-12 leading-relaxed"
+              className="text-xl md:text-2xl text-gray-600 mb-12 leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              AI-powered data intelligence platform that processes 10TB+ daily data with 94.7% prediction accuracy for actionable business insights.
+              Unlock the hidden value in your data with AI-powered intelligence platforms that deliver real-time insights and predictive analytics.
             </motion.p>
             
             <motion.div
@@ -425,28 +278,28 @@ export default function DataIntelligencePage() {
               className="flex flex-col sm:flex-row gap-6 mb-12"
             >
               <Button 
-                className="bg-[#00FF00] text-[#000000] px-8 py-4 text-lg rounded-xl hover:bg-[#00CC00] transition-all duration-300 hover:shadow-lg hover:shadow-[#00FF00]/25"
+                className="bg-blue-600 text-white px-8 py-4 text-lg rounded-xl hover:bg-blue-700 transition-all duration-300 hover:shadow-lg"
                 asChild
               >
                 <Link href="/contact">
-                  <Database className="w-5 h-5 mr-2" />
-                  Start Analyzing
+                  <Brain className="w-5 h-5 mr-2" />
+                  Get Intelligence
                 </Link>
               </Button>
               
               <Button 
                 variant="outline"
-                className="border-2 border-[#00FF00] text-[#00FF00] px-8 py-4 text-lg rounded-xl hover:bg-[#00FF00] hover:text-[#000000] transition-all duration-300"
+                className="border-2 border-blue-600 text-blue-600 px-8 py-4 text-lg rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300"
                 asChild
               >
                 <Link href="#demo">
-                  <Play className="w-5 h-5 mr-2" />
-                  See Platform
+                  <Database className="w-5 h-5 mr-2" />
+                  View Platform
                 </Link>
               </Button>
             </motion.div>
 
-            {/* Data Processing Stats */}
+            {/* Quick Stats */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -454,23 +307,15 @@ export default function DataIntelligencePage() {
               className="grid grid-cols-3 gap-8"
             >
               {[
-                { value: "10TB+", label: "Daily Processing", icon: HardDrive },
-                { value: "94.7%", label: "Accuracy", icon: Target },
-                { value: "2.3s", label: "Response Time", icon: Zap }
+                { value: "10TB/hr", label: "Data Processing" },
+                { value: "94.8%", label: "Model Accuracy" },
+                { value: "2min", label: "Time to Insights" }
               ].map((stat, index) => (
-                <div 
-                  key={index} 
-                  className={`text-center transform transition-all duration-300 ${
-                    activeDataFlow === index ? 'scale-110' : 'scale-100'
-                  }`}
-                >
-                  <div className="flex items-center justify-center mb-2">
-                    <stat.icon className="w-6 h-6 text-[#00FF00] mr-2" />
-                    <div className="text-2xl md:text-3xl font-heading font-bold text-[#00FF00]">
-                      {stat.value}
-                    </div>
+                <div key={index} className="text-center">
+                  <div className="text-2xl md:text-3xl font-bold text-blue-600 mb-1">
+                    {stat.value}
                   </div>
-                  <div className="text-sm text-[#FFFFFF]/60">
+                  <div className="text-sm text-gray-500">
                     {stat.label}
                   </div>
                 </div>
@@ -478,129 +323,128 @@ export default function DataIntelligencePage() {
             </motion.div>
           </div>
           
-          {/* Hero Visual - Data Processing Dashboard */}
+          {/* Hero Visual */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative flex items-center justify-center"
+            className="relative"
           >
-            <div className="relative w-96 h-96 bg-[#121212] rounded-3xl border border-[#00FF00]/20 p-6">
-              {/* Dashboard Header */}
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold text-[#FFFFFF] mb-2">Data Intelligence Dashboard</h3>
-                <div className="flex items-center text-sm text-[#00FF00]">
-                  <Activity className="w-4 h-4 mr-1" />
-                  Processing 847GB/hr
+            <div className="relative z-10">
+              {/* Data Intelligence Visualization */}
+              <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-lg">
+                <div className="text-center mb-8">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Data Intelligence Flow</h3>
+                  <p className="text-sm text-gray-600">Real-time data processing & insights</p>
                 </div>
-              </div>
-              
-              {/* Data Streams */}
-              <div className="space-y-4 mb-6">
-                {[
-                  { name: "Customer Data", value: "2.3TB", status: "active" },
-                  { name: "Sales Analytics", value: "1.8TB", status: "processing" },
-                  { name: "Marketing Data", value: "956GB", status: "complete" },
-                  { name: "Operations", value: "1.2TB", status: "active" }
-                ].map((stream, i) => (
-                  <div key={i} className="flex items-center justify-between p-3 bg-[#000000] rounded-lg border border-[#444444]">
-                    <div className="flex items-center">
-                      <div className={`w-2 h-2 rounded-full mr-3 ${
-                        stream.status === 'active' ? 'bg-[#00FF00] animate-pulse' :
-                        stream.status === 'processing' ? 'bg-yellow-400 animate-spin' :
-                        'bg-gray-400'
-                      }`}></div>
-                      <span className="text-sm text-[#FFFFFF]/80">{stream.name}</span>
+                
+                {/* Data Flow Network */}
+                <div className="relative h-48">
+                  {/* Central Hub */}
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center">
+                      <Brain className="w-8 h-8 text-white" />
                     </div>
-                    <span className="text-sm text-[#00FF00] font-medium">{stream.value}</span>
                   </div>
-                ))}
-              </div>
-              
-              {/* Mini Analytics Chart */}
-              <div className="bg-[#000000] rounded-xl p-4 border border-[#444444]">
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-sm text-[#FFFFFF]/70">Insights Generated</span>
-                  <span className="text-sm text-[#00FF00] font-medium">+247</span>
-                </div>
-                <div className="h-16 flex items-end justify-between">
-                  {[20, 35, 28, 42, 38, 55, 48].map((height, i) => (
-                    <div
-                      key={i}
-                      className="bg-[#00FF00] rounded-t"
-                      style={{ 
-                        height: `${height}%`, 
-                        width: '8px',
-                        animationDelay: `${i * 0.1}s`
+                  
+                  {/* Data Sources */}
+                  {[
+                    { icon: Database, position: "top-4 left-4", label: "Database" },
+                    { icon: Globe, position: "top-4 right-4", label: "Web Data" },
+                    { icon: Activity, position: "bottom-4 left-4", label: "Streams" },
+                    { icon: Server, position: "bottom-4 right-4", label: "APIs" }
+                  ].map((source, index) => (
+                    <motion.div
+                      key={index}
+                      className={`absolute ${source.position}`}
+                    >
+                      <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mb-1">
+                        <source.icon className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <div className="text-xs text-center text-gray-500">{source.label}</div>
+                      
+                      {/* Connection Lines */}
+                      <motion.div
+                        className="absolute top-1/2 left-1/2 w-20 h-0.5 bg-blue-200 origin-left"
+                        style={{
+                          transform: `rotate(${45 + index * 90}deg) translateY(-50%)`
+                        }}
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: 1, delay: 1 + index * 0.2 }}
+                      />
+                    </motion.div>
+                  ))}
+                  
+                  {/* Data Particles */}
+                  {Array.from({ length: 8 }).map((_, index) => (
+                    <motion.div
+                      key={index}
+                      className="absolute w-2 h-2 bg-blue-400 rounded-full"
+                      style={{
+                        left: `${20 + index * 10}%`,
+                        top: `${30 + Math.sin(index) * 20}%`
                       }}
-                    ></div>
+                      animate={{
+                        scale: [1, 1.5, 1],
+                        opacity: [0.5, 1, 0.5]
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        delay: index * 0.3
+                      }}
+                    />
+                  ))}
+                </div>
+                
+                {/* Output Metrics */}
+                <div className="grid grid-cols-3 gap-4 mt-8 text-center">
+                  {[
+                    { label: "Processed", value: "10TB" },
+                    { label: "Accuracy", value: "94%" },
+                    { label: "Speed", value: "2min" }
+                  ].map((metric, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 2 + index * 0.1 }}
+                    >
+                      <div className="text-lg font-bold text-blue-600">
+                        {metric.value}
+                      </div>
+                      <div className="text-xs text-gray-500">{metric.label}</div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
-              
-              {/* Processing Indicators */}
-              <div className="mt-4 grid grid-cols-2 gap-3">
-                <div className="text-center">
-                  <div className="text-lg font-bold text-[#00FF00]">94.7%</div>
-                  <div className="text-xs text-[#FFFFFF]/60">Accuracy</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-[#00FF00]">2.3s</div>
-                  <div className="text-xs text-[#FFFFFF]/60">Response</div>
-                </div>
-              </div>
             </div>
-            
-            {/* Floating Data Particles */}
-            <div className="absolute -top-4 -right-4 bg-[#00FF00] text-[#000000] px-3 py-2 rounded-full text-sm font-bold animate-bounce">
-              Live Data
-            </div>
-            <div className="absolute -bottom-4 -left-4 bg-[#121212] border border-[#00FF00] text-[#00FF00] px-3 py-2 rounded-full text-sm font-bold animate-pulse">
-              10TB+ Daily
-            </div>
-            
-            {/* Data Flow Visualization */}
-            <div className="absolute inset-0 pointer-events-none">
-              {[...Array(6)].map((_, i) => (
-                <div
-                  key={i}
-                  className="absolute w-2 h-2 bg-[#00FF00] rounded-full animate-ping"
-                  style={{
-                    left: `${20 + i * 15}%`,
-                    top: `${30 + Math.sin(i) * 20}%`,
-                    animationDelay: `${i * 0.3}s`
-                  }}
-                ></div>
-              ))}
-            </div>
-            
-            {/* Background Glow */}
-            <div className="absolute inset-0 bg-[#00FF00]/5 blur-3xl rounded-full -z-10"></div>
           </motion.div>
         </div>
       </section>
 
       {/* Intelligence Features */}
-      <section className="features-section py-32 px-4 bg-[#121212]">
+      <section className="py-32 px-4 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <motion.h2 
-              className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-[#FFFFFF] mb-8"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-8"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              AI-Powered <span className="text-[#00FF00]">Intelligence</span> Suite
+              Intelligence <span className="text-blue-600">Capabilities</span>
             </motion.h2>
             <motion.p 
-              className="text-xl font-paragraph text-[#FFFFFF]/80 max-w-3xl mx-auto"
+              className="text-xl text-gray-600 max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              Advanced data intelligence capabilities that transform raw data into actionable business insights.
+              Advanced data intelligence features that transform raw information into strategic business advantages.
             </motion.p>
           </div>
 
@@ -608,37 +452,37 @@ export default function DataIntelligencePage() {
             {intelligenceFeatures.map((feature, index) => (
               <motion.div
                 key={index}
-                className="feature-card"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -10 }}
               >
-                <Card className="bg-[#000000] border-[#444444] hover:border-[#00FF00] transition-all duration-300 group h-full">
+                <Card className="bg-white border-gray-200 hover:border-blue-300 transition-all duration-300 group h-full shadow-md hover:shadow-lg">
                   <CardContent className="p-8">
-                    <div className={`w-16 h-16 bg-linear-to-r ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                      <feature.icon className="w-8 h-8 text-white" />
+                    <div className="flex items-center justify-between mb-6">
+                      <div className={`w-16 h-16 bg-linear-to-r ${feature.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                        <feature.icon className="w-8 h-8 text-white" />
+                      </div>
+                      <div className="text-right">
+                        <div className="text-2xl font-bold text-blue-600">{feature.accuracy}</div>
+                        <div className="text-xs text-gray-500">Accuracy</div>
+                      </div>
                     </div>
                     
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-xl font-heading font-semibold text-[#FFFFFF]">
-                        {feature.title}
-                      </h3>
-                      <span className="text-sm font-medium text-[#00FF00] bg-[#00FF00]/10 px-2 py-1 rounded-full">
-                        {feature.accuracy}
-                      </span>
-                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                      {feature.title}
+                    </h3>
                     
-                    <p className="text-[#FFFFFF]/80 font-paragraph mb-6 leading-relaxed">
+                    <p className="text-gray-600 mb-6 leading-relaxed">
                       {feature.description}
                     </p>
                     
                     <div className="space-y-2">
                       {feature.benefits.map((benefit, idx) => (
                         <div key={idx} className="flex items-center text-sm">
-                          <CheckCircle className="w-4 h-4 text-[#00FF00] mr-2 shrink-0" />
-                          <span className="text-[#FFFFFF]/70">{benefit}</span>
+                          <CheckCircle className="w-4 h-4 text-blue-600 mr-2 shrink-0" />
+                          <span className="text-gray-700">{benefit}</span>
                         </div>
                       ))}
                     </div>
@@ -654,22 +498,22 @@ export default function DataIntelligencePage() {
       <section className="py-32 px-4 max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <motion.h2 
-            className="text-4xl md:text-5xl font-heading font-bold text-[#FFFFFF] mb-8"
+            className="text-4xl md:text-5xl font-bold text-gray-900 mb-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Intelligence <span className="text-[#00FF00]">Performance</span>
+            Intelligence <span className="text-blue-600">Performance</span>
           </motion.h2>
           <motion.p 
-            className="text-xl font-paragraph text-[#FFFFFF]/80 max-w-3xl mx-auto"
+            className="text-xl text-gray-600 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Measure the power and efficiency of our data intelligence platform across key performance indicators.
+            Measurable performance metrics that demonstrate the power and efficiency of our data intelligence platform.
           </motion.p>
         </div>
 
@@ -684,38 +528,21 @@ export default function DataIntelligencePage() {
               viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
             >
-              <Card className="bg-[#121212] border-[#444444] group-hover:border-[#00FF00] transition-all duration-300 p-8 relative overflow-hidden">
+              <Card className="bg-white border-gray-200 group-hover:border-blue-300 transition-all duration-300 p-8 shadow-md hover:shadow-lg">
                 <CardContent className="p-0">
-                  {/* Background Data Pattern */}
-                  <div className="absolute inset-0 opacity-5">
-                    <div className="absolute inset-0 bg-linear-to-br from-[#00FF00] to-transparent"></div>
-                    <div className="absolute top-2 right-2 text-xs text-[#00FF00]/20">
-                      {Array.from({length: 20}, (_, i) => '1').join('')}
-                    </div>
-                  </div>
+                  <metric.icon className="w-12 h-12 text-blue-600 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
                   
-                  <metric.icon className="w-12 h-12 text-[#00FF00] mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
-                  
-                  <div className={`text-4xl md:text-5xl font-heading font-bold mb-2 ${metric.color}`}>
+                  <div className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">
                     {metric.value}
                   </div>
                   
-                  <h3 className="text-lg font-heading font-semibold text-[#FFFFFF] mb-3">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
                     {metric.metric}
                   </h3>
                   
-                  <p className="text-sm text-[#FFFFFF]/70 leading-relaxed mb-3">
+                  <p className="text-sm text-gray-600 leading-relaxed">
                     {metric.description}
                   </p>
-                  
-                  <div className={`flex items-center justify-center ${
-                    metric.trend === 'up' ? 'text-green-400' : 'text-orange-400'
-                  }`}>
-                    <ArrowUp className={`w-4 h-4 mr-1 ${metric.trend === 'down' ? 'transform rotate-180' : ''}`} />
-                    <span className="text-xs font-medium">
-                      {metric.change}
-                    </span>
-                  </div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -723,70 +550,59 @@ export default function DataIntelligencePage() {
         </div>
       </section>
 
-      {/* Data Capabilities */}
-      <section className="py-32 px-4 bg-[#121212]">
+      {/* Data Types */}
+      <section className="py-32 px-4 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <motion.h2 
-              className="text-4xl md:text-5xl font-heading font-bold text-[#FFFFFF] mb-8"
+              className="text-4xl md:text-5xl font-bold text-gray-900 mb-8"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              Data <span className="text-[#00FF00]">Capabilities</span>
+              Data <span className="text-blue-600">Types We Handle</span>
             </motion.h2>
             <motion.p 
-              className="text-xl font-paragraph text-[#FFFFFF]/80 max-w-3xl mx-auto"
+              className="text-xl text-gray-600 max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              Comprehensive data processing and intelligence capabilities covering the entire data lifecycle.
+              Our platform processes all types of data to deliver comprehensive intelligence and insights.
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {dataCapabilities.map((capability, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {dataTypes.map((type, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -10 }}
+                whileHover={{ y: -5 }}
               >
-                <Card className="bg-[#000000] border-[#444444] hover:border-[#00FF00] transition-all duration-300 group h-full">
+                <Card className="bg-white border-gray-200 hover:border-blue-300 transition-all duration-300 group h-full shadow-md hover:shadow-lg">
                   <CardContent className="p-8">
-                    <div className="flex items-center justify-between mb-6">
-                      <capability.icon className="w-12 h-12 text-[#00FF00] group-hover:scale-110 transition-transform duration-300" />
-                      <div className="text-right">
-                        <div className="text-sm text-[#00FF00] font-medium">{capability.efficiency}</div>
-                        <div className="text-xs text-[#FFFFFF]/60">Efficiency</div>
-                      </div>
-                    </div>
+                    <type.icon className="w-12 h-12 text-blue-600 mb-6 group-hover:scale-110 transition-transform duration-300" />
                     
-                    <h3 className="text-xl font-heading font-semibold text-[#FFFFFF] mb-3">
-                      {capability.name}
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                      {type.name}
                     </h3>
                     
-                    <p className="text-[#FFFFFF]/80 font-paragraph mb-6 text-sm leading-relaxed">
-                      {capability.description}
+                    <p className="text-gray-600 mb-6 text-sm leading-relaxed">
+                      {type.description}
                     </p>
                     
-                    <div className="space-y-2 mb-6">
-                      {capability.capabilities.map((item, idx) => (
+                    <div className="space-y-2">
+                      {type.features.map((feature, idx) => (
                         <div key={idx} className="flex items-center text-xs">
-                          <div className="w-1 h-1 bg-[#00FF00] rounded-full mr-2 shrink-0"></div>
-                          <span className="text-[#FFFFFF]/70">{item}</span>
+                          <div className="w-1 h-1 bg-blue-600 rounded-full mr-2 shrink-0"></div>
+                          <span className="text-gray-600">{feature}</span>
                         </div>
                       ))}
-                    </div>
-                    
-                    <div className="pt-4 border-t border-[#444444]">
-                      <div className="text-xs text-[#FFFFFF]/60 mb-1">Data Sources:</div>
-                      <div className="text-sm text-[#00FF00] font-medium">{capability.sources}</div>
                     </div>
                   </CardContent>
                 </Card>
@@ -796,31 +612,31 @@ export default function DataIntelligencePage() {
         </div>
       </section>
 
-      {/* Industry Applications */}
+      {/* Use Cases */}
       <section className="py-32 px-4 max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <motion.h2 
-            className="text-4xl md:text-5xl font-heading font-bold text-[#FFFFFF] mb-8"
+            className="text-4xl md:text-5xl font-bold text-gray-900 mb-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Industry <span className="text-[#00FF00]">Applications</span>
+            Intelligence <span className="text-blue-600">Applications</span>
           </motion.h2>
           <motion.p 
-            className="text-xl font-paragraph text-[#FFFFFF]/80 max-w-3xl mx-auto"
+            className="text-xl text-gray-600 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Real-world applications of our data intelligence platform across diverse industries.
+            Real-world applications of data intelligence that drive business transformation and competitive advantage.
           </motion.p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {industryApplications.map((application, index) => (
+          {useCases.map((useCase, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 50 }}
@@ -829,45 +645,29 @@ export default function DataIntelligencePage() {
               viewport={{ once: true }}
               whileHover={{ y: -10 }}
             >
-              <Card className="bg-[#121212] border-[#444444] hover:border-[#00FF00] transition-all duration-300 group h-full">
+              <Card className="bg-white border-gray-200 hover:border-blue-300 transition-all duration-300 group overflow-hidden h-full shadow-md hover:shadow-lg">
+                <div className="relative overflow-hidden bg-linear-to-br from-blue-50 to-blue-100 h-48 flex items-center justify-center">
+                  <useCase.icon className="w-16 h-16 text-blue-600" />
+                </div>
+                
                 <CardContent className="p-8">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="bg-[#00FF00] text-[#000000] px-3 py-1 rounded-full text-sm font-medium">
-                      {application.industry}
-                    </div>
-                    <div className="text-right">
-                      <div className="text-sm text-[#00FF00] font-medium">{application.accuracy}</div>
-                      <div className="text-xs text-[#FFFFFF]/60">Accuracy</div>
-                    </div>
-                  </div>
-                  
-                  <h3 className="text-xl font-heading font-semibold text-[#FFFFFF] mb-4">
-                    {application.title}
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                    {useCase.title}
                   </h3>
                   
-                  <div className="mb-4">
-                    <div className="text-sm text-[#FFFFFF]/60 mb-2">Challenge:</div>
-                    <p className="text-sm text-[#FFFFFF]/80">{application.challenge}</p>
-                  </div>
+                  <p className="text-gray-600 mb-6 leading-relaxed">
+                    {useCase.description}
+                  </p>
                   
-                  <div className="mb-6">
-                    <div className="text-sm text-[#FFFFFF]/60 mb-2">Solution:</div>
-                    <p className="text-sm text-[#FFFFFF]/80">{application.solution}</p>
-                  </div>
-                  
-                  <div className="space-y-3 mb-4">
-                    <div className="text-sm text-[#FFFFFF]/60">Results:</div>
-                    {Object.entries(application.results).map(([key, value], idx) => (
+                  <div className="space-y-3">
+                    {useCase.metrics.map((metric, idx) => (
                       <div key={idx} className="flex items-center justify-between">
-                        <span className="text-sm text-[#FFFFFF]/70 capitalize">{key.replace('_', ' ')}</span>
-                        <span className="text-sm font-semibold text-[#00FF00]">{value}</span>
+                        <span className="text-sm text-gray-600">{metric.split(' ')[0]}</span>
+                        <span className="text-sm font-semibold text-blue-600">
+                          {metric.split(' ').slice(1).join(' ')}
+                        </span>
                       </div>
                     ))}
-                  </div>
-                  
-                  <div className="pt-4 border-t border-[#444444] text-center">
-                    <div className="text-xs text-[#FFFFFF]/60 mb-1">Data Volume:</div>
-                    <div className="text-sm text-[#00FF00] font-medium">{application.data_volume}</div>
                   </div>
                 </CardContent>
               </Card>
@@ -876,32 +676,32 @@ export default function DataIntelligencePage() {
         </div>
       </section>
 
-      {/* Pricing */}
-      <section className="py-32 px-4 bg-[#121212]">
+      {/* Testimonials */}
+      <section className="py-32 px-4 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <motion.h2 
-              className="text-4xl md:text-5xl font-heading font-bold text-[#FFFFFF] mb-8"
+              className="text-4xl md:text-5xl font-bold text-gray-900 mb-8"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              Intelligence <span className="text-[#00FF00]">Plans</span>
+              Intelligence <span className="text-blue-600">Success</span>
             </motion.h2>
             <motion.p 
-              className="text-xl font-paragraph text-[#FFFFFF]/80 max-w-3xl mx-auto"
+              className="text-xl text-gray-600 max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              Choose the right data intelligence solution for your business scale and requirements.
+              Organizations that transformed their decision-making with our data intelligence platform.
             </motion.p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {pricingPlans.map((plan, index) => (
+            {testimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 50 }}
@@ -910,59 +710,39 @@ export default function DataIntelligencePage() {
                 viewport={{ once: true }}
                 whileHover={{ y: -10 }}
               >
-                <Card className={`${
-                  plan.highlight 
-                    ? 'bg-[#00FF00]/5 border-[#00FF00] ring-2 ring-[#00FF00]/20' 
-                    : 'bg-[#000000] border-[#444444] hover:border-[#00FF00]'
-                } transition-all duration-300 group h-full relative overflow-hidden`}>
-                  {plan.highlight && (
-                    <div className="absolute top-0 left-0 right-0 bg-[#00FF00] text-[#000000] text-center py-2 text-sm font-semibold">
-                      Most Popular
-                    </div>
-                  )}
-                  
-                  <CardContent className={`${plan.highlight ? 'pt-16' : 'pt-8'} px-8 pb-8`}>
-                    <div className="flex items-center justify-between mb-6">
-                      <h3 className="text-xl font-heading font-semibold text-[#FFFFFF]">
-                        {plan.name}
-                      </h3>
-                      <div className="text-center">
-                        <div className="text-sm text-[#00FF00] font-medium">{plan.processing_capacity}</div>
-                        <div className="text-xs text-[#FFFFFF]/60">Capacity</div>
-                      </div>
-                    </div>
-                    
-                    <div className="mb-6">
-                      <span className="text-4xl font-heading font-bold text-[#00FF00]">{plan.price}</span>
-                      <span className="text-[#FFFFFF]/60 font-paragraph">{plan.period}</span>
-                    </div>
-                    
-                    <p className="text-[#FFFFFF]/80 font-paragraph mb-8 text-sm leading-relaxed">
-                      {plan.description}
-                    </p>
-                    
-                    <div className="space-y-4 mb-8">
-                      {plan.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center text-sm">
-                          <CheckCircle className="w-4 h-4 text-[#00FF00] mr-3 shrink-0" />
-                          <span className="text-[#FFFFFF]/80">{feature}</span>
-                        </div>
+                <Card className="bg-white border-gray-200 hover:border-blue-300 transition-all duration-300 group h-full shadow-md hover:shadow-lg">
+                  <CardContent className="p-8">
+                    <div className="flex items-center mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
                       ))}
                     </div>
                     
-                    <Button 
-                      className={`w-full py-3 rounded-xl transition-all duration-300 ${
-                        plan.highlight
-                          ? 'bg-[#00FF00] text-[#000000] hover:bg-[#00CC00]'
-                          : 'bg-[#121212] border border-[#00FF00] text-[#00FF00] hover:bg-[#00FF00] hover:text-[#000000]'
-                      }`}
-                      asChild
-                    >
-                      <Link href="/contact">
-                        Get Started
-                        <ArrowRight className="w-4 h-4 ml-2" />
-                      </Link>
-                    </Button>
+                    <blockquote className="text-gray-900 italic mb-6 leading-relaxed">
+                      "{testimonial.quote}"
+                    </blockquote>
+                    
+                    <div className="flex items-center mb-6">
+                      <div className="w-12 h-12 bg-linear-to-br from-blue-500 to-blue-600 rounded-full mr-4 flex items-center justify-center text-white font-semibold">
+                        {testimonial.author.split(' ').map(n => n[0]).join('')}
+                      </div>
+                      <div>
+                        <div className="text-gray-900 font-semibold">{testimonial.author}</div>
+                        <div className="text-blue-600 text-sm">{testimonial.position}</div>
+                        <div className="text-gray-500 text-sm">{testimonial.company}</div>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      {testimonial.results.map((result, idx) => (
+                        <div key={idx} className="flex items-center justify-between text-sm">
+                          <span className="text-gray-600">{result.split(' ')[0]}</span>
+                          <span className="text-blue-600 font-semibold">
+                            {result.split(' ').slice(1).join(' ')}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -971,27 +751,114 @@ export default function DataIntelligencePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-32 px-4 max-w-4xl mx-auto">
-        <div className="text-center">
+      {/* Pricing */}
+      <section className="py-32 px-4 max-w-7xl mx-auto">
+        <div className="text-center mb-20">
           <motion.h2 
-            className="text-4xl md:text-5xl font-heading font-bold text-[#FFFFFF] mb-8"
+            className="text-4xl md:text-5xl font-bold text-gray-900 mb-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Ready to <span className="text-[#00FF00]">Unlock</span> Your Data?
+            Intelligence <span className="text-blue-600">Pricing</span>
           </motion.h2>
-          
           <motion.p 
-            className="text-xl font-paragraph text-[#FFFFFF]/80 mb-12 max-w-2xl mx-auto"
+            className="text-xl text-gray-600 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Transform your data into powerful business intelligence with 94.7% accuracy and 10TB+ daily processing capacity.
+            Flexible pricing plans to unlock the power of data intelligence for organizations of any size.
+          </motion.p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {pricingPlans.map((plan, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -10 }}
+            >
+              <Card className={`${
+                plan.highlight 
+                  ? 'bg-blue-50 border-blue-300 ring-2 ring-blue-200' 
+                  : 'bg-white border-gray-200 hover:border-blue-300'
+              } transition-all duration-300 group h-full relative overflow-hidden shadow-md hover:shadow-lg`}>
+                {plan.highlight && (
+                  <div className="absolute top-0 left-0 right-0 bg-blue-600 text-white text-center py-2 text-sm font-semibold">
+                    Most Popular
+                  </div>
+                )}
+                
+                <CardContent className={`${plan.highlight ? 'pt-16' : 'pt-8'} px-8 pb-8`}>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    {plan.name}
+                  </h3>
+                  
+                  <div className="mb-6">
+                    <span className="text-4xl font-bold text-blue-600">{plan.price}</span>
+                    <span className="text-gray-500">{plan.period}</span>
+                  </div>
+                  
+                  <p className="text-gray-600 mb-8 text-sm leading-relaxed">
+                    {plan.description}
+                  </p>
+                  
+                  <div className="space-y-4 mb-8">
+                    {plan.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-center text-sm">
+                        <CheckCircle className="w-4 h-4 text-blue-600 mr-3 shrink-0" />
+                        <span className="text-gray-700">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <Button 
+                    className={`w-full py-3 rounded-xl transition-all duration-300 ${
+                      plan.highlight
+                        ? 'bg-blue-600 text-white hover:bg-blue-700'
+                        : 'bg-white border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white'
+                    }`}
+                    asChild
+                  >
+                    <Link href="/contact">
+                      Get Started
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-32 px-4 bg-gray-50">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold text-gray-900 mb-8"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            Ready for <span className="text-blue-600">Intelligent Data</span>?
+          </motion.h2>
+          
+          <motion.p 
+            className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            Transform your data into strategic intelligence and gain the competitive advantage your business needs to thrive.
           </motion.p>
           
           <motion.div
@@ -1002,23 +869,23 @@ export default function DataIntelligencePage() {
             className="flex flex-col sm:flex-row gap-6 justify-center items-center"
           >
             <Button
-              className="bg-[#00FF00] text-[#000000] px-12 py-4 text-lg rounded-xl hover:bg-[#00CC00] transition-all duration-300 shadow-lg hover:shadow-[#00FF00]/25"
+              className="bg-blue-600 text-white px-12 py-4 text-lg rounded-xl hover:bg-blue-700 transition-all duration-300 shadow-lg"
               asChild
             >
               <Link href="/contact">
-                <Database className="w-5 h-5 mr-2" />
-                Start Intelligence Platform
+                <Brain className="w-5 h-5 mr-2" />
+                Get Intelligence Now
               </Link>
             </Button>
             
             <Button
               variant="outline"
-              className="border-2 border-[#00FF00] text-[#00FF00] px-12 py-4 text-lg rounded-xl hover:bg-[#00FF00] hover:text-[#000000] transition-all duration-300"
+              className="border-2 border-blue-600 text-blue-600 px-12 py-4 text-lg rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300"
               asChild
             >
               <Link href="/contact">
                 <Calendar className="w-5 h-5 mr-2" />
-                Book Data Consultation
+                Platform Demo
               </Link>
             </Button>
           </motion.div>
@@ -1028,7 +895,7 @@ export default function DataIntelligencePage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
             viewport={{ once: true }}
-            className="mt-12 flex justify-center space-x-8 text-sm text-[#FFFFFF]/60"
+            className="mt-12 flex justify-center space-x-8 text-sm text-gray-500"
           >
             <div className="flex items-center">
               <Shield className="w-4 h-4 mr-2" />
@@ -1036,11 +903,11 @@ export default function DataIntelligencePage() {
             </div>
             <div className="flex items-center">
               <Clock className="w-4 h-4 mr-2" />
-              Real-time Processing
+              24/7 Expert Support
             </div>
             <div className="flex items-center">
               <Award className="w-4 h-4 mr-2" />
-              94.7% Accuracy
+              Proven Results
             </div>
           </motion.div>
         </div>

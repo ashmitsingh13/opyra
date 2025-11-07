@@ -3,6 +3,7 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import WhatsAppChat from "@/components/WhatsAppChat";
 import Script from "next/script";
 
 const inter = Inter({
@@ -183,8 +184,8 @@ export const metadata: Metadata = {
   
   // Additional meta tags
   other: {
-    'theme-color': '#00FF00',
-    'color-scheme': 'dark light',
+    'theme-color': '#2563eb',
+    'color-scheme': 'light dark',
     'mobile-web-app-capable': 'yes',
     'apple-mobile-web-app-capable': 'yes',
     'apple-mobile-web-app-status-bar-style': 'black-translucent',
@@ -222,15 +223,11 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         
         {/* Favicon and app icons */}
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
         
         {/* SEO Meta Tags */}
-        <meta name="theme-color" content="#00FF00" />
-        <meta name="color-scheme" content="dark light" />
+        <meta name="theme-color" content="#2563eb" />
+        <meta name="color-scheme" content="light dark" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -328,8 +325,8 @@ export default function RootLayout({
       
       <body className={`${inter.variable} ${poppins.variable} antialiased`}>
         
-        <div className="min-h-screen bg-[#080808] text-white relative overflow-x-hidden">
-          {/* Enhanced Header with Modern Animations */}
+        <div className="min-h-screen bg-white text-gray-900 relative overflow-x-hidden">
+          {/* Enhanced Header with Modern Design */}
           <Header />
           
           {/* Main Content */}
@@ -339,6 +336,9 @@ export default function RootLayout({
           
           {/* Enhanced Professional Footer */}
           <Footer />
+          
+          {/* WhatsApp Chat Widget */}
+          <WhatsAppChat />
         </div>        
       </body>
     </html>

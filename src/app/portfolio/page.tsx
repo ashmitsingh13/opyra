@@ -1,502 +1,299 @@
 "use client";
+
 import { motion } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { 
-  ExternalLink, 
-  TrendingUp, 
-  Users, 
-  Target, 
-  ArrowRight, 
-  Play,
-  Award,
-  Zap,
-  BarChart3,
-  Globe,
-  Rocket,
-  Star,
-  ChevronLeft,
-  ChevronRight,
-  Eye,
-  Calendar,
-  DollarSign,
-  MousePointer,
-  TrendingDown
+  ExternalLink, TrendingUp, Users, Target, ArrowRight, Play, Award,
+  Zap, BarChart3, Globe, Rocket, Star, ChevronLeft, ChevronRight,
+  Eye, Calendar, DollarSign, MousePointer, Filter, Grid, List
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Image } from '@/components/ui/image';
 import { useInView } from 'react-intersection-observer';
-
-// GSAP Animation Hook
-const useGSAP = () => {
-  const [gsap, setGsap] = useState<any>(null);
-  
-  useEffect(() => {
-    import('gsap').then((module) => {
-      setGsap(module.gsap);
-    });
-  }, []);
-  
-  return gsap;
-};
+import Image from 'next/image';
 
 export default function PortfolioPage() {
-  const gsap = useGSAP();
-  const [activeFilter, setActiveFilter] = useState('All');
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const heroRef = useRef<HTMLDivElement>(null);
-  const projectsRef = useRef<HTMLDivElement>(null);
-  
-  const { ref: statsRef, inView: statsInView } = useInView({
-    threshold: 0.3,
-    triggerOnce: true
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [viewMode, setViewMode] = useState('grid');
+
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
   });
-  
-  // Enhanced projects data with more details
+
+  const categories = [
+    { id: 'all', label: 'All Projects', count: 12 },
+    { id: 'ecommerce', label: 'E-commerce', count: 4 },
+    { id: 'saas', label: 'SaaS', count: 3 },
+    { id: 'fintech', label: 'FinTech', count: 2 },
+    { id: 'healthcare', label: 'Healthcare', count: 2 },
+    { id: 'education', label: 'Education', count: 1 }
+  ];
+
   const projects = [
     {
       id: 1,
-      title: "TechCorp Global Expansion",
-      client: "TechCorp Industries",
-      category: "B2B SaaS",
-      description: "AI-powered lead generation and conversion optimization for a global software company's market expansion.",
-      image: "https://static.wixstatic.com/media/d1fa15_de43476b088c4bcaaa5cd8830c5090ac~mv2.png?originWidth=576&originHeight=384",
-      results: [
-        { metric: "Lead Quality", value: "+340%" },
-        { metric: "Conversion Rate", value: "+180%" },
-        { metric: "Cost per Lead", value: "-65%" }
-      ],
-      tags: ["AI Analytics", "Lead Generation", "B2B"],
-      featured: true,
+      title: "TechCorp E-commerce Revolution",
+      client: "TechCorp",
+      category: "ecommerce",
+      industry: "Technology Retail",
       duration: "6 months",
-      investment: "$50K",
-      roi: "450%",
-      challenge: "Low quality leads and poor conversion rates in international markets",
-      solution: "Implemented AI-driven lead scoring and personalized nurturing sequences",
-      technologies: ["Machine Learning", "Predictive Analytics", "Marketing Automation"],
-      testimonial: "Opyra's AI solutions transformed our lead generation. We saw immediate improvements in lead quality and conversion rates.",
-      clientLogo: "🏢"
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop&auto=format",
+      description: "Complete AI-powered transformation of TechCorp's e-commerce platform, implementing predictive analytics and personalized customer experiences.",
+      challenge: "TechCorp's outdated e-commerce platform was experiencing declining conversion rates and poor customer engagement.",
+      solution: "We implemented our AI-powered analytics suite with real-time personalization, predictive inventory management, and automated marketing campaigns.",
+      results: {
+        roi: "+340%",
+        conversion: "+156%",
+        revenue: "+$2.4M",
+        retention: "+78%"
+      },
+      technologies: ["Machine Learning", "Predictive Analytics", "Real-time Personalization", "Automated Email Marketing"],
+      testimonial: {
+        quote: "Opyra transformed our entire business. The results exceeded every expectation we had.",
+        author: "Jennifer Walsh",
+        position: "CEO, TechCorp"
+      },
+      featured: true,
+      year: "2024"
     },
     {
       id: 2,
-      title: "EcoStyle E-commerce Revolution",
-      client: "EcoStyle Fashion",
-      category: "E-commerce",
-      description: "Complete AI-driven marketing transformation for a sustainable fashion brand, including personalization and retention.",
-      image: "https://static.wixstatic.com/media/d1fa15_cae0a185d2004b948d1cd610e4c85ea1~mv2.png?originWidth=576&originHeight=384",
-      results: [
-        { metric: "Revenue Growth", value: "+450%" },
-        { metric: "Customer LTV", value: "+220%" },
-        { metric: "Cart Abandonment", value: "-55%" }
-      ],
-      tags: ["E-commerce", "Personalization", "Retention"],
+      title: "StartupXYZ Growth Acceleration",
+      client: "StartupXYZ",
+      category: "saas",
+      industry: "Software as a Service",
+      duration: "4 months",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&auto=format",
+      description: "Rapid scaling strategy implementation for a growing SaaS startup, focusing on customer acquisition and retention optimization.",
+      challenge: "High customer acquisition costs and low retention rates were limiting StartupXYZ's growth potential.",
+      solution: "Implemented AI-driven customer segmentation, predictive churn analysis, and personalized onboarding flows.",
+      results: {
+        roi: "+280%",
+        conversion: "+89%",
+        revenue: "+$1.8M",
+        retention: "+65%"
+      },
+      technologies: ["Customer Segmentation AI", "Churn Prediction", "Personalized Onboarding", "Growth Analytics"],
+      testimonial: {
+        quote: "The growth we achieved with Opyra's help was beyond anything we thought possible.",
+        author: "Michael Chen",
+        position: "CEO, StartupXYZ"
+      },
       featured: true,
-      duration: "8 months",
-      investment: "$75K",
-      roi: "680%",
-      challenge: "High cart abandonment and low customer retention in competitive fashion market",
-      solution: "Deployed AI-powered personalization engine and intelligent remarketing campaigns",
-      technologies: ["Recommendation Engine", "Dynamic Pricing", "Behavioral Analytics"],
-      testimonial: "The personalization engine increased our conversion rates dramatically. Our customers love the tailored experience.",
-      clientLogo: "👗"
+      year: "2024"
     },
     {
       id: 3,
-      title: "HealthPlus Digital Transformation",
-      client: "HealthPlus Clinics",
-      category: "Healthcare",
-      description: "AI-powered patient acquisition and engagement platform for a network of healthcare clinics.",
-      image: "https://static.wixstatic.com/media/d1fa15_56f63579def64786a5d3a79c9383de7c~mv2.png?originWidth=576&originHeight=384",
-      results: [
-        { metric: "Patient Acquisition", value: "+280%" },
-        { metric: "Appointment Bookings", value: "+190%" },
-        { metric: "Patient Retention", value: "+85%" }
-      ],
-      tags: ["Healthcare", "Patient Acquisition", "Automation"],
+      title: "FinanceFlow Digital Transformation",
+      client: "FinanceFlow",
+      category: "fintech",
+      industry: "Financial Technology",
+      duration: "8 months",
+      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop&auto=format",
+      description: "End-to-end digital marketing transformation for a fintech company, implementing compliance-friendly AI solutions.",
+      challenge: "Strict financial regulations made traditional marketing approaches ineffective and risky.",
+      solution: "Developed compliance-first AI marketing strategies with advanced fraud detection and regulatory reporting.",
+      results: {
+        roi: "+220%",
+        conversion: "+112%",
+        revenue: "+$3.2M",
+        retention: "+45%"
+      },
+      technologies: ["Compliance AI", "Fraud Detection", "Risk Analytics", "Regulatory Reporting"],
+      testimonial: {
+        quote: "Opyra understood our regulatory challenges and delivered solutions that actually work in our industry.",
+        author: "David Rodriguez",
+        position: "CMO, FinanceFlow"
+      },
       featured: false,
-      duration: "4 months",
-      investment: "$40K",
-      roi: "320%",
-      challenge: "Difficulty reaching target patients and low appointment booking rates",
-      solution: "Created AI-driven patient targeting and automated appointment scheduling system",
-      technologies: ["Audience Segmentation", "Automated Scheduling", "Patient Journey Mapping"],
-      testimonial: "Patient acquisition has never been easier. The AI targeting is incredibly precise.",
-      clientLogo: "🏥"
+      year: "2023"
     },
     {
       id: 4,
-      title: "FinanceFlow Lead Optimization",
-      client: "FinanceFlow Solutions",
-      category: "Financial Services",
-      description: "Advanced AI targeting and conversion optimization for a financial advisory firm's digital presence.",
-      image: "https://static.wixstatic.com/media/d1fa15_6c043891fc434e718ae5e406687a9db5~mv2.png?originWidth=576&originHeight=384",
-      results: [
-        { metric: "Qualified Leads", value: "+320%" },
-        { metric: "Conversion Rate", value: "+150%" },
-        { metric: "Client Acquisition Cost", value: "-45%" }
-      ],
-      tags: ["Financial Services", "Lead Optimization", "Targeting"],
-      featured: false,
+      title: "HealthTech Patient Engagement",
+      client: "HealthTech Solutions",
+      category: "healthcare",
+      industry: "Healthcare Technology",
       duration: "5 months",
-      investment: "$60K",
-      roi: "425%",
-      challenge: "High client acquisition costs and low lead conversion in financial sector",
-      solution: "Implemented compliance-friendly AI targeting and conversion optimization",
-      technologies: ["Risk Assessment AI", "Compliance Automation", "Lead Scoring"],
-      testimonial: "Our client acquisition costs dropped significantly while lead quality improved dramatically.",
-      clientLogo: "💰"
+      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop&auto=format",
+      description: "HIPAA-compliant AI marketing platform for healthcare providers, focusing on patient education and engagement.",
+      challenge: "Need to improve patient engagement while maintaining strict HIPAA compliance requirements.",
+      solution: "Built a privacy-first AI platform for personalized patient communications and educational content delivery.",
+      results: {
+        roi: "+195%",
+        conversion: "+134%",
+        revenue: "+$1.5M",
+        retention: "+89%"
+      },
+      technologies: ["HIPAA-Compliant AI", "Patient Segmentation", "Educational Content AI", "Privacy-First Analytics"],
+      testimonial: {
+        quote: "Finally, an AI solution that understands healthcare compliance while delivering real results.",
+        author: "Dr. Sarah Kim",
+        position: "Chief Digital Officer, HealthTech Solutions"
+      },
+      featured: false,
+      year: "2023"
     },
     {
       id: 5,
-      title: "EduTech Growth Acceleration",
-      client: "EduTech Academy",
-      category: "Education",
-      description: "AI-driven student acquisition and engagement strategies for an online education platform.",
-      image: "https://static.wixstatic.com/media/d1fa15_d3c7057435924684b880545821d739bf~mv2.png?originWidth=576&originHeight=384",
-      results: [
-        { metric: "Student Enrollments", value: "+380%" },
-        { metric: "Course Completion", value: "+95%" },
-        { metric: "Student Satisfaction", value: "+75%" }
-      ],
-      tags: ["Education", "Student Acquisition", "Engagement"],
+      title: "E-Learning Platform Optimization",
+      client: "EduPlatform",
+      category: "education",
+      industry: "Online Education",
+      duration: "3 months",
+      image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=400&fit=crop&auto=format",
+      description: "AI-powered student acquisition and retention system for online learning platform.",
+      challenge: "High student dropout rates and low course completion were impacting revenue and reputation.",
+      solution: "Implemented predictive analytics for at-risk student identification and personalized learning paths.",
+      results: {
+        roi: "+167%",
+        conversion: "+98%",
+        revenue: "+$980K",
+        retention: "+76%"
+      },
+      technologies: ["Learning Analytics AI", "Predictive Student Success", "Personalized Learning", "Engagement Optimization"],
+      testimonial: {
+        quote: "Our student success rates have never been higher thanks to Opyra's AI insights.",
+        author: "Emma Johnson",
+        position: "VP of Growth, EduPlatform"
+      },
       featured: false,
-      duration: "7 months",
-      investment: "$45K",
-      roi: "520%",
-      challenge: "Low enrollment rates and poor course completion in competitive education market",
-      solution: "Built AI-powered student matching and personalized learning path recommendations",
-      technologies: ["Learning Analytics", "Student Profiling", "Adaptive Content"],
-      testimonial: "Student enrollment and completion rates exceeded all our expectations.",
-      clientLogo: "🎓"
+      year: "2023"
     },
     {
       id: 6,
-      title: "FoodieHub Delivery Optimization",
-      client: "FoodieHub",
-      category: "Food & Beverage",
-      description: "AI-powered customer acquisition and retention system for a food delivery platform.",
-      image: "https://static.wixstatic.com/media/d1fa15_3728f284b0284040881aa8feac0f1af3~mv2.png?originWidth=576&originHeight=384",
-      results: [
-        { metric: "Order Frequency", value: "+260%" },
-        { metric: "Customer Retention", value: "+140%" },
-        { metric: "Average Order Value", value: "+85%" }
-      ],
-      tags: ["Food & Beverage", "Delivery", "Customer Retention"],
-      featured: false,
-      duration: "3 months",
-      investment: "$35K",
-      roi: "380%",
-      challenge: "High customer churn and low repeat order rates in competitive food delivery market",
-      solution: "Developed AI-driven recommendation engine and loyalty program optimization",
-      technologies: ["Recommendation AI", "Loyalty Analytics", "Demand Forecasting"],
-      testimonial: "The recommendation engine increased our average order value and customer retention significantly.",
-      clientLogo: "🍕"
-    },
-    {
-      id: 7,
-      title: "AutoTech Digital Revolution",
-      client: "AutoTech Solutions",
-      category: "Automotive",
-      description: "AI-powered lead generation and customer journey optimization for automotive technology company.",
-      image: "https://static.wixstatic.com/media/d1fa15_1a2b3c4d5e6f789012345678901234~mv2.png",
-      results: [
-        { metric: "Test Drive Bookings", value: "+420%" },
-        { metric: "Sales Qualified Leads", value: "+280%" },
-        { metric: "Customer Lifetime Value", value: "+160%" }
-      ],
-      tags: ["Automotive", "Lead Generation", "Customer Journey"],
+      title: "RetailMax Omnichannel Strategy",
+      client: "RetailMax",
+      category: "ecommerce",
+      industry: "Retail",
+      duration: "7 months",
+      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop&auto=format",
+      description: "Unified omnichannel experience powered by AI, connecting online and offline customer journeys.",
+      challenge: "Disconnected online and offline experiences were creating customer confusion and lost sales.",
+      solution: "Developed unified AI system for cross-channel customer tracking and personalized experiences.",
+      results: {
+        roi: "+245%",
+        conversion: "+123%",
+        revenue: "+$2.1M",
+        retention: "+67%"
+      },
+      technologies: ["Omnichannel AI", "Cross-Channel Analytics", "Unified Customer Profiles", "Inventory Optimization"],
+      testimonial: {
+        quote: "Opyra helped us create a seamless experience that our customers love across all channels.",
+        author: "Robert Johnson",
+        position: "Digital Director, RetailMax"
+      },
       featured: true,
-      duration: "9 months",
-      investment: "$80K",
-      roi: "650%",
-      challenge: "Long sales cycles and difficulty tracking customer journey across multiple touchpoints",
-      solution: "Implemented AI-powered attribution modeling and multi-touch journey optimization",
-      technologies: ["Attribution Modeling", "Journey Analytics", "Predictive Lead Scoring"],
-      testimonial: "Finally, we can track and optimize every touchpoint in our customer journey.",
-      clientLogo: "🚗"
-    },
-    {
-      id: 8,
-      title: "PropTech Market Expansion",
-      client: "PropTech Innovations",
-      category: "Real Estate",
-      description: "AI-driven property matching and investor acquisition platform for real estate technology startup.",
-      image: "https://static.wixstatic.com/media/d1fa15_2b3c4d5e6f7890123456789012345~mv2.png",
-      results: [
-        { metric: "Property Matches", value: "+380%" },
-        { metric: "Investor Acquisitions", value: "+240%" },
-        { metric: "Deal Closure Rate", value: "+95%" }
-      ],
-      tags: ["Real Estate", "Property Matching", "Investor Relations"],
-      featured: false,
-      duration: "6 months",
-      investment: "$55K",
-      roi: "480%",
-      challenge: "Inefficient property-investor matching and low deal closure rates",
-      solution: "Built AI-powered property recommendation engine and investor profiling system",
-      technologies: ["Property Analytics", "Investor Profiling", "Market Prediction"],
-      testimonial: "The AI matching system has revolutionized how we connect properties with the right investors.",
-      clientLogo: "🏠"
+      year: "2024"
     }
   ];
 
-  const categories = ["All", "B2B SaaS", "E-commerce", "Healthcare", "Financial Services", "Education", "Food & Beverage", "Automotive", "Real Estate"];
-
-  const achievements = [
-    {
-      number: "800+",
-      label: "Projects Completed",
-      icon: Target,
-      description: "Successfully delivered AI marketing solutions across industries"
-    },
-    {
-      number: "3.2x",
-      label: "Average ROI Increase",
-      icon: TrendingUp,
-      description: "Consistent performance improvements for all clients"
-    },
-    {
-      number: "99%",
-      label: "Client Satisfaction",
-      icon: Star,
-      description: "Exceptional results and service quality"
-    },
-    {
-      number: "$150M+",
-      label: "Revenue Generated",
-      icon: DollarSign,
-      description: "Total additional revenue generated for clients"
-    },
-    {
-      number: "45%",
-      label: "Cost Reduction",
-      icon: TrendingDown,
-      description: "Average marketing cost reduction achieved"
-    },
-    {
-      number: "24/7",
-      label: "AI Monitoring",
-      icon: Eye,
-      description: "Continuous optimization and performance monitoring"
-    }
-  ];
-
-  const industries = [
-    { name: "B2B SaaS", count: 120, growth: "+340%", icon: "💻" },
-    { name: "E-commerce", count: 95, growth: "+280%", icon: "🛒" },
-    { name: "Healthcare", count: 78, growth: "+220%", icon: "🏥" },
-    { name: "Financial Services", count: 65, growth: "+190%", icon: "💰" },
-    { name: "Education", count: 52, growth: "+260%", icon: "🎓" },
-    { name: "Real Estate", count: 48, growth: "+180%", icon: "🏠" },
-    { name: "Automotive", count: 35, growth: "+310%", icon: "🚗" },
-    { name: "Food & Beverage", count: 42, growth: "+240%", icon: "🍕" }
-  ];
-
-  const technologies = [
-    { name: "Machine Learning", projects: 156, icon: "🤖" },
-    { name: "Predictive Analytics", projects: 142, icon: "📊" },
-    { name: "Marketing Automation", projects: 138, icon: "⚡" },
-    { name: "Recommendation Engines", projects: 89, icon: "🎯" },
-    { name: "Natural Language Processing", projects: 76, icon: "🧠" },
-    { name: "Computer Vision", projects: 52, icon: "👁️" }
-  ];
-
-  const clientTestimonials = [
-    {
-      name: "Sarah Johnson",
-      role: "CMO at TechCorp",
-      content: "Opyra's AI solutions transformed our lead generation process. We saw a 340% increase in qualified leads within the first quarter.",
-      rating: 5,
-      company: "TechCorp Industries",
-      image: "https://static.wixstatic.com/media/d1fa15_client1~mv2.png",
-      results: "+340% leads"
-    },
-    {
-      name: "Michael Chen",
-      role: "CEO at EcoStyle",
-      content: "The personalization engine revolutionized our customer experience. Revenue increased by 450% and customer satisfaction is at an all-time high.",
-      rating: 5,
-      company: "EcoStyle Fashion",
-      image: "https://static.wixstatic.com/media/d1fa15_client2~mv2.png",
-      results: "+450% revenue"
-    },
-    {
-      name: "Dr. Emily Rodriguez",
-      role: "Director at HealthPlus",
-      content: "Patient acquisition has never been easier. The AI targeting system helped us reach the right patients at the right time.",
-      rating: 5,
-      company: "HealthPlus Clinics",
-      image: "https://static.wixstatic.com/media/d1fa15_client3~mv2.png",
-      results: "+280% patients"
-    }
-  ];
-
-  // GSAP Animations
-  useEffect(() => {
-    if (!gsap) return;
-
-    // Hero section animations
-    const tl = gsap.timeline();
-    tl.from('.hero-title', { duration: 1, y: 100, opacity: 0, ease: 'power3.out' })
-      .from('.hero-subtitle', { duration: 0.8, y: 50, opacity: 0, ease: 'power2.out' }, '-=0.5')
-      .from('.hero-stats', { duration: 1, scale: 0, opacity: 0, stagger: 0.1, ease: 'back.out(1.7)' }, '-=0.3');
-
-    // Scroll-triggered animations
-    gsap.registerPlugin(require('gsap/ScrollTrigger').ScrollTrigger);
-    
-    gsap.utils.toArray('.project-card').forEach((card: any, i: number) => {
-      gsap.from(card, {
-        duration: 0.8,
-        y: 100,
-        opacity: 0,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: card,
-          start: 'top bottom-=100',
-          toggleActions: 'play none none reverse'
-        },
-        delay: i * 0.1
-      });
-    });
-
-  }, [gsap]);
-
-  // Filter projects
-  const filteredProjects = activeFilter === 'All' 
+  const filteredProjects = selectedCategory === 'all' 
     ? projects 
-    : projects.filter(project => project.category === activeFilter);
+    : projects.filter(project => project.category === selectedCategory);
 
-  // Swiper navigation
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % clientTestimonials.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + clientTestimonials.length) % clientTestimonials.length);
-  };
+  const stats = [
+    {
+      icon: TrendingUp,
+      value: "340%",
+      label: "Average ROI Increase",
+      description: "Across all client projects"
+    },
+    {
+      icon: Users,
+      value: "500+",
+      label: "Projects Delivered",
+      description: "Since 2019"
+    },
+    {
+      icon: Award,
+      value: "98%",
+      label: "Client Satisfaction",
+      description: "Based on post-project surveys"
+    },
+    {
+      icon: Globe,
+      value: "25+",
+      label: "Industries Served",
+      description: "Across multiple continents"
+    }
+  ];
 
   return (
-    <div className="min-h-screen bg-[#000000] text-[#FFFFFF] overflow-hidden">
-      {/* Enhanced Hero Section with 3D Effects */}
+    <div className="min-h-screen bg-white text-gray-900">
+      {/* Animated Background */}
+      <div className="fixed inset-0 pointer-events-none">
+        <motion.div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(37, 99, 235, 0.15) 2px, transparent 2px),
+              linear-gradient(90deg, rgba(37, 99, 235, 0.15) 2px, transparent 2px)
+            `,
+            backgroundSize: '50px 50px'
+          }}
+          animate={{
+            backgroundPosition: ['0px 0px', '50px 50px'],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+      </div>
 
-        <div className="relative z-10 text-center mb-20">
-          <motion.div
-            className="hero-title mb-8"
+      {/* Hero Section */}
+      <section className="relative py-32 px-4 max-w-7xl mx-auto">
+        <div className="text-center mb-20">
+          <motion.h1 
+            className="text-6xl md:text-7xl lg:text-8xl font-bold text-gray-900 mb-8"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.6 }}
           >
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-heading font-bold text-[#FFFFFF] mb-4">
-              Our
-              <span className="block text-transparent bg-clip-text bg-linear-to-r from-[#00FF00] to-[#00AA00]">
-                Portfolio
-              </span>
-            </h1>
-          </motion.div>
-          
+            Our <span className="text-blue-600">Portfolio</span>
+          </motion.h1>
           <motion.div 
-            className="h-1 bg-linear-to-r from-transparent via-[#00FF00] to-transparent w-32 mx-auto mb-8"
-            initial={{ width: 0, opacity: 0 }}
-            animate={{ width: '8rem', opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
+            className="h-1 bg-linear-to-r from-blue-600 to-transparent w-32 mx-auto mb-8"
+            initial={{ width: 0 }}
+            animate={{ width: '8rem' }}
+            transition={{ duration: 0.8, delay: 0.3 }}
           />
-          
           <motion.p 
-            className="hero-subtitle text-xl md:text-2xl font-paragraph text-[#CCCCCC] max-w-4xl mx-auto leading-relaxed mb-12"
+            className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed mb-16"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           >
-            Real results from real businesses. See how our AI-powered marketing solutions have transformed companies across industries with measurable, game-changing outcomes.
+            Real results from real clients. Explore case studies showcasing how our AI-powered marketing solutions have transformed businesses across industries.
           </motion.p>
 
-          {/* Hero Stats */}
-          <div className="hero-stats grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-            {achievements.slice(0, 4).map((stat, index) => (
+          {/* Stats Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
               <motion.div
                 key={index}
-                className="text-center group cursor-pointer"
-                initial={{ opacity: 0, scale: 0 }}
+                className="text-center group"
+                initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
+                transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
                 whileHover={{ scale: 1.05 }}
               >
-                <div className="relative">
-                  <div className="text-3xl md:text-4xl font-heading font-bold text-[#00FF00] mb-2 group-hover:text-[#00DD00] transition-colors">
-                    {stat.number}
+                <div className="bg-blue-50 rounded-2xl p-6 border border-blue-100 hover:border-blue-300 transition-colors duration-300">
+                  <stat.icon className="h-12 w-12 text-blue-600 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
+                  <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-2">
+                    {stat.value}
                   </div>
-                  <div className="text-sm md:text-base text-[#CCCCCC] font-paragraph">
+                  <div className="text-gray-900 font-semibold mb-1">
                     {stat.label}
                   </div>
-                  <div className="absolute inset-0 bg-[#00FF00]/10 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-      {/* Interactive Filter Section */}
-      <section className="py-16 px-4 bg-[#111111]">
-        <div className="max-w-480 mx-auto">
-          <motion.h2 
-            className="text-3xl md:text-4xl font-heading font-bold text-[#FFFFFF] mb-8 text-center"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            Explore by Industry
-          </motion.h2>
-          
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {categories.map((category, index) => (
-              <motion.button
-                key={category}
-                onClick={() => setActiveFilter(category)}
-                className={`px-6 py-3 rounded-full font-paragraph font-medium transition-all duration-300 ${
-                  activeFilter === category
-                    ? 'bg-[#00FF00] text-[#000000] shadow-lg shadow-[#00FF00]/25'
-                    : 'bg-[#222222] text-[#CCCCCC] hover:bg-[#333333] border border-[#444444]'
-                }`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {category}
-              </motion.button>
-            ))}
-          </div>
-
-          {/* Industry Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {industries.map((industry, index) => (
-              <motion.div
-                key={industry.name}
-                className="bg-[#222222] border border-[#333333] rounded-xl p-6 text-center hover:border-[#00FF00]/50 transition-all duration-300 group"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5 }}
-              >
-                <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                  {industry.icon}
-                </div>
-                <div className="text-lg font-heading font-semibold text-[#FFFFFF] mb-2">
-                  {industry.name}
-                </div>
-                <div className="text-2xl font-bold text-[#00FF00] mb-1">
-                  {industry.count}
-                </div>
-                <div className="text-sm text-[#CCCCCC]">
-                  projects
-                </div>
-                <div className="text-xs text-[#00FF00] mt-2 font-medium">
-                  {industry.growth} avg growth
+                  <div className="text-gray-600 text-sm">
+                    {stat.description}
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -504,688 +301,299 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Enhanced Featured Projects with 3D Hover Effects */}
-      <section className="py-32 px-4 bg-[#000000]">
-        <div className="max-w-480 mx-auto">
-          <motion.div
-            className="text-center mb-20"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-5xl md:text-6xl font-heading font-bold text-[#FFFFFF] mb-8">
-              Featured
-              <span className="block text-transparent bg-clip-text bg-linear-to-r from-[#00FF00] to-[#00AA00]">
-                Success Stories
-              </span>
-            </h2>
-            <p className="text-xl text-[#CCCCCC] max-w-3xl mx-auto font-paragraph">
-              Deep-dive into our most impactful projects and see the transformative power of AI-driven marketing.
-            </p>
-          </motion.div>
+      {/* Filter Section */}
+      <section className="py-16 px-4 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row justify-between items-center mb-12">
+            {/* Category Filters */}
+            <div className="flex flex-wrap gap-4 mb-6 lg:mb-0">
+              {categories.map((category) => (
+                <Button
+                  key={category.id}
+                  variant={selectedCategory === category.id ? "default" : "outline"}
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={`transition-all duration-300 ${
+                    selectedCategory === category.id
+                      ? 'bg-blue-600 text-white border-blue-600'
+                      : 'border-gray-300 text-gray-700 hover:border-blue-600 hover:text-blue-600'
+                  }`}
+                >
+                  {category.label}
+                  <span className="ml-2 text-xs opacity-75">({category.count})</span>
+                </Button>
+              ))}
+            </div>
 
-          <div className="space-y-32">
-            {projects.filter(project => project.featured).map((project, index) => (
-              <motion.div
-                key={project.id}
-                className="project-card group"
-                initial={{ opacity: 0, y: 100 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-                viewport={{ once: true }}
+            {/* View Mode Toggle */}
+            <div className="flex items-center gap-2">
+              <Button
+                variant={viewMode === 'grid' ? "default" : "outline"}
+                size="icon"
+                onClick={() => setViewMode('grid')}
+                className={viewMode === 'grid' ? 'bg-blue-600 text-white' : 'border-gray-300'}
               >
-                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${
-                  index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
+                <Grid className="h-4 w-4" />
+              </Button>
+              <Button
+                variant={viewMode === 'list' ? "default" : "outline"}
+                size="icon"
+                onClick={() => setViewMode('list')}
+                className={viewMode === 'list' ? 'bg-blue-600 text-white' : 'border-gray-300'}
+              >
+                <List className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Grid */}
+      <section className="py-32 px-4 max-w-7xl mx-auto">
+        <div className={`grid gap-8 ${
+          viewMode === 'grid' 
+            ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
+            : 'grid-cols-1'
+        }`}>
+          {filteredProjects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -10 }}
+              className="project-card"
+            >
+              <Card className={`group bg-white border-gray-200 hover:border-blue-300 transition-all duration-300 overflow-hidden shadow-lg hover:shadow-xl ${
+                viewMode === 'list' ? 'flex flex-col lg:flex-row' : 'h-full'
+              }`}>
+                {project.featured && (
+                  <Badge className="absolute top-4 right-4 z-10 bg-blue-600 text-white">
+                    Featured
+                  </Badge>
+                )}
+                
+                <div className={`relative overflow-hidden ${
+                  viewMode === 'list' ? 'lg:w-1/3' : ''
                 }`}>
-                  {/* Project Details */}
-                  <div className={`space-y-8 ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-                    {/* Header */}
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-3 flex-wrap">
-                        <Badge 
-                          variant="outline" 
-                          className="border-[#00FF00] text-[#00FF00] bg-[#00FF00]/10 px-4 py-2"
-                        >
-                          <span className="text-2xl mr-2">{project.clientLogo}</span>
-                          {project.category}
-                        </Badge>
-                        <Badge className="bg-linear-to-r from-[#00FF00] to-[#00AA00] text-[#000000] px-4 py-2">
-                          Featured Case Study
-                        </Badge>
-                      </div>
-                      
-                      <h3 className="text-4xl md:text-5xl font-heading font-bold text-[#FFFFFF] leading-tight">
-                        {project.title}
-                      </h3>
-                      
-                      <p className="text-xl text-[#00FF00] font-paragraph font-medium">
-                        {project.client}
-                      </p>
-                    </div>
-
-                    {/* Description and Challenge */}
-                    <div className="space-y-6">
-                      <p className="text-lg text-[#CCCCCC] font-paragraph leading-relaxed">
-                        {project.description}
-                      </p>
-                      
-                      <div className="bg-[#111111] border border-[#333333] rounded-xl p-6">
-                        <h4 className="text-lg font-heading font-semibold text-[#FFFFFF] mb-3">
-                          The Challenge
-                        </h4>
-                        <p className="text-[#CCCCCC] font-paragraph leading-relaxed">
-                          {project.challenge}
-                        </p>
-                      </div>
-                      
-                      <div className="bg-linear-to-r from-[#00FF00]/5 to-transparent border border-[#00FF00]/20 rounded-xl p-6">
-                        <h4 className="text-lg font-heading font-semibold text-[#FFFFFF] mb-3">
-                          Our Solution
-                        </h4>
-                        <p className="text-[#CCCCCC] font-paragraph leading-relaxed">
-                          {project.solution}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Key Metrics */}
-                    <div className="grid grid-cols-3 gap-6">
-                      {project.results.map((result, resultIndex) => (
-                        <motion.div
-                          key={resultIndex}
-                          className="text-center bg-[#111111] border border-[#333333] rounded-xl p-6 hover:border-[#00FF00]/50 transition-all duration-300"
-                          whileHover={{ scale: 1.05, y: -5 }}
-                        >
-                          <div className="text-2xl md:text-3xl font-heading font-bold text-[#00FF00] mb-2">
-                            {result.value}
-                          </div>
-                          <div className="text-sm text-[#CCCCCC] font-paragraph">
-                            {result.metric}
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
-
-                    {/* Project Details */}
-                    <div className="grid grid-cols-2 gap-6">
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-2">
-                          <Calendar className="h-4 w-4 text-[#00FF00]" />
-                          <span className="text-sm text-[#CCCCCC]">Duration: {project.duration}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <DollarSign className="h-4 w-4 text-[#00FF00]" />
-                          <span className="text-sm text-[#CCCCCC]">Investment: {project.investment}</span>
-                        </div>
-                      </div>
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-2">
-                          <TrendingUp className="h-4 w-4 text-[#00FF00]" />
-                          <span className="text-sm text-[#CCCCCC]">ROI: {project.roi}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Star className="h-4 w-4 text-[#00FF00]" />
-                          <span className="text-sm text-[#CCCCCC]">Client Rating: 5/5</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Technologies Used */}
-                    <div className="space-y-4">
-                      <h4 className="text-lg font-heading font-semibold text-[#FFFFFF]">
-                        Technologies Used
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {project.technologies.map((tech, techIndex) => (
-                          <Badge 
-                            key={techIndex} 
-                            variant="secondary" 
-                            className="bg-[#222222] text-[#CCCCCC] hover:bg-[#333333] transition-colors"
-                          >
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Client Testimonial */}
-                    <div className="bg-linear-to-r from-[#00FF00]/10 via-[#00FF00]/5 to-transparent border border-[#00FF00]/20 rounded-xl p-6">
-                      <div className="flex items-center gap-2 mb-3">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="h-4 w-4 text-[#00FF00] fill-current" />
-                        ))}
-                      </div>
-                      <blockquote className="text-[#FFFFFF] font-paragraph italic leading-relaxed mb-3">
-                        "{project.testimonial}"
-                      </blockquote>
-                      <cite className="text-sm text-[#00FF00] font-medium">
-                        — {project.client}
-                      </cite>
-                    </div>
-
-                    {/* CTA Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      <Button 
-                        asChild
-                        className="bg-linear-to-r from-[#00FF00] to-[#00AA00] text-[#000000] hover:from-[#00AA00] hover:to-[#008800] transition-all duration-300 px-8 py-6 text-lg font-semibold"
-                      >
-                        <Link href="/contact">
-                          <ExternalLink className="mr-2 h-5 w-5" />
-                          View Full Case Study
-                        </Link>
-                      </Button>
-                      <Button 
-                        variant="outline"
-                        className="border-[#00FF00] text-[#00FF00] hover:bg-[#00FF00] hover:text-[#000000] px-8 py-6 text-lg font-semibold"
-                      >
-                        <Play className="mr-2 h-5 w-5" />
-                        Watch Video
-                      </Button>
-                    </div>
-                  </div>
-                  
-                  {/* Project Visual */}
-                  <div className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-                    <motion.div 
-                      className="relative group cursor-pointer"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <div className="relative overflow-hidden rounded-2xl">
-                        {/* Gradient Overlay */}
-                        <div className="absolute inset-0 bg-linear-to-br from-[#00FF00]/20 via-transparent to-[#00FF00]/10 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        
-                        {/* Glow Effect */}
-                        <div className="absolute -inset-1 bg-linear-to-r from-[#00FF00]/50 to-[#00AA00]/50 rounded-2xl blur opacity-0 group-hover:opacity-75 transition-opacity duration-300" />
-                        
-                        <div className="relative bg-linear-to-br from-[#111111] to-[#222222] border border-[#333333] p-8 rounded-2xl group-hover:border-[#00FF00]/50 transition-all duration-300">
-                          <Image
-                            src={project.image}
-                            alt={`${project.title} dashboard showing AI marketing performance analytics and results`}
-                            width={600}
-                            height={400}
-                            className="w-full h-auto rounded-lg group-hover:scale-105 transition-transform duration-300"
-                          />
-                          
-                          {/* Floating Metrics */}
-                          <div className="absolute top-4 right-4 bg-[#000000]/80 backdrop-blur-sm border border-[#00FF00]/30 rounded-lg p-3">
-                            <div className="text-[#00FF00] text-sm font-semibold">Live Results</div>
-                            <div className="text-[#FFFFFF] text-lg font-bold">{project.results[0].value}</div>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    width={600}
+                    height={400}
+                    className={`${
+                      viewMode === 'list' 
+                        ? 'w-full lg:h-full object-cover' 
+                        : 'w-full h-64 object-cover'
+                    } group-hover:scale-105 transition-transform duration-300`}
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <Badge variant="secondary" className="bg-white/90 text-gray-900 mb-2">
+                      {project.industry}
+                    </Badge>
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Interactive Projects Grid with Filtering */}
-      <section className="py-32 px-4 bg-[#111111]">
-        <div className="max-w-480 mx-auto">
-          <motion.h2 
-            className="text-4xl md:text-5xl font-heading font-bold text-[#FFFFFF] mb-16 text-center"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            All Projects
-            <span className="block text-lg text-[#CCCCCC] font-paragraph font-normal mt-2">
-              Showing {filteredProjects.length} of {projects.length} projects
-            </span>
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                className="project-card"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                layout
-              >
-                <Card className="bg-[#222222] border-[#333333] hover:border-[#00FF00]/50 transition-all duration-300 group h-full overflow-hidden hover:shadow-2xl hover:shadow-[#00FF00]/10">
-                  {/* Project Image */}
-                  <div className="relative overflow-hidden h-48">
-                    <Image
-                      src={project.image}
-                      alt={`${project.title} project showcase`}
-                      width={400}
-                      height={250}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    
-                    {/* Overlay on Hover */}
-                    <div className="absolute inset-0 bg-linear-to-t from-[#000000]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    
-                    {/* Category Badge */}
-                    <div className="absolute top-4 left-4">
-                      <Badge className="bg-[#000000]/80 backdrop-blur-sm text-[#00FF00] border border-[#00FF00]/30">
-                        <span className="text-lg mr-1">{project.clientLogo}</span>
-                        {project.category}
-                      </Badge>
-                    </div>
-                    
-                    {/* Featured Badge */}
-                    {project.featured && (
-                      <div className="absolute top-4 right-4">
-                        <Badge className="bg-linear-to-r from-[#00FF00] to-[#00AA00] text-[#000000]">
-                          <Star className="h-3 w-3 mr-1" />
-                          Featured
-                        </Badge>
-                      </div>
-                    )}
-
-                    {/* View Details Button (Appears on Hover) */}
-                    <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <Button size="sm" className="bg-[#00FF00] text-[#000000] hover:bg-[#00AA00]">
-                        <Eye className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-                  
-                  <CardContent className="p-6 space-y-4">
-                    {/* Project Title & Client */}
+                <CardContent className={`p-8 ${viewMode === 'list' ? 'lg:w-2/3' : ''}`}>
+                  <div className="flex items-start justify-between mb-4">
                     <div>
-                      <h3 className="text-xl font-heading font-semibold text-[#FFFFFF] mb-2 group-hover:text-[#00FF00] transition-colors">
+                      <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
                         {project.title}
                       </h3>
-                      <p className="text-[#00FF00] font-paragraph font-medium text-sm">
-                        {project.client}
-                      </p>
+                      <p className="text-blue-600 font-medium mb-1">{project.client}</p>
+                      <p className="text-gray-500 text-sm">{project.duration} • {project.year}</p>
                     </div>
+                  </div>
 
-                    {/* Description */}
-                    <p className="text-[#CCCCCC] font-paragraph text-sm leading-relaxed line-clamp-3">
-                      {project.description}
-                    </p>
-                    
-                    {/* Key Metrics */}
-                    <div className="grid grid-cols-3 gap-3">
-                      {project.results.slice(0, 3).map((result, resultIndex) => (
-                        <div key={resultIndex} className="text-center bg-[#111111] rounded-lg p-3">
-                          <div className="text-lg font-heading font-bold text-[#00FF00]">
-                            {result.value}
-                          </div>
-                          <div className="text-xs text-[#CCCCCC] font-paragraph">
-                            {result.metric}
-                          </div>
-                        </div>
-                      ))}
+                  <p className="text-gray-700 leading-relaxed mb-6">
+                    {project.description}
+                  </p>
+
+                  {/* Results Grid */}
+                  <div className="grid grid-cols-2 gap-4 mb-6">
+                    <div className="text-center bg-gray-50 rounded-lg p-3">
+                      <div className="text-2xl font-bold text-blue-600">{project.results.roi}</div>
+                      <div className="text-xs text-gray-600">ROI Increase</div>
                     </div>
-
-                    {/* Project Meta */}
-                    <div className="flex items-center justify-between text-xs text-[#CCCCCC]">
-                      <div className="flex items-center gap-1">
-                        <Calendar className="h-3 w-3" />
-                        {project.duration}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <TrendingUp className="h-3 w-3 text-[#00FF00]" />
-                        {project.roi} ROI
-                      </div>
+                    <div className="text-center bg-gray-50 rounded-lg p-3">
+                      <div className="text-2xl font-bold text-blue-600">{project.results.conversion}</div>
+                      <div className="text-xs text-gray-600">Conversion Rate</div>
                     </div>
+                  </div>
 
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-1">
-                      {project.tags.slice(0, 2).map((tag, tagIndex) => (
+                  {/* Technologies */}
+                  <div className="mb-6">
+                    <h4 className="text-sm font-semibold text-gray-900 mb-3">Technologies Used:</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.slice(0, 3).map((tech, techIndex) => (
                         <Badge 
-                          key={tagIndex} 
-                          variant="secondary" 
-                          className="bg-[#333333] text-[#CCCCCC] text-xs hover:bg-[#444444] transition-colors"
+                          key={techIndex} 
+                          variant="outline" 
+                          className="text-xs border-blue-200 text-blue-700 bg-blue-50"
                         >
-                          {tag}
+                          {tech}
                         </Badge>
                       ))}
-                      {project.tags.length > 2 && (
-                        <Badge variant="secondary" className="bg-[#333333] text-[#CCCCCC] text-xs">
-                          +{project.tags.length - 2}
+                      {project.technologies.length > 3 && (
+                        <Badge variant="outline" className="text-xs text-gray-500">
+                          +{project.technologies.length - 3} more
                         </Badge>
                       )}
                     </div>
+                  </div>
 
-                    {/* Action Button */}
+                  {/* Testimonial */}
+                  <div className="bg-blue-50 rounded-lg p-4 mb-6 border border-blue-100">
+                    <blockquote className="text-gray-700 italic text-sm mb-3">
+                      "{project.testimonial.quote}"
+                    </blockquote>
+                    <div className="flex items-center">
+                      <div>
+                        <div className="text-gray-900 font-semibold text-sm">{project.testimonial.author}</div>
+                        <div className="text-blue-600 text-xs">{project.testimonial.position}</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex gap-3">
                     <Button 
                       asChild
-                      variant="outline"
-                      size="sm"
-                      className="w-full border-[#00FF00]/50 text-[#00FF00] hover:bg-[#00FF00] hover:text-[#000000] transition-all duration-300"
+                      className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
                     >
-                      <Link href="/contact">
-                        View Details
-                        <ArrowRight className="ml-2 h-3 w-3" />
+                      <Link href={`/portfolio/${project.id}`}>
+                        <Eye className="w-4 h-4 mr-2" />
+                        View Case Study
                       </Link>
                     </Button>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Client Testimonials Carousel */}
-      <section className="py-32 px-4 bg-[#000000]">
-        <div className="max-w-480 mx-auto">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#FFFFFF] mb-8">
-              What Our Clients Say
-            </h2>
-            <p className="text-xl text-[#CCCCCC] max-w-3xl mx-auto font-paragraph">
-              Real feedback from real clients who've experienced transformative growth with our AI solutions.
-            </p>
-          </motion.div>
-
-          {/* Testimonials Swiper */}
-          <div className="relative">
-            <div className="overflow-hidden rounded-2xl">
-              <motion.div 
-                className="flex transition-transform duration-500 ease-in-out"
-                animate={{ x: -currentSlide * 100 + '%' }}
-              >
-                {clientTestimonials.map((testimonial, index) => (
-                  <div key={index} className="w-full shrink-0 px-4">
-                    <Card className="bg-linear-to-br from-[#111111] to-[#222222] border border-[#333333] hover:border-[#00FF00]/50 transition-all duration-300">
-                      <CardContent className="p-12 text-center">
-                        {/* Rating Stars */}
-                        <div className="flex justify-center items-center gap-1 mb-6">
-                          {[...Array(testimonial.rating)].map((_, i) => (
-                            <Star key={i} className="h-6 w-6 text-[#00FF00] fill-current" />
-                          ))}
-                        </div>
-
-                        {/* Testimonial Content */}
-                        <blockquote className="text-xl md:text-2xl text-[#FFFFFF] font-paragraph italic leading-relaxed mb-8 max-w-4xl mx-auto">
-                          "{testimonial.content}"
-                        </blockquote>
-
-                        {/* Client Info */}
-                        <div className="flex items-center justify-center gap-6">
-                          <div className="text-center">
-                            <div className="text-xl font-heading font-semibold text-[#FFFFFF]">
-                              {testimonial.name}
-                            </div>
-                            <div className="text-[#00FF00] font-paragraph">
-                              {testimonial.role}
-                            </div>
-                            <div className="text-[#CCCCCC] text-sm">
-                              {testimonial.company}
-                            </div>
-                          </div>
-                          
-                          <div className="h-12 w-px bg-[#333333]" />
-                          
-                          <div className="text-center">
-                            <div className="text-2xl font-heading font-bold text-[#00FF00]">
-                              {testimonial.results}
-                            </div>
-                            <div className="text-[#CCCCCC] text-sm">
-                              Achieved
-                            </div>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
+                    <Button 
+                      variant="outline"
+                      size="icon"
+                      className="border-blue-200 text-blue-600 hover:bg-blue-50"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </Button>
                   </div>
-                ))}
-              </motion.div>
-            </div>
-
-            {/* Navigation Arrows */}
-            <Button
-              variant="outline"
-              size="icon"
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 border-[#00FF00] text-[#00FF00] hover:bg-[#00FF00] hover:text-[#000000] bg-[#000000]/80 backdrop-blur-sm"
-              onClick={prevSlide}
-            >
-              <ChevronLeft className="h-6 w-6" />
-            </Button>
-            
-            <Button
-              variant="outline"
-              size="icon"
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 border-[#00FF00] text-[#00FF00] hover:bg-[#00FF00] hover:text-[#000000] bg-[#000000]/80 backdrop-blur-sm"
-              onClick={nextSlide}
-            >
-              <ChevronRight className="h-6 w-6" />
-            </Button>
-
-            {/* Dots Indicator */}
-            <div className="flex justify-center gap-2 mt-8">
-              {clientTestimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    currentSlide === index 
-                      ? 'bg-[#00FF00] scale-125' 
-                      : 'bg-[#333333] hover:bg-[#555555]'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Enhanced Results Summary with Animated Counters */}
-      <section ref={statsRef} className="py-32 px-4 bg-[#111111]">
-        <div className="max-w-480 mx-auto">
-          <motion.div
-            className="text-center mb-20"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-5xl md:text-6xl font-heading font-bold text-[#FFFFFF] mb-8">
-              Our Collective
-              <span className="block text-transparent bg-clip-text bg-linear-to-r from-[#00FF00] to-[#00AA00]">
-                Impact
-              </span>
-            </h2>
-            <p className="text-xl text-[#CCCCCC] max-w-3xl mx-auto font-paragraph">
-              The cumulative power of AI-driven marketing across all our client partnerships.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {achievements.map((stat, index) => (
-              <motion.div
-                key={index}
-                className="text-center group cursor-pointer"
-                initial={{ opacity: 0, scale: 0.8, y: 50 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.05, y: -10 }}
-              >
-                <Card className="bg-linear-to-br from-[#222222] to-[#111111] border border-[#333333] hover:border-[#00FF00]/50 transition-all duration-500 p-8 h-full group-hover:shadow-2xl group-hover:shadow-[#00FF00]/20">
-                  <CardContent className="p-0 space-y-6">
-                    {/* Icon */}
-                    <div className="relative">
-                      <div className="w-16 h-16 mx-auto bg-linear-to-br from-[#00FF00]/20 to-[#00AA00]/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <stat.icon className="h-8 w-8 text-[#00FF00]" />
-                      </div>
-                      <div className="absolute inset-0 bg-[#00FF00]/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </div>
-
-                    {/* Number */}
-                    <div className="space-y-2">
-                      <div className="text-4xl md:text-5xl font-heading font-bold text-[#00FF00] group-hover:text-[#00DD00] transition-colors">
-                        {stat.number}
-                      </div>
-                      <div className="text-xl font-heading font-semibold text-[#FFFFFF]">
-                        {stat.label}
-                      </div>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-[#CCCCCC] font-paragraph text-sm leading-relaxed">
-                      {stat.description}
-                    </p>
-
-                    {/* Glow Effect */}
-                    <div className="absolute inset-0 bg-linear-to-r from-[#00FF00]/5 to-[#00AA00]/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Technologies Section */}
-          <motion.div
-            className="mt-32"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-3xl md:text-4xl font-heading font-bold text-[#FFFFFF] mb-12 text-center">
-              Technologies We Master
-            </h3>
-            
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-              {technologies.map((tech, index) => (
-                <motion.div
-                  key={tech.name}
-                  className="bg-[#222222] border border-[#333333] rounded-xl p-6 text-center hover:border-[#00FF00]/50 transition-all duration-300 group"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -5 }}
-                >
-                  <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                    {tech.icon}
-                  </div>
-                  <div className="text-lg font-heading font-semibold text-[#FFFFFF] mb-2">
-                    {tech.name}
-                  </div>
-                  <div className="text-[#00FF00] font-bold text-xl">
-                    {tech.projects}
-                  </div>
-                  <div className="text-[#CCCCCC] text-sm">
-                    projects
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Enhanced CTA Section with Interactive Elements */}
-      <section className="py-32 px-4 bg-linear-to-br from-[#000000] via-[#111111] to-[#000000] relative overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0">
-          {[...Array(15)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-[#00FF00]/30 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                scale: [1, 2, 1],
-                opacity: [0.3, 1, 0.3],
-              }}
-              transition={{
-                duration: 2 + Math.random() * 3,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
+      </section>
 
-        <div className="max-w-480 mx-auto text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
+      {/* Results Summary */}
+      <section className="py-32 px-4 bg-gray-50">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.h2 
+            className="text-5xl md:text-6xl font-bold text-gray-900 mb-8"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-[#FFFFFF] mb-8">
-              Ready to Write Your
-              <span className="block text-transparent bg-clip-text bg-linear-to-r from-[#00FF00] to-[#00AA00]">
-                Success Story?
-              </span>
-            </h2>
-            
-            <p className="text-xl md:text-2xl font-paragraph text-[#CCCCCC] mb-12 max-w-4xl mx-auto leading-relaxed">
-              Join the ranks of successful businesses that have transformed their marketing with Opyra's AI-powered solutions. Your story could be our next featured case study.
-            </p>
+            Proven <span className="text-blue-600">Results</span>
+          </motion.h2>
+          <motion.p 
+            className="text-xl text-gray-600 mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            Every project tells a story of transformation, growth, and success. Here's what our clients have achieved with our AI-powered marketing solutions.
+          </motion.p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            {[
+              { 
+                metric: "$12.8M+", 
+                label: "Additional Revenue Generated",
+                description: "Across all client projects"
+              },
+              { 
+                metric: "240%", 
+                label: "Average ROI Improvement",
+                description: "Within first 6 months"
+              },
+              { 
+                metric: "95%", 
+                label: "Client Retention Rate",
+                description: "Long-term partnerships"
+              }
+            ].map((item, index) => (
               <motion.div
+                key={index}
+                className="bg-white rounded-2xl p-8 border border-gray-200 shadow-lg"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
                 whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
               >
-                <Button 
-                  asChild
-                  className="bg-linear-to-r from-[#00FF00] to-[#00AA00] text-[#000000] hover:from-[#00AA00] hover:to-[#008800] px-12 py-6 text-xl font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-[#00FF00]/30"
-                >
-                  <Link href="/contact">
-                    <Rocket className="mr-3 h-6 w-6" />
-                    Start Your Project
-                  </Link>
-                </Button>
+                <div className="text-4xl md:text-5xl font-bold text-blue-600 mb-3">
+                  {item.metric}
+                </div>
+                <div className="text-lg font-semibold text-gray-900 mb-2">
+                  {item.label}
+                </div>
+                <div className="text-gray-600 text-sm">
+                  {item.description}
+                </div>
               </motion.div>
-              
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button 
-                  variant="outline"
-                  className="border-[#00FF00] text-[#00FF00] hover:bg-[#00FF00] hover:text-[#000000] px-12 py-6 text-xl font-semibold transition-all duration-300"
-                >
-                  <Play className="mr-3 h-6 w-6" />
-                  Watch Demo
-                </Button>
-              </motion.div>
-            </div>
-
-            {/* Trust Indicators */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
-              {[
-                { icon: Award, label: "Award Winning", value: "AI Solutions" },
-                { icon: Users, label: "500+ Happy", value: "Clients" },
-                { icon: Globe, label: "Global", value: "Presence" },
-                { icon: Zap, label: "24/7", value: "Support" }
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  className="text-center"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <item.icon className="h-8 w-8 text-[#00FF00] mx-auto mb-2" />
-                  <div className="text-sm text-[#CCCCCC] mb-1">{item.label}</div>
-                  <div className="text-[#FFFFFF] font-semibold">{item.value}</div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+            ))}
+          </div>
         </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="py-32 px-4 max-w-4xl mx-auto text-center">
+        <motion.h2 
+          className="text-5xl md:text-6xl font-bold text-gray-900 mb-8"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          Ready to Be Our Next <span className="text-blue-600">Success Story?</span>
+        </motion.h2>
+        <motion.p 
+          className="text-xl text-gray-600 max-w-2xl mx-auto mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          Join the hundreds of companies that have transformed their marketing with our AI-powered solutions. Let's discuss how we can help you achieve similar results.
+        </motion.p>
+        
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+        >
+          <Button
+            asChild
+            className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-6 text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl rounded-xl"
+          >
+            <Link href="/contact">
+              <Rocket className="w-5 h-5 mr-2" />
+              Start Your Project
+            </Link>
+          </Button>
+          <Button
+            variant="outline"
+            asChild
+            className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-12 py-6 text-lg font-semibold transition-all duration-300 rounded-xl"
+          >
+            <Link href="/services">
+              <Eye className="w-5 h-5 mr-2" />
+              Explore Services
+            </Link>
+          </Button>
+        </motion.div>
       </section>
     </div>
   );

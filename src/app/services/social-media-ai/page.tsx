@@ -4,8 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+// Removed GSAP dependencies
 import {
   MessageCircle, Share2, Users, Heart, Zap, TrendingUp,
   BarChart3, Calendar, Bot, Megaphone, Eye, Target,
@@ -19,9 +18,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import './social-media.css';
 
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+// Removed GSAP registration
 
 export default function SocialMediaAIPage() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -43,51 +40,7 @@ export default function SocialMediaAIPage() {
     triggerOnce: true,
   });
 
-  useEffect(() => {
-    setMounted(true);
-    
-    if (typeof window !== 'undefined') {
-      // Hero animations
-      gsap.fromTo(
-        '.hero-content',
-        { y: 100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out', stagger: 0.2 }
-      );
-
-      // Social platform icons animation
-      gsap.to('.social-platform', {
-        y: '+=15',
-        rotation: 360,
-        duration: 6,
-        ease: 'power2.inOut',
-        stagger: 0.5,
-        repeat: -1,
-        yoyo: true
-      });
-
-      // Platform cycling
-      const platformInterval = setInterval(() => {
-        setActivePlatform(prev => (prev + 1) % 6);
-      }, 2000);
-
-      // Feature cards animation
-      ScrollTrigger.create({
-        trigger: '.features-section',
-        start: 'top 80%',
-        onEnter: () => {
-          gsap.fromTo('.feature-card', 
-            { y: 50, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, stagger: 0.15 }
-          );
-        }
-      });
-
-      return () => {
-        clearInterval(platformInterval);
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-      };
-    }
-  }, []);
+  // Removed GSAP animations - using Framer Motion instead
 
   const socialFeatures = [
     {

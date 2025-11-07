@@ -1,11 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   TrendingUp, Zap, BarChart3, Target, Rocket, Activity,
   DollarSign, Percent, ArrowUp, LineChart, PieChart, Users,
@@ -17,72 +15,9 @@ import {
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import './growth.css';
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 export default function GrowthOptimizationPage() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
   const [activeMetric, setActiveMetric] = useState(0);
-
-  // Generate stable growth chart points
-  const chartPoints = Array.from({ length: 8 }, (_, i) => ({
-    x: (i * 14.28),
-    y: Math.sin((i * Math.PI) / 4) * 20 + 50 + (i * 5),
-    value: Math.floor(Math.random() * 1000) + 100
-  }));
-
-  const [ref, inView] = useInView({
-    threshold: 0.1,
-    triggerOnce: true,
-  });
-
-  useEffect(() => {
-    setMounted(true);
-    
-    if (typeof window !== 'undefined') {
-      // Hero animations
-      gsap.fromTo(
-        '.hero-content',
-        { y: 100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out', stagger: 0.2 }
-      );
-
-      // Growth chart animation
-      gsap.to('.growth-line', {
-        strokeDasharray: '1000 1000',
-        strokeDashoffset: 0,
-        duration: 3,
-        ease: 'power2.out',
-        delay: 0.5
-      });
-
-      // Metric counter animation
-      const metricInterval = setInterval(() => {
-        setActiveMetric(prev => (prev + 1) % 4);
-      }, 3000);
-
-      // Feature cards animation
-      ScrollTrigger.create({
-        trigger: '.features-section',
-        start: 'top 80%',
-        onEnter: () => {
-          gsap.fromTo('.feature-card', 
-            { y: 50, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, stagger: 0.15 }
-          );
-        }
-      });
-
-      return () => {
-        clearInterval(metricInterval);
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-      };
-    }
-  }, []);
 
   const optimizationFeatures = [
     {
@@ -90,7 +25,7 @@ export default function GrowthOptimizationPage() {
       title: "Conversion Rate Optimization",
       description: "AI-powered testing and optimization to maximize your conversion rates across all touchpoints.",
       benefits: ["A/B Testing Automation", "Multivariate Testing", "User Journey Analysis", "Conversion Funnel Optimization"],
-      color: "from-blue-500 to-purple-600",
+      color: "from-blue-500 to-blue-600",
       improvement: "+340%"
     },
     {
@@ -98,7 +33,7 @@ export default function GrowthOptimizationPage() {
       title: "Revenue Growth Acceleration",
       description: "Strategic optimization to dramatically increase your revenue through data-driven improvements.",
       benefits: ["Revenue Stream Analysis", "Pricing Optimization", "Upsell Automation", "Cross-sell Enhancement"],
-      color: "from-green-500 to-teal-600",
+      color: "from-blue-500 to-blue-600",
       improvement: "+280%"
     },
     {
@@ -106,7 +41,7 @@ export default function GrowthOptimizationPage() {
       title: "Performance Optimization",
       description: "Optimize every aspect of your marketing performance for maximum ROI and efficiency.",
       benefits: ["Campaign Performance", "Ad Spend Optimization", "Channel Efficiency", "Attribution Modeling"],
-      color: "from-orange-500 to-red-600",
+      color: "from-blue-500 to-blue-600",
       improvement: "+195%"
     },
     {
@@ -114,7 +49,7 @@ export default function GrowthOptimizationPage() {
       title: "Speed & Efficiency",
       description: "Accelerate your growth with automated optimization and real-time performance improvements.",
       benefits: ["Automated Optimization", "Real-time Adjustments", "Performance Monitoring", "Efficiency Metrics"],
-      color: "from-purple-500 to-pink-600",
+      color: "from-blue-500 to-blue-600",
       improvement: "+225%"
     },
     {
@@ -122,7 +57,7 @@ export default function GrowthOptimizationPage() {
       title: "Data-Driven Insights",
       description: "Transform raw data into actionable growth strategies with advanced analytics and insights.",
       benefits: ["Advanced Analytics", "Predictive Modeling", "Growth Forecasting", "Performance Insights"],
-      color: "from-indigo-500 to-blue-600",
+      color: "from-blue-500 to-blue-600",
       improvement: "+167%"
     },
     {
@@ -130,7 +65,7 @@ export default function GrowthOptimizationPage() {
       title: "Scalable Growth Systems",
       description: "Build sustainable growth systems that scale with your business and market demands.",
       benefits: ["Growth Framework", "Scalability Planning", "Resource Optimization", "System Integration"],
-      color: "from-teal-500 to-green-600",
+      color: "from-blue-500 to-blue-600",
       improvement: "+312%"
     }
   ];
@@ -143,259 +78,205 @@ export default function GrowthOptimizationPage() {
       description: "Average revenue increase within 6 months",
       trend: "up",
       change: "+23%",
-      color: "text-green-400"
+      color: "text-green-600"
     },
     {
       icon: TrendingUp,
       metric: "Conversion Rate",
       value: "267%",
-      description: "Improvement in conversion rates",
-      trend: "up",
+      description: "Improvement in conversion rates across channels",
+      trend: "up", 
       change: "+18%",
-      color: "text-blue-400"
+      color: "text-blue-600"
     },
     {
-      icon: Percent,
-      metric: "ROI Improvement",
-      value: "445%",
-      description: "Return on investment optimization",
-      trend: "up",
-      change: "+32%",
-      color: "text-purple-400"
-    },
-    {
-      icon: ArrowUp,
-      metric: "Growth Velocity",
-      value: "8.7x",
-      description: "Acceleration in growth rate",
-      trend: "up",
-      change: "+0.9x",
-      color: "text-orange-400"
-    }
-  ];
-
-  const growthStrategies = [
-    {
-      name: "Revenue Optimization",
-      description: "Maximize revenue through pricing, upselling, and conversion optimization",
-      icon: DollarSign,
-      strategies: ["Dynamic Pricing", "Upsell Automation", "Revenue Stream Analysis", "Lifetime Value Optimization", "Pricing Psychology"],
-      impact: "340%",
-      timeframe: "3-6 months"
-    },
-    {
-      name: "Conversion Enhancement",
-      description: "Improve conversion rates across all customer touchpoints and channels",
-      icon: Target,
-      strategies: ["Landing Page Optimization", "Checkout Flow Improvement", "CTA Testing", "Form Optimization", "Mobile Conversion"],
-      impact: "267%",
-      timeframe: "2-4 months"
-    },
-    {
-      name: "Customer Acquisition",
-      description: "Scale customer acquisition while reducing costs and improving quality",
       icon: Users,
-      strategies: ["Channel Optimization", "Lead Quality Scoring", "Acquisition Funnel", "Cost Per Acquisition", "Referral Programs"],
-      impact: "195%",
-      timeframe: "4-8 months"
+      metric: "Customer Growth",
+      value: "189%",
+      description: "Increase in customer acquisition rate",
+      trend: "up",
+      change: "+14%",
+      color: "text-purple-600"
     },
     {
-      name: "Retention & Loyalty",
-      description: "Increase customer lifetime value through retention and loyalty programs",
-      icon: RefreshCw,
-      strategies: ["Churn Prevention", "Loyalty Programs", "Customer Success", "Retention Campaigns", "Engagement Optimization"],
-      impact: "225%",
-      timeframe: "6-12 months"
-    },
-    {
-      name: "Operational Efficiency",
-      description: "Streamline operations to reduce costs and improve profit margins",
-      icon: Settings,
-      strategies: ["Process Automation", "Resource Optimization", "Cost Reduction", "Workflow Improvement", "Performance Monitoring"],
-      impact: "156%",
-      timeframe: "2-6 months"
-    },
-    {
-      name: "Market Expansion",
-      description: "Enter new markets and segments to accelerate growth opportunities",
-      icon: Globe,
-      strategies: ["Market Research", "Segment Analysis", "Geographic Expansion", "Product-Market Fit", "Competitive Analysis"],
-      impact: "289%",
-      timeframe: "6-18 months"
+      icon: Rocket,
+      metric: "Time to ROI",
+      value: "65%",
+      description: "Faster time to positive return on investment",
+      trend: "down",
+      change: "-45%",
+      color: "text-orange-600"
     }
   ];
 
-  const successStories = [
+  const optimizationAreas = [
     {
-      title: "Tech Startup",
-      challenge: "Slow user growth and low conversion rates",
-      solution: "Implemented comprehensive growth optimization with conversion rate improvements",
-      results: {
-        user_growth: "+450%",
-        conversion_rate: "+280%",
-        revenue: "+340%"
-      },
-      industry: "Technology",
-      timeline: "4 months",
-      company_size: "50-200 employees"
+      title: "Website & Landing Pages",
+      description: "Optimize your web properties for maximum conversion and user experience.",
+      icon: Monitor,
+      metrics: ["Conversion Rate +45%", "Page Load Speed +78%", "User Engagement +92%"],
+      features: ["Page Speed Optimization", "UX/UI Enhancement", "Mobile Responsiveness", "A/B Testing"]
     },
     {
-      title: "E-commerce Brand",
-      challenge: "High customer acquisition costs and low retention",
-      solution: "Optimized customer journey and implemented retention strategies",
-      results: {
-        acquisition_cost: "-45%",
-        customer_retention: "+320%",
-        lifetime_value: "+180%"
-      },
-      industry: "E-commerce",
-      timeline: "6 months",
-      company_size: "200-500 employees"
+      title: "Sales Funnel",
+      description: "Streamline your sales process to convert more prospects into customers.",
+      icon: Target,
+      metrics: ["Lead Conversion +156%", "Sales Cycle -34%", "Revenue Per Lead +89%"],
+      features: ["Funnel Analysis", "Lead Scoring", "Process Automation", "Conversion Tracking"]
     },
     {
-      title: "SaaS Platform",
-      challenge: "Plateau in revenue growth and market penetration",
-      solution: "Developed scalable growth systems and market expansion strategy",
-      results: {
-        revenue_growth: "+520%",
-        market_share: "+85%",
-        customer_base: "+390%"
-      },
-      industry: "SaaS",
-      timeline: "8 months",
-      company_size: "100-300 employees"
+      title: "Customer Journey",
+      description: "Optimize every touchpoint in your customer's journey for better results.",
+      icon: Activity,
+      metrics: ["Customer Satisfaction +67%", "Retention Rate +43%", "Lifetime Value +124%"],
+      features: ["Journey Mapping", "Touchpoint Analysis", "Experience Optimization", "Retention Strategies"]
+    }
+  ];
+
+  const growthStages = [
+    {
+      stage: "Analysis",
+      title: "Deep Performance Analysis",
+      description: "We analyze your current performance across all channels and touchpoints",
+      icon: BarChart3,
+      duration: "Week 1-2"
+    },
+    {
+      stage: "Strategy",
+      title: "Growth Strategy Development",
+      description: "Create a customized growth strategy based on data insights and best practices",
+      icon: Brain,
+      duration: "Week 2-3"
+    },
+    {
+      stage: "Implementation",
+      title: "Optimization Implementation",
+      description: "Execute growth optimization strategies across all identified areas",
+      icon: Rocket,
+      duration: "Week 3-8"
+    },
+    {
+      stage: "Monitoring",
+      title: "Performance Monitoring",
+      description: "Continuously monitor and refine optimization strategies for maximum results",
+      icon: Activity,
+      duration: "Ongoing"
     }
   ];
 
   const pricingPlans = [
     {
       name: "Growth Starter",
-      price: "$799",
+      price: "$499",
       period: "/month",
-      description: "Essential growth optimization for emerging businesses",
+      description: "Essential growth optimization for small businesses",
       features: [
-        "Conversion rate optimization",
-        "Basic A/B testing",
-        "Performance analytics",
-        "Growth strategy consultation",
+        "Basic conversion optimization",
+        "Landing page optimization",
+        "A/B testing setup",
+        "Monthly reporting",
         "Email support",
-        "Up to 5 optimization campaigns"
+        "Standard integrations"
       ],
-      highlight: false,
-      growth_potential: "2-3x"
+      highlight: false
     },
     {
-      name: "Scale Accelerator",
-      price: "$2,299",
+      name: "Growth Professional",
+      price: "$1,299",
       period: "/month",
-      description: "Advanced growth optimization with AI-powered automation",
+      description: "Advanced optimization for scaling businesses",
       features: [
-        "All optimization features",
-        "AI-powered testing",
-        "Revenue optimization",
+        "Full funnel optimization",
+        "Advanced A/B testing",
         "Customer journey mapping",
+        "Real-time optimization",
         "Priority support",
-        "Unlimited campaigns",
         "Custom integrations",
-        "Dedicated growth manager"
+        "Weekly strategy calls",
+        "Performance dashboard"
       ],
-      highlight: true,
-      growth_potential: "4-6x"
+      highlight: true
     },
     {
-      name: "Enterprise Growth",
+      name: "Growth Enterprise",
       price: "Custom",
       period: "pricing",
-      description: "Enterprise-grade growth optimization with full-service support",
+      description: "Enterprise-grade growth optimization",
       features: [
-        "White-label solutions",
-        "Custom growth frameworks",
+        "Custom growth strategy",
         "Dedicated growth team",
-        "24/7 premium support",
-        "Advanced integrations",
-        "Custom reporting",
-        "Training & workshops",
-        "Performance guarantees"
+        "Advanced ML optimization",
+        "24/7 phone support",
+        "Custom development",
+        "White-label solutions",
+        "SLA guarantees",
+        "Executive reporting"
       ],
-      highlight: false,
-      growth_potential: "8-12x"
+      highlight: false
+    }
+  ];
+
+  const testimonials = [
+    {
+      quote: "Opyra's growth optimization strategies helped us achieve 340% revenue growth in just 6 months. The results speak for themselves.",
+      author: "Amanda Foster",
+      position: "CEO",
+      company: "GrowthLab",
+      image: "/api/placeholder/64/64",
+      results: ["340% Revenue Growth", "67% Better Conversion", "45% Lower CAC"]
+    },
+    {
+      quote: "The systematic approach to optimization transformed our entire business. We're now growing faster than ever before.",
+      author: "Robert Chen",
+      position: "Founder",
+      company: "ScaleForward",
+      image: "/api/placeholder/64/64",
+      results: ["267% Conversion Increase", "89% Higher Revenue", "156% Customer Growth"]
+    },
+    {
+      quote: "From struggling with conversions to becoming a market leader - Opyra made it possible with their optimization expertise.",
+      author: "Maria Santos",
+      position: "CMO",
+      company: "TechRise",
+      image: "/api/placeholder/64/64",
+      results: ["195% Performance Boost", "78% Faster Growth", "234% ROI Improvement"]
     }
   ];
 
   return (
-    <div className="min-h-screen bg-[#000000] text-[#FFFFFF] overflow-hidden">
-      {/* Animated Background */}
-      {mounted && (
-        <div className="fixed inset-0 pointer-events-none z-0">
-          {/* Growth Lines */}
-          <svg className="absolute inset-0 w-full h-full opacity-10">
-            <defs>
-              <linearGradient id="growthGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#00FF00" stopOpacity="0" />
-                <stop offset="50%" stopColor="#00FF00" stopOpacity="0.5" />
-                <stop offset="100%" stopColor="#00FF00" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-            <polyline
-              className="growth-line"
-              fill="none"
-              stroke="url(#growthGradient)"
-              strokeWidth="2"
-              strokeDasharray="1000 1000"
-              strokeDashoffset="1000"
-              points={chartPoints.map(point => `${point.x * 10},${point.y * 5}`).join(' ')}
-            />
-          </svg>
-          
-          {/* Floating Growth Icons */}
-          <div className="absolute top-20 left-10 animate-bounce">
-            <TrendingUp className="w-8 h-8 text-[#00FF00] opacity-20" />
-          </div>
-          <div className="absolute top-40 right-20 animate-pulse">
-            <Rocket className="w-6 h-6 text-[#00FF00] opacity-30" />
-          </div>
-          <div className="absolute bottom-40 left-20 animate-float">
-            <BarChart3 className="w-7 h-7 text-[#00FF00] opacity-25" />
-          </div>
-          <div className="absolute bottom-20 right-10 animate-bounce" style={{ animationDelay: '1s' }}>
-            <Activity className="w-8 h-8 text-[#00FF00] opacity-20" />
-          </div>
-        </div>
-      )}
-
+    <div className="min-h-screen bg-white text-gray-900 overflow-hidden">
       {/* Hero Section */}
-      <section ref={heroRef} className="relative py-32 px-4 max-w-7xl mx-auto">
+      <section className="relative py-32 px-4 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="hero-content">
+          <div>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="mb-6"
             >
-              <span className="px-4 py-2 bg-[#00FF00]/10 text-[#00FF00] rounded-full text-sm font-medium border border-[#00FF00]/20">
+              <span className="px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-sm font-medium border border-blue-200">
                 Growth Optimization
               </span>
             </motion.div>
             
             <motion.h1 
-              className="hero-content text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-[#FFFFFF] mb-8 leading-tight"
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-8 leading-tight"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               Accelerate Your
-              <span className="text-[#00FF00] block">Business Growth</span>
-              with AI
+              <span className="text-blue-600 block">Business Growth</span>
             </motion.h1>
             
             <motion.p 
-              className="hero-content text-xl md:text-2xl font-paragraph text-[#FFFFFF]/80 mb-12 leading-relaxed"
+              className="text-xl md:text-2xl text-gray-600 mb-12 leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              AI-powered growth optimization that delivers 340% revenue increases and 267% conversion improvements through data-driven strategies.
+              Optimize every aspect of your business for exponential growth. Data-driven strategies that deliver measurable results.
             </motion.p>
             
             <motion.div
@@ -405,7 +286,7 @@ export default function GrowthOptimizationPage() {
               className="flex flex-col sm:flex-row gap-6 mb-12"
             >
               <Button 
-                className="bg-[#00FF00] text-[#000000] px-8 py-4 text-lg rounded-xl hover:bg-[#00CC00] transition-all duration-300 hover:shadow-lg hover:shadow-[#00FF00]/25"
+                className="bg-blue-600 text-white px-8 py-4 text-lg rounded-xl hover:bg-blue-700 transition-all duration-300 hover:shadow-lg"
                 asChild
               >
                 <Link href="/contact">
@@ -416,17 +297,17 @@ export default function GrowthOptimizationPage() {
               
               <Button 
                 variant="outline"
-                className="border-2 border-[#00FF00] text-[#00FF00] px-8 py-4 text-lg rounded-xl hover:bg-[#00FF00] hover:text-[#000000] transition-all duration-300"
+                className="border-2 border-blue-600 text-blue-600 px-8 py-4 text-lg rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300"
                 asChild
               >
-                <Link href="#demo">
-                  <Play className="w-5 h-5 mr-2" />
-                  Watch Demo
+                <Link href="#case-studies">
+                  <BarChart3 className="w-5 h-5 mr-2" />
+                  View Results
                 </Link>
               </Button>
             </motion.div>
 
-            {/* Live Growth Metrics */}
+            {/* Quick Stats */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -434,23 +315,15 @@ export default function GrowthOptimizationPage() {
               className="grid grid-cols-3 gap-8"
             >
               {[
-                { value: "340%", label: "Revenue Growth", icon: DollarSign },
-                { value: "267%", label: "Conversion Lift", icon: TrendingUp },
-                { value: "8.7x", label: "Growth Velocity", icon: Rocket }
+                { value: "340%", label: "Revenue Growth" },
+                { value: "267%", label: "Conversion Lift" },
+                { value: "65%", label: "Faster ROI" }
               ].map((stat, index) => (
-                <div 
-                  key={index} 
-                  className={`text-center transform transition-all duration-300 ${
-                    activeMetric === index ? 'scale-110' : 'scale-100'
-                  }`}
-                >
-                  <div className="flex items-center justify-center mb-2">
-                    <stat.icon className="w-6 h-6 text-[#00FF00] mr-2" />
-                    <div className="text-2xl md:text-3xl font-heading font-bold text-[#00FF00]">
-                      {stat.value}
-                    </div>
+                <div key={index} className="text-center">
+                  <div className="text-2xl md:text-3xl font-bold text-blue-600 mb-1">
+                    {stat.value}
                   </div>
-                  <div className="text-sm text-[#FFFFFF]/60">
+                  <div className="text-sm text-gray-500">
                     {stat.label}
                   </div>
                 </div>
@@ -458,119 +331,118 @@ export default function GrowthOptimizationPage() {
             </motion.div>
           </div>
           
-          {/* Hero Visual - Growth Chart */}
+          {/* Hero Visual */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative flex items-center justify-center"
+            className="relative"
           >
-            <div className="relative w-96 h-96 bg-[#121212] rounded-3xl border border-[#00FF00]/20 p-8">
-              {/* Chart Header */}
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold text-[#FFFFFF] mb-2">Growth Performance</h3>
-                <div className="flex items-center text-sm text-[#00FF00]">
-                  <ArrowUp className="w-4 h-4 mr-1" />
-                  +340% Revenue Growth
+            <div className="relative z-10">
+              {/* Growth Chart */}
+              <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-lg">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-lg font-semibold text-gray-900">Growth Performance</h3>
+                  <TrendingUp className="w-6 h-6 text-blue-600" />
                 </div>
-              </div>
-              
-              {/* Chart Area */}
-              <div className="relative h-48 bg-[#000000] rounded-xl p-4 border border-[#444444]">
-                <svg className="w-full h-full">
-                  <defs>
-                    <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#00FF00" stopOpacity="0.3" />
-                      <stop offset="100%" stopColor="#00FF00" stopOpacity="0" />
-                    </linearGradient>
-                  </defs>
-                  
-                  {/* Chart Line */}
-                  <polyline
-                    fill="none"
-                    stroke="#00FF00"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    points={chartPoints.map((point, i) => `${i * 40},${160 - point.y}`).join(' ')}
-                  />
-                  
-                  {/* Fill Area */}
-                  <polygon
-                    fill="url(#chartGradient)"
-                    points={`0,160 ${chartPoints.map((point, i) => `${i * 40},${160 - point.y}`).join(' ')} 280,160`}
-                  />
-                  
-                  {/* Data Points */}
-                  {chartPoints.slice(0, 7).map((point, i) => (
-                    <circle
-                      key={i}
-                      cx={i * 40}
-                      cy={160 - point.y}
-                      r="4"
-                      fill="#00FF00"
-                      className="animate-pulse"
-                      style={{ animationDelay: `${i * 0.2}s` }}
-                    />
-                  ))}
-                </svg>
                 
-                {/* Chart Labels */}
-                <div className="absolute bottom-0 left-0 right-0 flex justify-between text-xs text-[#FFFFFF]/60 px-2">
-                  {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'].map((month, i) => (
-                    <span key={i}>{month}</span>
+                {/* Simple Growth Chart Visualization */}
+                <div className="relative h-32 mb-4">
+                  <svg viewBox="0 0 300 100" className="w-full h-full">
+                    <motion.path
+                      d="M10,80 Q50,60 90,50 T170,30 T250,10"
+                      stroke="#2563eb"
+                      strokeWidth="3"
+                      fill="none"
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{ duration: 2, delay: 1 }}
+                    />
+                    {/* Data Points */}
+                    {[
+                      { x: 10, y: 80 },
+                      { x: 90, y: 50 },
+                      { x: 170, y: 30 },
+                      { x: 250, y: 10 }
+                    ].map((point, index) => (
+                      <motion.circle
+                        key={index}
+                        cx={point.x}
+                        cy={point.y}
+                        r="4"
+                        fill="#2563eb"
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.3, delay: 1.5 + index * 0.1 }}
+                      />
+                    ))}
+                  </svg>
+                </div>
+                
+                {/* Metrics */}
+                <div className="grid grid-cols-3 gap-4 text-center">
+                  {[
+                    { label: "Revenue", value: "+340%", color: "text-green-600" },
+                    { label: "Conversion", value: "+267%", color: "text-blue-600" },
+                    { label: "Growth", value: "+189%", color: "text-purple-600" }
+                  ].map((metric, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 2 + index * 0.1 }}
+                    >
+                      <div className={`text-lg font-bold ${metric.color}`}>
+                        {metric.value}
+                      </div>
+                      <div className="text-xs text-gray-500">{metric.label}</div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
               
-              {/* Growth Metrics */}
-              <div className="mt-4 grid grid-cols-2 gap-4">
-                <div className="text-center">
-                  <div className="text-lg font-bold text-[#00FF00]">$2.4M</div>
-                  <div className="text-xs text-[#FFFFFF]/60">Revenue</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-[#00FF00]">12.7%</div>
-                  <div className="text-xs text-[#FFFFFF]/60">Conversion</div>
-                </div>
-              </div>
+              {/* Floating Growth Indicators */}
+              <motion.div 
+                className="absolute -top-4 -right-4 bg-green-500 text-white p-3 rounded-xl shadow-lg"
+                animate={{ y: [-5, 5, -5] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <ArrowUp className="w-6 h-6" />
+              </motion.div>
+              
+              <motion.div 
+                className="absolute -bottom-4 -left-4 bg-blue-600 text-white p-3 rounded-xl shadow-lg"
+                animate={{ y: [5, -5, 5] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+              >
+                <Rocket className="w-6 h-6" />
+              </motion.div>
             </div>
-            
-            {/* Floating Growth Indicators */}
-            <div className="absolute -top-4 -right-4 bg-[#00FF00] text-[#000000] px-3 py-2 rounded-full text-sm font-bold animate-bounce">
-              +340%
-            </div>
-            <div className="absolute -bottom-4 -left-4 bg-[#121212] border border-[#00FF00] text-[#00FF00] px-3 py-2 rounded-full text-sm font-bold animate-pulse">
-              ROI: 445%
-            </div>
-            
-            {/* Background Glow */}
-            <div className="absolute inset-0 bg-[#00FF00]/5 blur-3xl rounded-full -z-10"></div>
           </motion.div>
         </div>
       </section>
 
-      {/* Growth Features */}
-      <section className="features-section py-32 px-4 bg-[#121212]">
+      {/* Optimization Features */}
+      <section className="py-32 px-4 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <motion.h2 
-              className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-[#FFFFFF] mb-8"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-8"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              Growth <span className="text-[#00FF00]">Optimization</span> Suite
+              Growth Optimization <span className="text-blue-600">Services</span>
             </motion.h2>
             <motion.p 
-              className="text-xl font-paragraph text-[#FFFFFF]/80 max-w-3xl mx-auto"
+              className="text-xl text-gray-600 max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              Comprehensive AI-powered tools designed to accelerate every aspect of your business growth.
+              Comprehensive optimization across all aspects of your business to maximize growth potential and ROI.
             </motion.p>
           </div>
 
@@ -578,37 +450,37 @@ export default function GrowthOptimizationPage() {
             {optimizationFeatures.map((feature, index) => (
               <motion.div
                 key={index}
-                className="feature-card"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -10 }}
               >
-                <Card className="bg-[#000000] border-[#444444] hover:border-[#00FF00] transition-all duration-300 group h-full">
+                <Card className="bg-white border-gray-200 hover:border-blue-300 transition-all duration-300 group h-full shadow-md hover:shadow-lg">
                   <CardContent className="p-8">
-                    <div className={`w-16 h-16 bg-linear-to-r ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                      <feature.icon className="w-8 h-8 text-white" />
+                    <div className="flex items-center justify-between mb-6">
+                      <div className={`w-16 h-16 bg-linear-to-r ${feature.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                        <feature.icon className="w-8 h-8 text-white" />
+                      </div>
+                      <div className="text-right">
+                        <div className="text-2xl font-bold text-green-600">{feature.improvement}</div>
+                        <div className="text-xs text-gray-500">Avg. Improvement</div>
+                      </div>
                     </div>
                     
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-xl font-heading font-semibold text-[#FFFFFF]">
-                        {feature.title}
-                      </h3>
-                      <span className="text-sm font-medium text-[#00FF00] bg-[#00FF00]/10 px-2 py-1 rounded-full">
-                        {feature.improvement}
-                      </span>
-                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                      {feature.title}
+                    </h3>
                     
-                    <p className="text-[#FFFFFF]/80 font-paragraph mb-6 leading-relaxed">
+                    <p className="text-gray-600 mb-6 leading-relaxed">
                       {feature.description}
                     </p>
                     
                     <div className="space-y-2">
                       {feature.benefits.map((benefit, idx) => (
                         <div key={idx} className="flex items-center text-sm">
-                          <CheckCircle className="w-4 h-4 text-[#00FF00] mr-2 shrink-0" />
-                          <span className="text-[#FFFFFF]/70">{benefit}</span>
+                          <CheckCircle className="w-4 h-4 text-blue-600 mr-2 shrink-0" />
+                          <span className="text-gray-700">{benefit}</span>
                         </div>
                       ))}
                     </div>
@@ -620,26 +492,26 @@ export default function GrowthOptimizationPage() {
         </div>
       </section>
 
-      {/* Growth Metrics Dashboard */}
+      {/* Growth Metrics */}
       <section className="py-32 px-4 max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <motion.h2 
-            className="text-4xl md:text-5xl font-heading font-bold text-[#FFFFFF] mb-8"
+            className="text-4xl md:text-5xl font-bold text-gray-900 mb-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Growth <span className="text-[#00FF00]">Performance</span>
+            Growth <span className="text-blue-600">Results</span>
           </motion.h2>
           <motion.p 
-            className="text-xl font-paragraph text-[#FFFFFF]/80 max-w-3xl mx-auto"
+            className="text-xl text-gray-600 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Track and measure the impact of our growth optimization strategies on your business metrics.
+            Measurable improvements across all key growth metrics for our clients.
           </motion.p>
         </div>
 
@@ -654,30 +526,25 @@ export default function GrowthOptimizationPage() {
               viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
             >
-              <Card className="bg-[#121212] border-[#444444] group-hover:border-[#00FF00] transition-all duration-300 p-8 relative overflow-hidden">
+              <Card className="bg-white border-gray-200 group-hover:border-blue-300 transition-all duration-300 p-8 shadow-md hover:shadow-lg">
                 <CardContent className="p-0">
-                  {/* Background Gradient */}
-                  <div className="absolute inset-0 bg-linear-to-br from-[#00FF00]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <metric.icon className="w-12 h-12 text-blue-600 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
                   
-                  <metric.icon className="w-12 h-12 text-[#00FF00] mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
-                  
-                  <div className={`text-4xl md:text-5xl font-heading font-bold mb-2 ${metric.color}`}>
+                  <div className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">
                     {metric.value}
                   </div>
                   
-                  <h3 className="text-lg font-heading font-semibold text-[#FFFFFF] mb-3">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
                     {metric.metric}
                   </h3>
                   
-                  <p className="text-sm text-[#FFFFFF]/70 leading-relaxed mb-3">
+                  <p className="text-sm text-gray-600 leading-relaxed mb-3">
                     {metric.description}
                   </p>
                   
-                  <div className="flex items-center justify-center text-green-400">
-                    <ArrowUp className="w-4 h-4 mr-1" />
-                    <span className="text-xs font-medium">
-                      {metric.change}
-                    </span>
+                  <div className={`flex items-center justify-center ${metric.color}`}>
+                    <TrendingUp className="w-4 h-4 mr-1" />
+                    <span className="text-xs font-medium">{metric.change}</span>
                   </div>
                 </CardContent>
               </Card>
@@ -686,180 +553,32 @@ export default function GrowthOptimizationPage() {
         </div>
       </section>
 
-      {/* Growth Strategies */}
-      <section className="py-32 px-4 bg-[#121212]">
+      {/* Optimization Areas */}
+      <section className="py-32 px-4 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <motion.h2 
-              className="text-4xl md:text-5xl font-heading font-bold text-[#FFFFFF] mb-8"
+              className="text-4xl md:text-5xl font-bold text-gray-900 mb-8"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              Growth <span className="text-[#00FF00]">Strategies</span>
+              Optimization <span className="text-blue-600">Focus Areas</span>
             </motion.h2>
             <motion.p 
-              className="text-xl font-paragraph text-[#FFFFFF]/80 max-w-3xl mx-auto"
+              className="text-xl text-gray-600 max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              Proven strategies and methodologies to drive sustainable growth across all areas of your business.
-            </motion.p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {growthStrategies.map((strategy, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -10 }}
-              >
-                <Card className="bg-[#000000] border-[#444444] hover:border-[#00FF00] transition-all duration-300 group h-full">
-                  <CardContent className="p-8">
-                    <div className="flex items-center justify-between mb-6">
-                      <strategy.icon className="w-12 h-12 text-[#00FF00] group-hover:scale-110 transition-transform duration-300" />
-                      <div className="text-right">
-                        <div className="text-sm text-[#00FF00] font-medium">{strategy.impact}</div>
-                        <div className="text-xs text-[#FFFFFF]/60">Impact</div>
-                      </div>
-                    </div>
-                    
-                    <h3 className="text-xl font-heading font-semibold text-[#FFFFFF] mb-3">
-                      {strategy.name}
-                    </h3>
-                    
-                    <p className="text-[#FFFFFF]/80 font-paragraph mb-6 text-sm leading-relaxed">
-                      {strategy.description}
-                    </p>
-                    
-                    <div className="space-y-2 mb-6">
-                      {strategy.strategies.map((item, idx) => (
-                        <div key={idx} className="flex items-center text-xs">
-                          <div className="w-1 h-1 bg-[#00FF00] rounded-full mr-2 shrink-0"></div>
-                          <span className="text-[#FFFFFF]/70">{item}</span>
-                        </div>
-                      ))}
-                    </div>
-                    
-                    <div className="pt-4 border-t border-[#444444]">
-                      <div className="text-xs text-[#FFFFFF]/60 mb-1">Timeline:</div>
-                      <div className="text-sm text-[#00FF00] font-medium">{strategy.timeframe}</div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Success Stories */}
-      <section className="py-32 px-4 max-w-7xl mx-auto">
-        <div className="text-center mb-20">
-          <motion.h2 
-            className="text-4xl md:text-5xl font-heading font-bold text-[#FFFFFF] mb-8"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            Growth <span className="text-[#00FF00]">Success Stories</span>
-          </motion.h2>
-          <motion.p 
-            className="text-xl font-paragraph text-[#FFFFFF]/80 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            Real businesses achieving extraordinary growth through our optimization strategies.
-          </motion.p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {successStories.map((story, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -10 }}
-            >
-              <Card className="bg-[#121212] border-[#444444] hover:border-[#00FF00] transition-all duration-300 group h-full">
-                <CardContent className="p-8">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="bg-[#00FF00] text-[#000000] px-3 py-1 rounded-full text-sm font-medium">
-                      {story.industry}
-                    </div>
-                    <div className="text-right">
-                      <div className="text-sm text-[#FFFFFF]/60">{story.company_size}</div>
-                      <div className="text-xs text-[#FFFFFF]/40">{story.timeline}</div>
-                    </div>
-                  </div>
-                  
-                  <h3 className="text-xl font-heading font-semibold text-[#FFFFFF] mb-4">
-                    {story.title}
-                  </h3>
-                  
-                  <div className="mb-4">
-                    <div className="text-sm text-[#FFFFFF]/60 mb-2">Challenge:</div>
-                    <p className="text-sm text-[#FFFFFF]/80">{story.challenge}</p>
-                  </div>
-                  
-                  <div className="mb-6">
-                    <div className="text-sm text-[#FFFFFF]/60 mb-2">Solution:</div>
-                    <p className="text-sm text-[#FFFFFF]/80">{story.solution}</p>
-                  </div>
-                  
-                  <div className="space-y-3">
-                    <div className="text-sm text-[#FFFFFF]/60 mb-3">Results:</div>
-                    {Object.entries(story.results).map(([key, value], idx) => (
-                      <div key={idx} className="flex items-center justify-between">
-                        <span className="text-sm text-[#FFFFFF]/70 capitalize">{key.replace('_', ' ')}</span>
-                        <span className="text-sm font-semibold text-[#00FF00]">{value}</span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section className="py-32 px-4 bg-[#121212]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <motion.h2 
-              className="text-4xl md:text-5xl font-heading font-bold text-[#FFFFFF] mb-8"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              Growth <span className="text-[#00FF00]">Investment</span> Plans
-            </motion.h2>
-            <motion.p 
-              className="text-xl font-paragraph text-[#FFFFFF]/80 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              Invest in growth solutions that deliver measurable returns and scale with your business.
+              We optimize every critical area of your business to ensure maximum growth and performance.
             </motion.p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {pricingPlans.map((plan, index) => (
+            {optimizationAreas.map((area, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 50 }}
@@ -868,59 +587,39 @@ export default function GrowthOptimizationPage() {
                 viewport={{ once: true }}
                 whileHover={{ y: -10 }}
               >
-                <Card className={`${
-                  plan.highlight 
-                    ? 'bg-[#00FF00]/5 border-[#00FF00] ring-2 ring-[#00FF00]/20' 
-                    : 'bg-[#000000] border-[#444444] hover:border-[#00FF00]'
-                } transition-all duration-300 group h-full relative overflow-hidden`}>
-                  {plan.highlight && (
-                    <div className="absolute top-0 left-0 right-0 bg-[#00FF00] text-[#000000] text-center py-2 text-sm font-semibold">
-                      Most Popular
-                    </div>
-                  )}
+                <Card className="bg-white border-gray-200 hover:border-blue-300 transition-all duration-300 group overflow-hidden h-full shadow-md hover:shadow-lg">
+                  <div className="relative overflow-hidden bg-linear-to-br from-blue-50 to-blue-100 h-48 flex items-center justify-center">
+                    <area.icon className="w-16 h-16 text-blue-600" />
+                  </div>
                   
-                  <CardContent className={`${plan.highlight ? 'pt-16' : 'pt-8'} px-8 pb-8`}>
-                    <div className="flex items-center justify-between mb-6">
-                      <h3 className="text-xl font-heading font-semibold text-[#FFFFFF]">
-                        {plan.name}
-                      </h3>
-                      <div className="text-center">
-                        <div className="text-sm text-[#00FF00] font-medium">{plan.growth_potential}</div>
-                        <div className="text-xs text-[#FFFFFF]/60">Growth</div>
-                      </div>
-                    </div>
+                  <CardContent className="p-8">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                      {area.title}
+                    </h3>
                     
-                    <div className="mb-6">
-                      <span className="text-4xl font-heading font-bold text-[#00FF00]">{plan.price}</span>
-                      <span className="text-[#FFFFFF]/60 font-paragraph">{plan.period}</span>
-                    </div>
-                    
-                    <p className="text-[#FFFFFF]/80 font-paragraph mb-8 text-sm leading-relaxed">
-                      {plan.description}
+                    <p className="text-gray-600 mb-6 leading-relaxed">
+                      {area.description}
                     </p>
                     
-                    <div className="space-y-4 mb-8">
-                      {plan.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center text-sm">
-                          <CheckCircle className="w-4 h-4 text-[#00FF00] mr-3 shrink-0" />
-                          <span className="text-[#FFFFFF]/80">{feature}</span>
+                    <div className="space-y-3 mb-6">
+                      {area.metrics.map((metric, idx) => (
+                        <div key={idx} className="flex items-center justify-between">
+                          <span className="text-sm text-gray-600">{metric.split(' ')[0]}</span>
+                          <span className="text-sm font-semibold text-blue-600">
+                            {metric.split(' ').slice(1).join(' ')}
+                          </span>
                         </div>
                       ))}
                     </div>
                     
-                    <Button 
-                      className={`w-full py-3 rounded-xl transition-all duration-300 ${
-                        plan.highlight
-                          ? 'bg-[#00FF00] text-[#000000] hover:bg-[#00CC00]'
-                          : 'bg-[#121212] border border-[#00FF00] text-[#00FF00] hover:bg-[#00FF00] hover:text-[#000000]'
-                      }`}
-                      asChild
-                    >
-                      <Link href="/contact">
-                        Start Growing
-                        <ArrowRight className="w-4 h-4 ml-2" />
-                      </Link>
-                    </Button>
+                    <div className="space-y-2">
+                      {area.features.map((feature, idx) => (
+                        <div key={idx} className="flex items-center text-sm">
+                          <CheckCircle className="w-3 h-3 text-blue-600 mr-2 shrink-0" />
+                          <span className="text-gray-600">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -929,27 +628,246 @@ export default function GrowthOptimizationPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-32 px-4 max-w-4xl mx-auto">
-        <div className="text-center">
+      {/* Growth Process */}
+      <section className="py-32 px-4 max-w-7xl mx-auto">
+        <div className="text-center mb-20">
           <motion.h2 
-            className="text-4xl md:text-5xl font-heading font-bold text-[#FFFFFF] mb-8"
+            className="text-4xl md:text-5xl font-bold text-gray-900 mb-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Ready to <span className="text-[#00FF00]">Accelerate</span> Your Growth?
+            Our Growth <span className="text-blue-600">Process</span>
           </motion.h2>
-          
           <motion.p 
-            className="text-xl font-paragraph text-[#FFFFFF]/80 mb-12 max-w-2xl mx-auto"
+            className="text-xl text-gray-600 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Join businesses achieving 340% revenue growth and 8.7x growth velocity with our AI-powered optimization.
+            A systematic approach to growth optimization that delivers consistent, measurable results.
+          </motion.p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {growthStages.map((stage, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5 }}
+            >
+              <Card className="bg-white border-gray-200 hover:border-blue-300 transition-all duration-300 group h-full shadow-md hover:shadow-lg text-center">
+                <CardContent className="p-8">
+                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <stage.icon className="w-8 h-8 text-white" />
+                  </div>
+                  
+                  <div className="text-sm font-medium text-blue-600 mb-2">
+                    {stage.duration}
+                  </div>
+                  
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                    {stage.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    {stage.description}
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-32 px-4 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <motion.h2 
+              className="text-4xl md:text-5xl font-bold text-gray-900 mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              Growth <span className="text-blue-600">Success Stories</span>
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-gray-600 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              Real results from businesses that accelerated their growth with our optimization strategies.
+            </motion.p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -10 }}
+              >
+                <Card className="bg-white border-gray-200 hover:border-blue-300 transition-all duration-300 group h-full shadow-md hover:shadow-lg">
+                  <CardContent className="p-8">
+                    <div className="flex items-center mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                    
+                    <blockquote className="text-gray-900 italic mb-6 leading-relaxed">
+                      "{testimonial.quote}"
+                    </blockquote>
+                    
+                    <div className="flex items-center mb-6">
+                      <div className="w-12 h-12 bg-linear-to-br from-blue-500 to-blue-600 rounded-full mr-4 flex items-center justify-center text-white font-semibold">
+                        {testimonial.author.split(' ').map(n => n[0]).join('')}
+                      </div>
+                      <div>
+                        <div className="text-gray-900 font-semibold">{testimonial.author}</div>
+                        <div className="text-blue-600 text-sm">{testimonial.position}</div>
+                        <div className="text-gray-500 text-sm">{testimonial.company}</div>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      {testimonial.results.map((result, idx) => (
+                        <div key={idx} className="flex items-center justify-between text-sm">
+                          <span className="text-gray-600">{result.split(' ')[0]}</span>
+                          <span className="text-blue-600 font-semibold">
+                            {result.split(' ').slice(1).join(' ')}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section className="py-32 px-4 max-w-7xl mx-auto">
+        <div className="text-center mb-20">
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold text-gray-900 mb-8"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            Growth <span className="text-blue-600">Pricing</span>
+          </motion.h2>
+          <motion.p 
+            className="text-xl text-gray-600 max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            Choose the perfect growth optimization plan to accelerate your business results.
+          </motion.p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {pricingPlans.map((plan, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -10 }}
+            >
+              <Card className={`${
+                plan.highlight 
+                  ? 'bg-blue-50 border-blue-300 ring-2 ring-blue-200' 
+                  : 'bg-white border-gray-200 hover:border-blue-300'
+              } transition-all duration-300 group h-full relative overflow-hidden shadow-md hover:shadow-lg`}>
+                {plan.highlight && (
+                  <div className="absolute top-0 left-0 right-0 bg-blue-600 text-white text-center py-2 text-sm font-semibold">
+                    Most Popular
+                  </div>
+                )}
+                
+                <CardContent className={`${plan.highlight ? 'pt-16' : 'pt-8'} px-8 pb-8`}>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    {plan.name}
+                  </h3>
+                  
+                  <div className="mb-6">
+                    <span className="text-4xl font-bold text-blue-600">{plan.price}</span>
+                    <span className="text-gray-500">{plan.period}</span>
+                  </div>
+                  
+                  <p className="text-gray-600 mb-8 text-sm leading-relaxed">
+                    {plan.description}
+                  </p>
+                  
+                  <div className="space-y-4 mb-8">
+                    {plan.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-center text-sm">
+                        <CheckCircle className="w-4 h-4 text-blue-600 mr-3 shrink-0" />
+                        <span className="text-gray-700">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <Button 
+                    className={`w-full py-3 rounded-xl transition-all duration-300 ${
+                      plan.highlight
+                        ? 'bg-blue-600 text-white hover:bg-blue-700'
+                        : 'bg-white border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white'
+                    }`}
+                    asChild
+                  >
+                    <Link href="/contact">
+                      Get Started
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-32 px-4 bg-gray-50">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold text-gray-900 mb-8"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            Ready to <span className="text-blue-600">Accelerate</span> Your Growth?
+          </motion.h2>
+          
+          <motion.p 
+            className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            Join hundreds of businesses that have achieved exponential growth with our proven optimization strategies.
           </motion.p>
           
           <motion.div
@@ -960,23 +878,23 @@ export default function GrowthOptimizationPage() {
             className="flex flex-col sm:flex-row gap-6 justify-center items-center"
           >
             <Button
-              className="bg-[#00FF00] text-[#000000] px-12 py-4 text-lg rounded-xl hover:bg-[#00CC00] transition-all duration-300 shadow-lg hover:shadow-[#00FF00]/25"
+              className="bg-blue-600 text-white px-12 py-4 text-lg rounded-xl hover:bg-blue-700 transition-all duration-300 shadow-lg"
               asChild
             >
               <Link href="/contact">
                 <Rocket className="w-5 h-5 mr-2" />
-                Start Growing Today
+                Start Growing Now
               </Link>
             </Button>
             
             <Button
               variant="outline"
-              className="border-2 border-[#00FF00] text-[#00FF00] px-12 py-4 text-lg rounded-xl hover:bg-[#00FF00] hover:text-[#000000] transition-all duration-300"
+              className="border-2 border-blue-600 text-blue-600 px-12 py-4 text-lg rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300"
               asChild
             >
               <Link href="/contact">
                 <Calendar className="w-5 h-5 mr-2" />
-                Schedule Consultation
+                Free Consultation
               </Link>
             </Button>
           </motion.div>
@@ -986,19 +904,19 @@ export default function GrowthOptimizationPage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
             viewport={{ once: true }}
-            className="mt-12 flex justify-center space-x-8 text-sm text-[#FFFFFF]/60"
+            className="mt-12 flex justify-center space-x-8 text-sm text-gray-500"
           >
             <div className="flex items-center">
               <Shield className="w-4 h-4 mr-2" />
-              Growth Guarantee
+              Results Guaranteed
             </div>
             <div className="flex items-center">
               <Clock className="w-4 h-4 mr-2" />
-              Fast Implementation
+              24/7 Support
             </div>
             <div className="flex items-center">
               <Award className="w-4 h-4 mr-2" />
-              Proven Results
+              Proven Track Record
             </div>
           </motion.div>
         </div>

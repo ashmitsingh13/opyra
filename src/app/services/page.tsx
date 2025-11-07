@@ -181,32 +181,32 @@ export default function ServicesPage() {
     {
       name: "E-commerce",
       description: "Boost online sales with AI-powered product recommendations and dynamic pricing",
-      image: "https://static.wixstatic.com/media/d1fa15_2a8b9c3d4e5f6789abcdef123456789~mv2.png"
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop&auto=format"
     },
     {
       name: "Healthcare",
       description: "Improve patient engagement and optimize healthcare marketing campaigns",
-      image: "https://static.wixstatic.com/media/d1fa15_3b9c0d4e5f67890abcdef234567890~mv2.png"
+      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=250&fit=crop&auto=format"
     },
     {
       name: "FinTech",
       description: "Drive financial product adoption with compliant, AI-driven marketing strategies",
-      image: "https://static.wixstatic.com/media/d1fa15_4c0d1e5f67890abcdef345678901234~mv2.png"
+      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=250&fit=crop&auto=format"
     },
     {
       name: "SaaS",
       description: "Accelerate customer acquisition and reduce churn with intelligent automation",
-      image: "https://static.wixstatic.com/media/d1fa15_5d1e2f67890abcdef456789012345678~mv2.png"
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop&auto=format"
     },
     {
       name: "Education",
       description: "Enhance student recruitment and engagement through personalized marketing",
-      image: "https://static.wixstatic.com/media/d1fa15_6e2f3g67890abcdef567890123456789~mv2.png"
+      image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=250&fit=crop&auto=format"
     },
     {
       name: "Real Estate",
       description: "Connect buyers with perfect properties using AI-powered matching algorithms",
-      image: "https://static.wixstatic.com/media/d1fa15_7f3g4h67890abcdef678901234567890~mv2.png"
+      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=250&fit=crop&auto=format"
     }
   ];
 
@@ -303,12 +303,12 @@ export default function ServicesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#000000] text-[]">
+    <div className="min-h-screen bg-white text-gray-900">
      {/* Hero Section */}
-      <section className="py-32 px-4 max-w-480 mx-auto">
+      <section className="py-32 px-4 max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <motion.h1 
-            className="text-6xl md:text-7xl lg:text-8xl font-heading font#FFFFFF-bold text-[] mb-8"
+            className="text-6xl md:text-7xl lg:text-8xl font-heading font-bold text-gray-900 mb-8"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -316,13 +316,13 @@ export default function ServicesPage() {
             Our Services
           </motion.h1>
           <motion.div 
-            className="h-1 bg-[#00FF00] w-24 mx-auto mb-8"
+            className="h-1 bg-blue-600 w-24 mx-auto mb-8"
             initial={{ width: 0 }}
             animate={{ width: '6rem' }}
             transition={{ duration: 0.5, delay: 0.3 }}
           />
           <motion.p 
-            className="text-xl md:text-2xl font-paragraph text-[#FFFFFF] max-w-4xl mx-auto leading-relaxed"
+            className="text-xl md:text-2xl font-paragraph text-gray-600 max-w-4xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -333,8 +333,8 @@ export default function ServicesPage() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-32 px-4 bg-[#121212]">
-        <div className="max-w-480 mx-auto">
+      <section className="py-32 px-4 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
           <div className="space-y-32">
             {services.map((service, index) => (
               <motion.div
@@ -348,24 +348,24 @@ export default function ServicesPage() {
                 }`}
               >
                 <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
-                  <service.icon className="h-16 w-16 text-[#00FF00] mb-8" />
-                  <h2 className="text-4xl md:text-5xl font-headin#FFFFFFg font-bold text-[] mb-6">
+                  <service.icon className="h-16 w-16 text-blue-600 mb-8" />
+                  <h2 className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-6">
                     {service.title}
                   </h2>
-                  <p className="text-lg font-paragraph text-[#FFFFFF] mb-8 leading-relaxed">
+                  <p className="text-lg font-paragraph text-gray-600 mb-8 leading-relaxed">
                     {service.description}
                   </p>
                   <div className="space-y-4 mb-8">
                     {service.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-center gap-3">
-                        <CheckCircle className="h-5 w-5 text-[#00FF00] shrink-0" />
-                        <span className="text-[#FFFFFF] font-paragraph">{feature}</span>
+                        <CheckCircle className="h-5 w-5 text-blue-600 shrink-0" />
+                        <span className="text-gray-700 font-paragraph">{feature}</span>
                       </div>
                     ))}
                   </div>
                   <Button 
                     asChild
-                    className="bg-[#00FF00] text-[#000000] hover:bg-[#00FF00]/90 transition-all duration-300"
+                    className="bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300"
                   >
                     <Link href={`/services/${service.link}`}>
                       Learn More <ArrowRight className="ml-2 h-4 w-4" />
@@ -375,7 +375,7 @@ export default function ServicesPage() {
                 
                 <div className={index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}>
                   <div className="relative">
-                    <div className="bg-linear-to-br from-[#00FF00]/10 to-transparent p-8 rounded-2xl border border-[#00FF00]/20">
+                    <div className="bg-linear-to-br from-blue-50/50 to-transparent p-8 rounded-2xl border border-blue-200/50">
                       <Image
                         src={service.image}
                         alt={`${service.title} visualization showing AI-powered marketing analytics`}
@@ -424,20 +424,20 @@ export default function ServicesPage() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="bg-[#121212] border-[#444444] hover:border-[#00FF00] transition-all duration-300 group h-full">
+              <Card className="bg-white border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 group h-full">
                 <CardContent className="p-8">
-                  <service.icon className="h-12 w-12 text-[#00FF00] mb-6 group-hover:scale-110 transition-transform duration-300" />
-                  <h3 className="text-2xl font-heading font-semibold text-[#FFFFFF] mb-4">
+                  <service.icon className="h-12 w-12 text-blue-600 mb-6 group-hover:scale-110 transition-transform duration-300" />
+                  <h3 className="text-2xl font-heading font-semibold text-gray-900 mb-4">
                     {service.title}
                   </h3>
-                  <p className="text-[#FFFFFF] font-paragraph mb-6 leading-relaxed">
+                  <p className="text-gray-600 font-paragraph mb-6 leading-relaxed">
                     {service.description}
                   </p>
                   <div className="space-y-2">
                     {service.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 bg-[#00FF00] rounded-full" />
-                        <span className="text-sm text-[#FFFFFF] font-paragraph">{feature}</span>
+                        <div className="w-1.5 h-1.5 bg-blue-600 rounded-full" />
+                        <span className="text-sm text-gray-700 font-paragraph">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -449,11 +449,11 @@ export default function ServicesPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-32 px-4 bg-[#121212]">
-        <div className="max-w-480 mx-auto">
+      <section className="py-32 px-4 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <motion.h2 
-              className="text-5xl md:text-6xl font-heading font-bold text-[#FFFFFF] mb-8"
+              className="text-5xl md:text-6xl font-heading font-bold text-gray-900 mb-8"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -462,7 +462,7 @@ export default function ServicesPage() {
               Measurable Benefits
             </motion.h2>
             <motion.p 
-              className="text-xl font-paragraph text-[#FFFFFF] max-w-3xl mx-auto"
+              className="text-xl font-paragraph text-gray-600 max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -482,15 +482,15 @@ export default function ServicesPage() {
                 viewport={{ once: true }}
                 className="text-center group"
               >
-                <div className="bg-[#000000] border border-[#00FF00]/20 rounded-2xl p-8 hover:border-[#00FF00] transition-all duration-300">
-                  <benefit.icon className="h-12 w-12 text-[#00FF00] mx-auto mb-6 group-hover:scale-110 transition-transform duration-300" />
-                  <div className="text-3xl font-heading font-bold text-[#00FF00] mb-2">
+                <div className="bg-white border border-blue-200 rounded-2xl p-8 hover:border-blue-400 hover:shadow-lg transition-all duration-300">
+                  <benefit.icon className="h-12 w-12 text-blue-600 mx-auto mb-6 group-hover:scale-110 transition-transform duration-300" />
+                  <div className="text-3xl font-heading font-bold text-blue-600 mb-2">
                     {benefit.stat}
                   </div>
-                  <h3 className="text-xl font-heading font-semibold text-[#FFFFFF] mb-4">
+                  <h3 className="text-xl font-heading font-semibold text-gray-900 mb-4">
                     {benefit.title}
                   </h3>
-                  <p className="text-[#FFFFFF] font-paragraph">
+                  <p className="text-gray-600 font-paragraph">
                     {benefit.description}
                   </p>
                 </div>
@@ -501,87 +501,159 @@ export default function ServicesPage() {
       </section>
 
       {/* Process Section */}
-      <section className="py-32 px-4 max-w-480 mx-auto">
-        <div className="text-center mb-20">
-          <motion.h2 
-            className="text-5xl md:text-6xl font-heading font-bold text-[#FFFFFF] mb-8"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            Our Process
-          </motion.h2>
-          <motion.p 
-            className="text-xl font-paragraph text-[#FFFFFF] max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            A proven methodology that ensures successful AI implementation and maximum ROI for your marketing efforts.
-          </motion.p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {process.map((step, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <Card className="bg-[#121212] border-[#444444] hover:border-[#00FF00] transition-all duration-300 group h-full">
-                <CardContent className="p-8">
-                  <div className="text-6xl font-heading font-bold text-[#00FF00]/20 mb-4">
-                    {step.step}
-                  </div>
-                  <h3 className="text-2xl font-heading font-se#FFFFFFmibold text-[] mb-4">
-                    {step.title}
-                  </h3>
-                  <p className="text-[#FFFFFF] font-paragraph leading-relaxed">
-                    {step.description}
-                  </p>
-                </CardContent>
-              </Card>
-              
-              {/* Connector Line */}
-              {index < process.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-[#00FF00]/30 transform -translate-y-1/2" />
-              )}
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Features Comparison */}
-      <section className="py-32 px-4 bg-[#121212]">
-        <div className="max-w-480 mx-auto">
-          <div className="text-center mb-20">
+      <section className="py-16 md:py-32 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12 md:mb-20">
             <motion.h2 
-              className="text-5xl md:text-6xl font-heading font-bold text-[#FFFFFF] mb-8"
+              className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-gray-900 mb-6 md:mb-8"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              Why Choose AI?
+              Our <span className="text-blue-600">Process</span>
             </motion.h2>
+            <motion.div 
+              className="h-1 bg-blue-600 w-24 mx-auto mb-6"
+              initial={{ width: 0 }}
+              animate={{ width: '6rem' }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            />
+            <motion.p 
+              className="text-lg md:text-xl font-paragraph text-gray-600 max-w-4xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              A proven methodology that ensures successful AI implementation and maximum ROI for your marketing efforts.
+            </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            {process.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="relative"
+              >
+                <Card className="bg-white border-gray-200 hover:border-blue-300 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group h-full">
+                  <CardContent className="p-6 md:p-8 text-center">
+                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 group-hover:scale-110 transition-all duration-300">
+                      <div className="text-2xl md:text-3xl font-heading font-bold text-blue-600 group-hover:text-white transition-colors duration-300">
+                        {step.step}
+                      </div>
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-heading font-semibold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
+                      {step.title}
+                    </h3>
+                    <p className="text-gray-600 font-paragraph leading-relaxed text-sm md:text-base group-hover:text-gray-700 transition-colors duration-300">
+                      {step.description}
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                {/* Connector Arrow */}
+                {index < process.length - 1 && (
+                  <div className="hidden lg:flex absolute top-1/2 -right-4 w-8 h-8 items-center justify-center transform -translate-y-1/2 z-10">
+                    <div className="w-8 h-0.5 bg-blue-300 relative">
+                      <div className="absolute -right-1 -top-1 w-2 h-2 bg-blue-600 rounded-full"></div>
+                    </div>
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Additional Process Benefits */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+            className="mt-16 bg-blue-50 rounded-2xl p-8 md:p-12 border border-blue-100"
+          >
+            <div className="text-center mb-8">
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-gray-900 mb-4">
+                Why Our Process <span className="text-blue-600">Works</span>
+              </h3>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Our systematic approach has been refined through hundreds of successful implementations
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-white font-bold">✓</span>
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-2">Proven Results</h4>
+                <p className="text-sm text-gray-600">98% client satisfaction rate</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-white font-bold">⚡</span>
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-2">Fast Implementation</h4>
+                <p className="text-sm text-gray-600">Results within 2-4 weeks</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-white font-bold">🎯</span>
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-2">Measurable ROI</h4>
+                <p className="text-sm text-gray-600">Average 340% ROI increase</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Features Comparison */}
+      <section className="py-16 md:py-32 px-4 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12 md:mb-20">
+            <motion.h2 
+              className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-gray-900 mb-6 md:mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              Why Choose <span className="text-blue-600">AI?</span>
+            </motion.h2>
+            <motion.div 
+              className="h-1 bg-blue-600 w-24 mx-auto mb-6"
+              initial={{ width: 0 }}
+              animate={{ width: '6rem' }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            />
+            <motion.p 
+              className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              See the clear advantages of AI-powered marketing over traditional approaches
+            </motion.p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
+              className="bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-gray-200"
             >
-              <h3 className="text-3xl font-heading font-bold text-[#FFFFFF] mb-8">
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-gray-900 mb-6 md:mb-8 text-center lg:text-left">
                 Traditional Marketing
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-4 md:space-y-6">
                 {[
                   "Manual campaign optimization",
                   "Limited audience insights",
@@ -589,9 +661,9 @@ export default function ServicesPage() {
                   "Time-intensive processes",
                   "Inconsistent results"
                 ].map((item, index) => (
-                  <div key={index} className="flex items-center gap-3 text-[#FFFFFF]/60">
-                    <div className="w-2 h-2 bg-[#FFFFFF]/60 rounded-full" />
-                    <span className="font-paragraph">{item}</span>
+                  <div key={index} className="flex items-center gap-3 text-gray-600">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full shrink-0" />
+                    <span className="font-paragraph text-sm md:text-base">{item}</span>
                   </div>
                 ))}
               </div>
@@ -602,11 +674,12 @@ export default function ServicesPage() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
+              className="bg-blue-50 rounded-2xl p-6 md:p-8 shadow-lg border-2 border-blue-200"
             >
-              <h3 className="text-3xl font-heading font-bold text-[#00FF00] mb-8">
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-blue-600 mb-6 md:mb-8 text-center lg:text-left">
                 AI-Powered Marketing
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-4 md:space-y-6">
                 {[
                   "Automated optimization in real-time",
                   "Deep audience insights and predictions",
@@ -615,21 +688,48 @@ export default function ServicesPage() {
                   "Consistent, measurable growth"
                 ].map((item, index) => (
                   <div key={index} className="flex items-center gap-3">
-                    <CheckCircle className="h-5 w-5 text-[#00FF00] shrink-0" />
-                    <span className="text-[#FFFFFF] font-paragraph">{item}</span>
+                    <CheckCircle className="h-5 w-5 text-blue-600 shrink-0" />
+                    <span className="text-gray-700 font-paragraph text-sm md:text-base">{item}</span>
                   </div>
                 ))}
               </div>
             </motion.div>
           </div>
+
+          {/* Additional comparison stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="mt-12 md:mt-16 text-center"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+              <div className="bg-white rounded-xl p-6 shadow-md border border-gray-200">
+                <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-2">5x</div>
+                <div className="text-gray-900 font-semibold mb-1">Faster Results</div>
+                <div className="text-gray-600 text-sm">With AI automation</div>
+              </div>
+              <div className="bg-white rounded-xl p-6 shadow-md border border-gray-200">
+                <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-2">340%</div>
+                <div className="text-gray-900 font-semibold mb-1">Average ROI</div>
+                <div className="text-gray-600 text-sm">Increase in 90 days</div>
+              </div>
+              <div className="bg-white rounded-xl p-6 shadow-md border border-gray-200">
+                <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-2">24/7</div>
+                <div className="text-gray-900 font-semibold mb-1">Optimization</div>
+                <div className="text-gray-600 text-sm">Continuous improvement</div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Industry Solutions */}
-      <section className="py-32 px-4 max-w-480 mx-auto">
+      <section className="py-32 px-4 max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <motion.h2 
-            className="text-5xl md:text-6xl font-heading font-bold text-[#FFFFFF] mb-8"
+            className="text-5xl md:text-6xl font-heading font-bold text-gray-900 mb-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -638,7 +738,7 @@ export default function ServicesPage() {
             Industry Solutions
           </motion.h2>
           <motion.p 
-            className="text-xl font-paragraph text-[#FFFFFF] max-w-3xl mx-auto"
+            className="text-xl font-paragraph text-gray-600 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -657,18 +757,22 @@ export default function ServicesPage() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="bg-[#121212] border-[#444444] hover:border-[#00FF00] transition-all duration-300 group overflow-hidden">
+              <Card className="bg-white border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 group overflow-hidden">
                 <div className="relative h-48 overflow-hidden">
                   <div className="absolute inset-0 bg-linear-to-t from-[#121212] via-transparent to-transparent z-10" />
-                  <div className="w-full h-full bg-linear-to-br from-[#00FF00]/20 to-[#00FF00]/5 flex items-center justify-center">
-                    <div className="text-6xl">🏢</div>
-                  </div>
+                  <Image
+                    src={industry.image}
+                    alt={`${industry.name} industry solutions`}
+                    width={400}
+                    height={250}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
                 <CardContent className="p-6">
-                  <h3 className="text-2xl font-heading font-semibold text-[#FFFFFF] mb-4">
+                  <h3 className="text-2xl font-heading font-semibold text-gray-900 mb-4">
                     {industry.name}
                   </h3>
-                  <p className="text-[#FFFFFF] font-paragraph leading-relaxed">
+                  <p className="text-gray-600 font-paragraph leading-relaxed">
                     {industry.description}
                   </p>
                 </CardContent>
@@ -679,11 +783,11 @@ export default function ServicesPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-32 px-4 bg-[#121212]">
-        <div className="max-w-480 mx-auto">
+      <section className="py-32 px-4 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <motion.h2 
-              className="text-5xl md:text-6xl font-heading font-bold text-[#FFFFFF] mb-8"
+              className="text-5xl md:text-6xl font-heading font-bold text-gray-900 mb-8"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -692,7 +796,7 @@ export default function ServicesPage() {
               Client Success Stories
             </motion.h2>
             <motion.p 
-              className="text-xl font-paragraph text-[#FFFFFF] max-w-3xl mx-auto"
+              className="text-xl font-paragraph text-gray-600 max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -711,21 +815,21 @@ export default function ServicesPage() {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 viewport={{ once: true }}
               >
-                <Card className="bg-[#000000] border-[#00FF00]/20 hover:border-[#00FF00] transition-all duration-300 h-full">
+                <Card className="bg-white border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all duration-300 h-full">
                   <CardContent className="p-8">
                     <div className="flex items-center mb-4">
                       {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="h-5 w-5 text-[#00FF00] fill-current" />
+                        <Star key={i} className="h-5 w-5 text-blue-600 fill-current" />
                       ))}
                     </div>
-                    <p className="text-[#FFFFFF] font-paragraph italic mb-6 leading-relaxed">
+                    <p className="text-gray-600 font-paragraph italic mb-6 leading-relaxed">
                       "{testimonial.content}"
                     </p>
                     <div>
-                      <div className="font-heading font-semibold text-[#FFFFFF]">
+                      <div className="font-heading font-semibold text-gray-900">
                         {testimonial.name}
                       </div>
-                      <div className="text-[#00FF00] font-paragraph text-sm">
+                      <div className="text-blue-600 font-paragraph text-sm">
                         {testimonial.role}
                       </div>
                     </div>
@@ -738,10 +842,10 @@ export default function ServicesPage() {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-32 px-4 max-w-480 mx-auto">
+      <section className="py-32 px-4 max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <motion.h2 
-            className="text-5xl md:text-6xl font-heading font-bold text-[#FFFFFF] mb-8"
+            className="text-5xl md:text-6xl font-heading font-bold text-gray-900 mb-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -772,26 +876,26 @@ export default function ServicesPage() {
             >
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-[#00FF00] text-[#000000] px-4 py-2 rounded-full text-sm font-semibold">
+                  <div className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
                     Most Popular
                   </div>
                 </div>
               )}
-              <Card className={`h-full ${plan.popular ? 'bg-[#000000] border-[#00FF00] scale-105' : 'bg-[#121212] border-[#444444]'} hover:border-[#00FF00] transition-all duration-300`}>
+              <Card className={`h-full ${plan.popular ? 'bg-white border-blue-500 scale-105 shadow-lg' : 'bg-white border-gray-200'} hover:border-blue-400 hover:shadow-xl hover:shadow-blue-600/20 hover:-translate-y-2 transition-all duration-500 group cursor-pointer`}>
                 <CardContent className="p-8">
                   <div className="text-center mb-8">
-                    <h3 className="text-2xl font-heading font-bold text-[#FFFFFF] mb-2">
+                    <h3 className="text-2xl font-heading font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
                       {plan.name}
                     </h3>
                     <div className="flex items-end justify-center gap-1 mb-4">
-                      <span className="text-4xl font-heading font-bold text-[#00FF00]">
+                      <span className="text-4xl font-heading font-bold text-blue-600 group-hover:scale-110 transition-transform duration-300">
                         {plan.price}
                       </span>
-                      <span className="text-[#FFFFFF] font-paragraph">
+                      <span className="text-gray-600 font-paragraph">
                         {plan.period}
                       </span>
                     </div>
-                    <p className="text-[#FFFFFF] font-paragraph">
+                    <p className="text-gray-600 font-paragraph group-hover:text-gray-700 transition-colors duration-300">
                       {plan.description}
                     </p>
                   </div>
@@ -799,18 +903,18 @@ export default function ServicesPage() {
                   <div className="space-y-4 mb-8">
                     {plan.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-center gap-3">
-                        <CheckCircle className="h-5 w-5 text-[#00FF00] shrink-0" />
-                        <span className="text-[#FFFFFF] font-paragraph">{feature}</span>
+                        <CheckCircle className="h-5 w-5 text-blue-600 shrink-0" />
+                        <span className="text-gray-700 font-paragraph">{feature}</span>
                       </div>
                     ))}
                   </div>
                   
                   <Button 
                     asChild
-                    className={`w-full ${plan.popular ? 'bg-[#00FF00] text-[#000000] hover:bg-[#00FF00]/90' : 'bg-transparent border border-[#00FF00] text-[#00FF00] hover:bg-[#00FF00] hover:text-[#000000]'} transition-all duration-300`}
+                    className={`w-full ${plan.popular ? 'bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg' : 'bg-transparent border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white hover:shadow-lg'} transition-all duration-300 group-hover:scale-105`}
                   >
                     <Link href="/contact">
-                      Get Started <ArrowRight className="ml-2 h-4 w-4" />
+                      Get Started <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
                     </Link>
                   </Button>
                 </CardContent>
@@ -821,10 +925,10 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 px-4 max-w-480 mx-auto">
+      <section className="py-32 px-4 max-w-7xl mx-auto">
         <div className="text-center">
           <motion.h2 
-            className="text-5xl md:text-6xl font-heading font-bold text-[#FFFFFF] mb-8"
+            className="text-5xl md:text-6xl font-heading font-bold text-gray-900 mb-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -833,7 +937,7 @@ export default function ServicesPage() {
             Ready to Get Started?
           </motion.h2>
           <motion.p 
-            className="text-xl font-paragraph text-[#FFFFFF] mb-12 max-w-3xl mx-auto"
+            className="text-xl font-paragraph text-gray-600 mb-12 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -849,7 +953,7 @@ export default function ServicesPage() {
           >
             <Button 
               asChild
-              className="bg-[#00FF00] text-[#000000] hover:bg-[#00FF00]/90 px-12 py-6 text-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-[#00FF00]/25"
+              className="bg-blue-600 text-white hover:bg-blue-700 px-12 py-6 text-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-blue-600/25"
             >
               <Link href="/contact">
                 Schedule a Consultation <ArrowRight className="ml-3 h-6 w-6" />

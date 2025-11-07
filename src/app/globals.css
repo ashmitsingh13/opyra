@@ -1,27 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
-  --primary: #00FF00;
-  --primary-foreground: #000000;
-  --secondary: #ffffff;
-  --secondary-foreground: #000000;
-  --destructive: #FF4500;
-  --destructive-foreground: #000000;
-  --neon-green: #00FF00;
-  --dark-gray: #121212;
-  --light-gray: #444444;
+  --background: #ffffff;
+  --foreground: #1a202c;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --secondary: #f8fafc;
+  --secondary-foreground: #334155;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --blue-primary: #2563eb;
+  --blue-secondary: #3b82f6;
+  --blue-light: #dbeafe;
+  --blue-dark: #1d4ed8;
+  --gray-light: #f1f5f9;
+  --gray-medium: #64748b;
+  --gray-dark: #334155;
   --radius: 0.625rem;
-  --border: #444444;
-  --input: #444444;
-  --ring: #00FF00;
+  --border: #e2e8f0;
+  --input: #f1f5f9;
+  --ring: #2563eb;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #000000;
-    --foreground: #ffffff;
+    --background: #ffffff;
+    --foreground: #1a202c;
   }
 }
 
@@ -32,5 +36,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Open Sans", sans-serif;
+  font-family: "Inter", "Open Sans", sans-serif;
 }

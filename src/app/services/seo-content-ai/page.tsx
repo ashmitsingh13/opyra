@@ -4,8 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+// Removed GSAP dependencies
 import {
   PenTool, Search, FileText, Target, Zap, TrendingUp,
   BarChart3, Eye, Brain, Bot, Edit, Type, Hash,
@@ -19,9 +18,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import './seo-content.css';
 
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+// Removed GSAP registration
 
 export default function SEOContentAIPage() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -43,51 +40,7 @@ export default function SEOContentAIPage() {
     triggerOnce: true,
   });
 
-  useEffect(() => {
-    setMounted(true);
-    
-    if (typeof window !== 'undefined') {
-      // Hero animations
-      gsap.fromTo(
-        '.hero-content',
-        { y: 100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out', stagger: 0.2 }
-      );
-
-      // Content bubbles animation
-      gsap.to('.content-bubble', {
-        y: '+=20',
-        rotation: 360,
-        duration: 4,
-        ease: 'power2.inOut',
-        stagger: 0.2,
-        repeat: -1,
-        yoyo: true
-      });
-
-      // Content type cycling
-      const contentTypeInterval = setInterval(() => {
-        setActiveContentType(prev => (prev + 1) % 5);
-      }, 2500);
-
-      // Feature cards animation
-      ScrollTrigger.create({
-        trigger: '.features-section',
-        start: 'top 80%',
-        onEnter: () => {
-          gsap.fromTo('.feature-card', 
-            { y: 50, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, stagger: 0.15 }
-          );
-        }
-      });
-
-      return () => {
-        clearInterval(contentTypeInterval);
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-      };
-    }
-  }, []);
+  // Removed GSAP animations - using Framer Motion instead
 
   const contentFeatures = [
     {
