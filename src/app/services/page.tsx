@@ -43,7 +43,7 @@ export default function ServicesPage() {
         "ROI optimization recommendations"
       ],
       link: "ai-powered-analytics",
-      image: "https://static.wixstatic.com/media/d1fa15_5e07e16180624cbbbb8855744f843caf~mv2.png?originWidth=576&originHeight=384"
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&auto=format&q=80"
     },
     {
       icon: Target,
@@ -56,7 +56,7 @@ export default function ServicesPage() {
         "Dynamic audience optimization"
       ],
       link: "precision-targeting",
-      image: "https://static.wixstatic.com/media/d1fa15_1fb442b14a054b588a7eccca03ea8f39~mv2.png?originWidth=576&originHeight=384"
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&auto=format&q=80"
     },
     {
       icon: TrendingUp,
@@ -69,7 +69,7 @@ export default function ServicesPage() {
         "Scalable growth strategies"
       ],
       link: "growth-optimization",
-      image: "https://static.wixstatic.com/media/d1fa15_e1fc03636cf04fc5b1435dba2eb2359b~mv2.png?originWidth=576&originHeight=384"
+      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop&auto=format&q=80"
     },
     {
       icon: BarChart3,
@@ -82,7 +82,7 @@ export default function ServicesPage() {
         "Performance benchmarking"
       ],
       link: "data-intelligence",
-      image: "https://static.wixstatic.com/media/d1fa15_b93263ca6bc24b42965ebc2833a98fd1~mv2.png?originWidth=576&originHeight=384"
+      image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&h=400&fit=crop&auto=format&q=80"
     },
     {
       icon: Search,
@@ -94,7 +94,7 @@ export default function ServicesPage() {
         "Technical SEO audits",
         "Content performance tracking"
       ],
-      image: "https://static.wixstatic.com/media/d1fa15_0a9659ef5058491a8cad46cd262ef507~mv2.png?originWidth=576&originHeight=384"
+      image: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=600&h=400&fit=crop&auto=format&q=80"
     },
     {
       icon: MessageSquare,
@@ -107,7 +107,7 @@ export default function ServicesPage() {
         "Social listening and monitoring"
       ],
       link: "social-media-ai",
-      image: "https://static.wixstatic.com/media/d1fa15_903782f58a94493f832a659c716cba52~mv2.png?originWidth=576&originHeight=384"
+      image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop&auto=format&q=80"
     }
   ];
 
@@ -181,32 +181,32 @@ export default function ServicesPage() {
     {
       name: "E-commerce",
       description: "Boost online sales with AI-powered product recommendations and dynamic pricing",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop&auto=format"
+      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=250&fit=crop&auto=format&q=80"
     },
     {
       name: "Healthcare",
       description: "Improve patient engagement and optimize healthcare marketing campaigns",
-      image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=250&fit=crop&auto=format"
+      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=250&fit=crop&auto=format&q=80"
     },
     {
       name: "FinTech",
       description: "Drive financial product adoption with compliant, AI-driven marketing strategies",
-      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=250&fit=crop&auto=format"
+      image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=250&fit=crop&auto=format&q=80"
     },
     {
       name: "SaaS",
       description: "Accelerate customer acquisition and reduce churn with intelligent automation",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop&auto=format"
+      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=250&fit=crop&auto=format&q=80"
     },
     {
       name: "Education",
       description: "Enhance student recruitment and engagement through personalized marketing",
-      image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=250&fit=crop&auto=format"
+      image: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&h=250&fit=crop&auto=format&q=80"
     },
     {
       name: "Real Estate",
       description: "Connect buyers with perfect properties using AI-powered matching algorithms",
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=250&fit=crop&auto=format"
+      image: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=400&h=250&fit=crop&auto=format&q=80"
     }
   ];
 

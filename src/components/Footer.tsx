@@ -40,8 +40,8 @@ const Footer = () => {
               key={i}
               className="absolute w-2 h-2 bg-blue-600/20 rounded-full"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
+                left: `${15 + (i * 15) % 70}%`,
+                top: `${10 + (i * 17) % 80}%`,
               }}
               animate={{
                 y: [0, -20, 0],
@@ -49,9 +49,9 @@ const Footer = () => {
                 scale: [1, 1.2, 1],
               }}
               transition={{
-                duration: 3 + Math.random() * 2,
+                duration: 3 + (i % 2),
                 repeat: Infinity,
-                delay: Math.random() * 2,
+                delay: i * 0.3,
               }}
             />
           ))}

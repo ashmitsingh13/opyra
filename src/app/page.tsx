@@ -155,39 +155,47 @@ export default function HomePage() {
           />
         </div>
 
-        {/* Floating Digital Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(25)].map((_, i) => {
-            const icons = [BarChart3, TrendingUp, Zap, Target, Globe, Smartphone, Brain, Rocket, Search, MessageSquare, Eye, MousePointer];
-            const IconComponent = icons[Math.floor(Math.random() * icons.length)];
-            
-            return (
-              <motion.div
-                key={i}
-                className="absolute"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-                animate={{
-                  y: [0, -40, 0],
-                  x: [0, Math.random() * 30 - 15, 0],
-                  rotate: [0, 360],
-                  opacity: [0.2, 0.8, 0.2],
-                  scale: [0.8, 1.2, 0.8],
-                }}
-                transition={{
-                  duration: 8 + Math.random() * 6,
-                  repeat: Infinity,
-                  delay: Math.random() * 3,
-                  ease: "easeInOut"
-                }}
-              >
-                <IconComponent className="w-6 h-6 md:w-8 md:h-8 text-blue-500/50" />
-              </motion.div>
-            );
-          })}
-        </div>
+        {/* Floating Digital Elements - Client Only */}
+        {isLoaded && (
+          <div className="absolute inset-0 overflow-hidden">
+            {[...Array(25)].map((_, i) => {
+              const icons = [BarChart3, TrendingUp, Zap, Target, Globe, Smartphone, Brain, Rocket, Search, MessageSquare, Eye, MousePointer];
+              // Use deterministic positions based on index to avoid hydration mismatch
+              const IconComponent = icons[i % icons.length];
+              const leftPos = ((i * 37) % 100); // Pseudo-random but consistent
+              const topPos = ((i * 73) % 100);
+              const xOffset = ((i * 13) % 30) - 15;
+              const duration = 8 + ((i * 23) % 6);
+              const delay = (i * 0.3) % 3;
+              
+              return (
+                <motion.div
+                  key={i}
+                  className="absolute"
+                  style={{
+                    left: `${leftPos}%`,
+                    top: `${topPos}%`,
+                  }}
+                  animate={{
+                    y: [0, -40, 0],
+                    x: [0, xOffset, 0],
+                    rotate: [0, 360],
+                    opacity: [0.2, 0.8, 0.2],
+                    scale: [0.8, 1.2, 0.8],
+                  }}
+                  transition={{
+                    duration: duration,
+                    repeat: Infinity,
+                    delay: delay,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <IconComponent className="w-6 h-6 md:w-8 md:h-8 text-blue-500/50" />
+                </motion.div>
+              );
+            })}
+          </div>
+        )}
 
         {/* Geometric Shapes */}
         <div className="absolute inset-0">
@@ -197,16 +205,16 @@ export default function HomePage() {
               className="absolute w-24 h-24 md:w-32 md:h-32 rounded-full bg-blue-500/10 blur-xl"
               style={{
                 left: `${15 + (i * 8)}%`,
-                top: `${25 + Math.sin(i) * 50}%`,
+                top: `${25 + (i * 7) % 50}%`,
               }}
               animate={{
                 scale: [1, 1.5, 1],
                 opacity: [0.3, 0.7, 0.3],
-                x: [0, Math.sin(i) * 50, 0],
-                y: [0, Math.cos(i) * 30, 0],
+                x: [0, (i * 10) % 50, 0],
+                y: [0, (i * 6) % 30, 0],
               }}
               transition={{
-                duration: 6 + Math.random() * 4,
+                duration: 6 + (i % 4),
                 repeat: Infinity,
                 delay: i * 0.5,
               }}
@@ -475,7 +483,7 @@ export default function HomePage() {
                       className="absolute w-1 h-1 bg-blue-600 rounded-full"
                       style={{
                         left: `${20 + (i * 15)}%`,
-                        top: `${30 + Math.sin(i) * 40}%`,
+                        top: `${30 + (i * 8) % 40}%`,
                       }}
                       animate={{
                         y: [0, -30, 0],
@@ -672,7 +680,7 @@ export default function HomePage() {
                       className="absolute w-1 h-1 bg-blue-600 rounded-full"
                       style={{
                         left: `${25 + (i * 20)}%`,
-                        top: `${30 + Math.sin(i) * 30}%`,
+                        top: `${30 + (i * 6) % 30}%`,
                       }}
                       animate={{
                         y: [0, -20, 0],
@@ -906,8 +914,8 @@ export default function HomePage() {
                     key={i}
                     className="absolute w-4 h-4 bg-blue-600 rounded-full"
                     style={{
-                      left: `${15 + Math.random() * 70}%`,
-                      top: `${15 + Math.random() * 70}%`,
+                      left: `${15 + (i * 7) % 70}%`,
+                      top: `${15 + (i * 11) % 70}%`,
                     }}
                     animate={{
                       y: [0, -25, 0],
@@ -916,9 +924,9 @@ export default function HomePage() {
                       rotate: [0, 180, 360]
                     }}
                     transition={{
-                      duration: 3 + Math.random() * 3,
+                      duration: 3 + (i % 3),
                       repeat: Infinity,
-                      delay: Math.random() * 2,
+                      delay: (i * 0.2) % 2,
                     }}
                   />
                 ))}
