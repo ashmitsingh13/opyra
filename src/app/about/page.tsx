@@ -707,7 +707,7 @@ export default function AboutPage() {
             >
               <Card className="bg-white border-gray-200 hover:border-blue-300 transition-all duration-300 group h-full shadow-lg hover:shadow-xl relative overflow-hidden">
                 <CardContent className="p-8 text-center">
-                  <div className={`w-16 h-16 bg-gradient-to-r ${impact.color} rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  <div className={`w-16 h-16 bg-linear-to-r ${impact.color} rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
                     <impact.icon className="h-8 w-8 text-white" />
                   </div>
                   <div className="text-4xl font-bold text-gray-900 mb-2">
@@ -761,7 +761,7 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-3xl border-2 border-blue-200/40">
+            <div className="bg-linear-to-br from-blue-50 to-indigo-50 p-8 rounded-3xl border-2 border-blue-200/40">
               <Image
                 src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&h=400&fit=crop"
                 alt="Global business growth and success metrics"
@@ -769,7 +769,7 @@ export default function AboutPage() {
                 height={400}
                 className="w-full h-auto rounded-2xl"
               />
-              <div className="absolute -top-4 -right-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 rounded-xl">
+              <div className="absolute -top-4 -right-4 bg-linear-to-r from-blue-600 to-indigo-600 text-white p-4 rounded-xl">
                 <Globe className="h-8 w-8" />
               </div>
             </div>
@@ -857,7 +857,7 @@ export default function AboutPage() {
                       height={250}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                   <CardContent className="p-6">
                     <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
@@ -888,7 +888,7 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="mt-16 text-center"
           >
-            <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200 shadow-xl">
+            <Card className="bg-linear-to-br from-blue-50 to-indigo-50 border-blue-200 shadow-xl">
               <CardContent className="p-12">
                 <Palette className="h-16 w-16 text-blue-600 mx-auto mb-6" />
                 <h3 className="text-3xl font-bold text-gray-900 mb-6">

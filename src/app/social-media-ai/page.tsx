@@ -269,7 +269,7 @@ export default function SocialMediaAIPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-3xl">
+            <div className="bg-linear-to-br from-blue-50 to-indigo-50 p-8 rounded-3xl">
               <Image
                 src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop"
                 alt="Social Media AI Dashboard"
@@ -563,7 +563,7 @@ export default function SocialMediaAIPage() {
                         </div>
                       </div>
 
-                      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl">
+                      <div className="bg-linear-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl">
                         <h4 className="text-lg font-semibold text-gray-900 mb-4">Results</h4>
                         <div className="space-y-4">
                           {Object.entries(study.results).map(([key, value], idx) => (

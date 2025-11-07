@@ -227,7 +227,7 @@ export default function DataIntelligencePage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-3xl">
+            <div className="bg-linear-to-br from-blue-50 to-indigo-50 p-8 rounded-3xl">
               <Image
                 src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop"
                 alt="Data Intelligence Dashboard"
@@ -475,7 +475,7 @@ export default function DataIntelligencePage() {
                       </div>
                     </div>
 
-                    <div className="bg-gradient-to-br from-green-50 to-blue-50 p-6 rounded-xl text-center">
+                    <div className="bg-linear-to-br from-green-50 to-blue-50 p-6 rounded-xl text-center">
                       <div className="text-3xl font-bold text-green-600 mb-2">
                         {useCase.results}
                       </div>

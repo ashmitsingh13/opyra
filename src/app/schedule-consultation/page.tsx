@@ -208,7 +208,7 @@ export default function ScheduleConsultationPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-3xl">
+            <div className="bg-linear-to-br from-blue-50 to-indigo-50 p-8 rounded-3xl">
               <Image
                 src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop"
                 alt="AI Marketing Consultation"

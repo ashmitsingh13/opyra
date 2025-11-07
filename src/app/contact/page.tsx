@@ -702,7 +702,7 @@ export default function ContactPage() {
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
                     whileHover={{ scale: 1.05 }}
-                    className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl text-center border border-blue-100 hover:border-blue-200 transition-all duration-300"
+                    className="bg-linear-to-br from-blue-50 to-indigo-50 p-6 rounded-xl text-center border border-blue-100 hover:border-blue-200 transition-all duration-300"
                   >
                     <stat.icon className="w-8 h-8 text-blue-600 mx-auto mb-3" />
                     <div className="text-2xl font-bold text-gray-900 mb-1">
