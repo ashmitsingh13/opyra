@@ -27,8 +27,8 @@ const nextConfig: NextConfig = {
   // Static export configuration
   output: 'export',
   
-  // Disable Turbopack to use webpack for PWA compatibility
-  // turbopack: {}, // Commented out for PWA
+  // Add empty turbopack config to silence the error but force webpack usage
+  turbopack: {},
   
   // Image optimization settings for static export
   images: {
