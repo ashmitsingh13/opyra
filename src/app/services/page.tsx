@@ -186,7 +186,7 @@ export default function ServicesPage() {
     {
       name: "Healthcare",
       description: "Improve patient engagement and optimize healthcare marketing campaigns",
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=250&fit=crop&auto=format"
+      image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=250&fit=crop&auto=format"
     },
     {
       name: "FinTech",

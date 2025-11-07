@@ -118,7 +118,7 @@ export default function PortfolioPage() {
       category: "healthcare",
       industry: "Healthcare Technology",
       duration: "5 months",
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop&auto=format",
+      image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=600&h=400&fit=crop&auto=format",
       description: "HIPAA-compliant AI marketing platform for healthcare providers, focusing on patient education and engagement.",
       challenge: "Need to improve patient engagement while maintaining strict HIPAA compliance requirements.",
       solution: "Built a privacy-first AI platform for personalized patient communications and educational content delivery.",
