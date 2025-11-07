@@ -806,7 +806,7 @@ export default function HomePage() {
                   asChild
                   className="bg-blue-600 hover:bg-blue-700 text-white px-16 py-8 text-2xl md:text-3xl font-bold transition-all duration-500 hover:shadow-2xl hover:shadow-blue-600/60 rounded-2xl border-2 border-blue-500/50"
                 >
-                  <Link href="/contact">
+                  <Link href="/discover-our-approach">
                     <motion.span
                       className="flex items-center"
                     >
