@@ -233,7 +233,7 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        
+        <meta name="google-site-verification" content="A_xcVkAudWAiKICZB_6UjLFl9qc6-scu1FqLQg6CVAI" />
         {/* Structured Data for SEO */}
         <script
           type="application/ld+json"
